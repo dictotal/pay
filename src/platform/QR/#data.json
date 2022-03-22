@@ -1,0 +1,42 @@
+{
+  "bankCardList": [
+    {
+      "bankName": "Wave Pay",
+      "iconUrl": "https://img.yym203.com/link/tt/bank_icon/wave.png",
+      "id": "ba2d24695eb7a9a4da086f08c5dd4559",
+      "minAmount": 1,
+      "maxAmount": 2000
+    },
+    {
+      "bankName": "AYA mBanking",
+      "iconUrl": "https://img.yym203.com/link/tt/bank_icon/aya.png",
+      "id": "d0225cedae716e62f653302c63e53954",
+      "minAmount": 100,
+      "maxAmount": 10000
+    }
+  ],
+  "device": {
+    "devicePlatform": "UNKNOWN",
+    "deviceType": "NORMAL",
+    "mobile": false,
+    "normal": true,
+    "tablet": false
+  },
+  "lang": "zh",
+  "paymentId": "zz_b",
+  "paymentMethodList": [
+    {
+      "keyName": "\u8F6C\u8D26\u652F\u4ED8",
+      "maxAmount": 1000000,
+      "minAmount": 10000,
+      "paymentIconUrl": "",
+      "paymentId": "zz_b",
+      "paymentKey": "zz_b",
+      "paymentType": "transpay",
+      "rechargeFees": 0.000
+    }
+  ],
+  "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbc8nOi+OrmrkN7BD7agc5APjVaDgbZSlWt97E1u275HwSVkPTzqbJ+QdJ9yCbrkIAgmz/ciwqUBfbGDvUD/0KHnB+VcwMcYhxUCvDQUDlMIdhygAJ+jiBMw4J4mBjONJjvIhW8DruWK2tmYDMEBu6CFRYazvAfwmEUZNdN4oHYQIDAQAB",
+  "sign": "KLojGCjogpN2NSbLWgYxvK5JKkvbktKce4P/O3aIQE9AyOFL1GiIAqetq7LzJNFqxizZntVmxGllbPq2xCrvWOKEM9N/DbLAVAm4ucE3S20zJt3G1/Qkqoc0X26z6Usm8YOl70hqFUOz9CACByBOwf4ur9UtMMwpdzlfjB9lufBjG5iFfmomAYUwzFwlMEqPCNPPD3xcxhe8TQNen1iQBBdhjEFaT21ECJtDuPrgSUhvWbN2P6uZICUxbOrGIFRQdlhglhVwsRkGTxRX8eh5yyxOwrHhyR1AQR6hPC+3Lt0hjdP3sKwgPnGxgS/UHRlAF7b9zKXQAH7SBwZsQkMEXg==",
+  "uid": 20014
+}

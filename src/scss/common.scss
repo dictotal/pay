@@ -1,0 +1,125 @@
+//公共界面样式在次实现
+//v2.12.14 添加 din字体
+$scss-file: "~@/scss";
+@font-face {
+   font-family: "DIN";
+   src:url("#{$scss-file}/font/DIN-Bold.otf");
+}
+.f-din{
+  font-family: "DIN";
+}
+/*
+* 项目以rem为基础的数据结构，
+*/
+html {
+  //使用大写的PX可以忽略转换，这里是指定PC的默认字体
+  font-size: 100PX;
+}
+
+body {
+  font-size: 12px;
+}
+
+input::-webkit-input-placeholder {
+  color: #bcbfcb;
+  font-weight: 100;
+}
+.fw-100{
+ font-weight: 100;
+}
+.fc-898{
+  color: #898c98;
+}
+.fc-676{
+  color: #676974;
+}
+.fc-red{
+  color: #ff1d1d;
+}
+.fc-333{
+  color: #333;
+}
+.line-through{
+  text-decoration: line-through;
+}
+/*栅格模式这里更新成为flex方式而不是float模拟*/
+/*========================非响应式栅格系统,采用24列模式===========================*/
+.w-row {
+  display: flex;
+
+  .w-cell {
+    flex: 1;
+  }
+}
+
+@for $i from 1 through 24 {
+  .w-col-#{$i} {
+    box-sizing: border-box;
+    flex: 0 0 100%/24*$i;
+  }
+}
+
+.w-top {
+  align-items: flex-start;
+}
+
+.w-middle {
+  align-items: center;
+}
+
+.w-bottom {
+  align-items: flex-end;
+}
+
+.w-stretch {
+  align-items: stretch;
+}
+
+.w-baseline {
+  align-items: baseline;
+}
+
+.w-left {
+  justify-content: flex-start;
+}
+
+.w-center {
+  justify-content: center;
+}
+
+.w-right {
+  justify-content: flex-end;
+}
+
+.w-between {
+  justify-content: space-between;
+}
+
+.w-around {
+  justify-content: space-around;
+}
+
+.w-wrap {
+  flex-wrap: wrap;
+}
+
+.layout-wrap {
+  max-width: 1000px;
+  padding: 30px 50px;
+}
+.panel-main {
+  padding: 0 20px;
+  color: #676974;
+  background: #FFF;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+.box-shadow {
+  box-shadow: 0 2px 8px rgba(0, 93, 255, 0.05);
+}
+
+.view-bg-gray{
+  min-height: 100%;
+  background: #f9f9fc;
+}
+
