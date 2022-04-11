@@ -19,7 +19,6 @@
 import {changeLanguage} from "@/common/i18n";
 
 let input  = document.querySelector("body > input[type=hidden]");
-
 const CONFIG = input?JSON.parse(input.value):{};
 
 changeLanguage(CONFIG.lang||"zh");

@@ -1,0 +1,58 @@
+{
+  "bankCardList": [
+    {
+      "bankName": "AYA mBanking",
+      "iconUrl": "https://img.yym203.com/link/tt/bank_icon/aya.png",
+      "id": "9e2d592545001b25fcdb06296c6fa922",
+      "maxAmount": 1000000.000000,
+      "minAmount": 10000.000000
+    },
+    {
+      "bankName": "KBZ mBanking",
+      "iconUrl": "https://img.yym203.com/link/tt/bank_icon/kbz.png",
+      "id": "414340e80b3863d85eedab83c0923ece",
+      "maxAmount": 1000000.000000,
+      "minAmount": 10000.000000
+    },
+    {
+      "bankName": "KBZ Pay",
+      "iconUrl": "https://img.yym203.com/link/tt/bank_icon/kbz_pay.png",
+      "id": "2cae4b08c9c37dc7f28bea145f5dd800",
+      "maxAmount": 1000000.000000,
+      "minAmount": 10000.000000
+    },
+    {
+      "bankName": "Wave Pay",
+      "iconUrl": "https://img.yym203.com/link/tt/bank_icon/wave.png",
+      "id": "017360eab7dda2f44708df347632af73",
+      "maxAmount": 1000000.000000,
+      "minAmount": 10000.000000
+    }
+  ],
+  "currency": "MMK",
+  "currencyUnit": "ks",
+  "device": {
+    "devicePlatform": "ANDROID",
+    "deviceType": "MOBILE",
+    "mobile": true,
+    "normal": false,
+    "tablet": false
+  },
+  "lang": "zh",
+  "paymentId": "zz_b",
+  "paymentMethodList": [
+    {
+      "keyName": "\u8F6C\u8D26\u652F\u4ED8",
+      "maxAmount": 1000000,
+      "minAmount": 10000,
+      "paymentIconUrl": "",
+      "paymentId": "zz_b",
+      "paymentKey": "zz_b",
+      "paymentType": "transpay",
+      "rechargeFees": 0.000
+    }
+  ],
+  "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDa0LLtsIGjzhrlHcSy7idyU8dEoBMQ7Dgnm9viE/ND/sANRfQUq+RJpraKSycAqlyxfPLXr8mRUXK7nuocVa3HX9C9YFBv46G3P9L6WQsy40IaG2ZdIfWTYNp4GcI/PfRe0dGWht2eS+0VxEPaubeivBqWuWBp7XMaTOMANyIBAQIDAQAB",
+  "sign": "EB5Igf5e0uMxasTls3JTyNSg8FwMzw0/+GnBkeRCzapV2pn10rxhirE9egGdyfchY0Di9CRKwXfEuh1qN2juLfL2wWgDSIwpbOCng6r956s+Mujngu6FmuVdfL84g/hmfjcGrG1a61PbHcyo7/z7CZVY/dhLAsp3A4dvtOfzeBREjejebCCIe/XoGLA0SBW22RzkoS0/qxXwfu29yiUBft+CzvlkI3rQ09TJ6NnrbmcW8oy364i1jJlyG5GS0dIXvGc0qCBnfye4k7RMBwS0aOSNWU264wdsiX5CqFgbn8PG/JRFe3GcgKWTufHWrsXSCPgvU0CLymULMhu5f8SDCQ==",
+  "uid": 142376
+}

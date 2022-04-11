@@ -3,8 +3,14 @@
   html{
     font-size: 200PX;
   }
+  body {
+    background-color: $skin-bg1;
+  }
   //移动版本默认边距
   .layout-wrap{
-    padding: 30px 15px !important;
+    padding: 10px 12px !important;
+  }
+  .view-bg-gray {
+    background: $skin-bg1;
   }
 }

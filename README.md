@@ -122,3 +122,11 @@
 │   └─mobile.scss 
 └─vue.config.js 
  ```
+## 换肤新增方式
+1. @platform/PAY 为支付页面和支付等待页面，兼容普通状态和二维码，通过后端字段进行区分
+- 测试环境命令 npm run PAY_DEV
+- 打包名利 npm run PAY_BUILD
+2. @paltform/STATUS 为充值状态和提现状态页面，根据数据区分
+
+## 注意
+1. pay$waiting在env中后面的数据消失

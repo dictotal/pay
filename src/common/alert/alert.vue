@@ -1,6 +1,6 @@
 <template>
 	<transition name="dialog">
-		<div id="v-alert" v-if="isShow" :class="[type, css]" :style="{'z-index': zIndex}">
+		<div id="v-alert" v-if="isShow" :class="[type, css]" :style="{ 'z-index': zIndex }">
 			<h1 class="title">{{ title }}</h1>
 			<div class="content" v-html="content"></div>
 
@@ -155,6 +155,9 @@ $red: #f56c6c;
 		margin-top: 40px;
 		align-items: stretch;
 		justify-content: space-between;
+		.btn-ok {
+			color: $skin-font1;
+		}
 	}
 	.btn {
 		@include h-lh(40px);
@@ -177,6 +180,7 @@ $red: #f56c6c;
 	.btn-ok {
 		background: linear-gradient(90deg, #4664c4, #2a3e83);
 	}
+	
 	.wrap-ipt {
 		margin-bottom: 20px;
 		input {
@@ -232,5 +236,39 @@ $red: #f56c6c;
 		transform: scale(0.85) translate(-50%, -50%);
 		opacity: 0;
 	}
+}
+@media screen and (max-width: 760px) {
+	#v-alert {
+		background: $skin-bg5;
+		.title {
+			color: $skin-font1;
+		}
+	.content {
+		margin-top: 20px !important;
+		color: $skin-font3;
+	}
+	.wrap-btns {
+		display: block !important;
+		height: auto !important;
+		margin-top: 30px !important;
+		.btn {
+			width: 100%;
+			height: 40px;
+			display: block;
+			border-radius: 10px;
+			border: none;
+		}
+    
+		.btn-cancel {
+			color: $skin-font6;
+			background: $skin-bg2;
+		}
+		.btn-ok {
+			margin-top: 10px;
+			background: $skin-color1;
+			color: $skin-font5;
+		}
+	}
+}
 }
 </style>

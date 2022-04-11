@@ -1,6 +1,7 @@
 //公共界面样式在次实现
 //v2.12.14 添加 din字体
 $scss-file: "~@/scss";
+
 @font-face {
    font-family: "DIN";
    src:url("#{$scss-file}/font/DIN-Bold.otf");
@@ -109,8 +110,8 @@ input::-webkit-input-placeholder {
 }
 .panel-main {
   padding: 0 20px;
-  color: #676974;
-  background: #FFF;
+  color: #fff;
+  background: $skin-bg2;
   border: 1px solid transparent;
   border-radius: 10px;
 }

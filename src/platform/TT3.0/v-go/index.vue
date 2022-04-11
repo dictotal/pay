@@ -322,7 +322,7 @@ export default {
 		position: relative;
 		width: 100%;
 		min-height: 420px;
-		background-color: #fcfcff;
+		background-color: $skin-bg1;
 		border: 2px dashed #e5e5eb;
 		border-radius: 10px;
 		padding: 10px 40px 10px 104px;

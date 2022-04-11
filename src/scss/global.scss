@@ -6,6 +6,29 @@
 $images: '~@/scss/images';
 $danger:#f90;
 
+$skin-bg1: #19181F;
+$skin-bg2: #23232C;
+$skin-bg3: #393946;
+$skin-bg4: #f5f6f7;
+$skin-bg5: #2C2C38;
+
+$skin-font1: #FFFFFF;
+$skin-font2: #D4D5DB;
+$skin-font3: #9598A5;
+$skin-font4: #5B5F6F;
+$skin-font5: #33333E;
+$skin-font6: #d4d5db;
+
+$skin-color1: #29F08C;
+$skin-color2: #FF5252;
+$skin-color3: #FF7600;
+$skin-color4: #306BFF;
+$skin-color5: #31f894;
+$skin-color6: #00c763;
+$skin-color7: #fff8eb;
+
+$skin-other1: #707070;
+
 //========================其它公共方法===========================
 @mixin h-lh($h,$ph:0px){
   height: $h;
