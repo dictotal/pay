@@ -1,10 +1,12 @@
 <template>
+  <div class="active-detail">
 
+  </div>
 </template>
 
 <script>
 export default {
-  name: "applyDetail.vue"
+  name: "applyDetail"
 }
 </script>
 

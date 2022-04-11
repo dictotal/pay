@@ -5,12 +5,15 @@
   "scripts": {
     "QR_DEV": "vue-cli-service serve  --config-name QR",
     "PAY_DEV": "vue-cli-service serve  --config-name PAY",
+    "DETAIL_DEV": "vue-cli-service serve  --config-name DETAIL",
     "============": "node --version",
     "QR_BUILD": "vue-cli-service build --config-name QR",
-    "PAY_BUILD": "vue-cli-service build  --config-name PAY"
+    "PAY_BUILD": "vue-cli-service build  --config-name PAY",
+    "DETAIL_BUILD": "vue-cli-service build  --config-name DETAIL"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "dsbridge": "^3.1.4",
     "qrious": "^4.0.2",
     "vue": "^2.6.11"
   },

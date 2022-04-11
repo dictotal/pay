@@ -18,6 +18,7 @@ function resolve(dir) {
 const ARGV_LIST = process.argv;
 
 let platform = ARGV_LIST.slice(-1)||"YYM";
+console.log(platform, 'platform')
 console.log("VUE_APP_PLATFORM:"+platform);
 let publicPath = publicPathMap[platform]||"third";
 module.exports = {
