@@ -32,7 +32,7 @@ export default {
   computed: {
     activeView() {
       if(this.$$cfg.isTestModel){
-        return 'chargeDetail';
+        return 'applyDetail';
       }
       return `v-${this.view}`;
     }
@@ -62,7 +62,7 @@ export default {
   align-items: center;
   height: 45px;
   justify-content: center;
-  font-size: 12px;
+  font-size: 14px;
   &-icon {
     margin-right: 10px;
   }
@@ -75,11 +75,38 @@ export default {
 }
 .active-status {
   margin-bottom: 30px;
-  color: $skin-color1;
   font-size: 17px;
   height: 24px;
   line-height: 24px;
   text-align: center;
-  font-weight: bold
+  &.confirm {
+    color: $skin-color3;
+  }
+  &.failed {
+    color: $skin-color2;
+  }
+  &.success {
+    color: $skin-color1;
+  }
+}
+.common-wrapper-item {
+  min-height: 19px;
+  line-height: 19px;
+  margin: 15px 0;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .common-item-value {
+    display: flex;
+    align-content: center;
+    align-items: center;
+  }
+}
+.common-copy-icon {
+  width: 17px;
+  height: 17px;
+  transform: translateY(0.5px);
+  margin-left: 5px;
 }
 </style>
