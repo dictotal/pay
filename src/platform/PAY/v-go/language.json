@@ -59,7 +59,11 @@
                 "txt_15": "Copy successfully, please paste",
                 "txt_13": "အသိပေးချက်",
                 "txt_16": "付款人开户名",
-                "txt_17": "充值方式"
+                "txt_17": "充值方式",
+                "txt_18": "银行卡转账",
+                "txt_19": "THAI QR",
+                "txt_20": "我已付款",
+                "txt_21": "确定您已存入[[{{amount}}{{moneyUnit}}]]?"
             },
             "qrcode": {
                 "txt_1": "支持以下银行的手机应用程序扫描二维码进行支付",

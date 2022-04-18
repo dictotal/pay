@@ -19,7 +19,7 @@ export default {
         dsbridge.call('toCustomer', JSON.stringify({}))
       }
       if (window.parent) {
-        window.parent.postMessage('toCustomer', this.config)
+        this.$$tools.postMessage('toCustomer', this.config)
       }
     }
   }
