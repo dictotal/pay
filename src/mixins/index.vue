@@ -6,6 +6,7 @@
 				:class="{active: idx === actTestIdx}"
 				@click="actTestIdx = idx"
 				v-for="(item, idx) in testViewList"
+                :key="idx"
 			>
 				{{ item.label }}
 			</div>
@@ -26,7 +27,7 @@ export default {
     name: "v-index",
     data() {
         return {
-            actTestIdx:1,
+            actTestIdx:0,
             testViewList:[
                 {label:'INIT',value:"vInit"},
                 {label:'GO',value:"vGo"},

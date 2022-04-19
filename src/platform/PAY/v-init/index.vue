@@ -6,29 +6,30 @@
         <template v-if="showPayWay">
           <h2 class="title-s1">{{ $i18n("bank-my.index.txt_8", "充值方式") }}</h2>
           <div class="choose-list">
-            <div class="choose-pay-mode" @click="choosePayWay(index)" v-if="item.bankCardList.length > 0"
-                 :class="{'choose-active': index === activeIndex}" v-for="(item, index) in bankChooseList" :key="index">
-              <div class="choose-item-top">
-                <img class="choose-pay-icon" alt="pay-icon" :src="item.icon">
-                <div class="choose-item-type">{{ item.name }}</div>
-                <img class="choose-icon" v-if="item.selected" src="./images/selected.png" alt="choose">
-                <img class="choose-icon" v-else src="./images/un-select.png" alt="choose">
-              </div>
-              <div class="choose-bank-list" ref="bankListRef" v-show="item.selected">
-                <div class="choose-bank-item" :class="{active: idx === item.activeIdx}"
-                     v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)">
-                  <img class="bank-icon" :src="bank.iconUrl" alt="">
-                  <div class="bank-name">{{ bank.bankName }}</div>
+            <template v-for="(item, index) in bankChooseList">
+                <div class="choose-pay-mode" @click="choosePayWay(index)"
+                    :class="{'choose-active': index === activeIndex}" v-if="item.bankCardList.length > 0" :key="index">
+                    <div class="choose-item-top">
+                        <img class="choose-pay-icon" alt="pay-icon" :src="item.icon">
+                        <div class="choose-item-type">{{ item.name }}</div>
+                        <img class="choose-icon" v-if="item.selected" src="./images/selected.png" alt="choose">
+                        <img class="choose-icon" v-else src="./images/un-select.png" alt="choose">
+                    </div>
+                    <div class="choose-bank-list" ref="bankListRef" v-show="item.selected">
+                        <div class="choose-bank-item" :class="{active: idx === item.activeIdx}"
+                            v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)" :key="`${index}-${idx}`">
+                        <img class="bank-icon" :src="bank.iconUrl" alt="">
+                        <div class="bank-name">{{ bank.bankName }}</div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
+            </template>
           </div>
-
         </template>
 
         <h2 class="title-s1">{{ $i18n("bank-my.index.txt_2", "存款金额") }}-{{ config.currency }}</h2>
         <div class="quick-amount-box">
-          <div class="item btn btn-amount mb10 f-din" @click="amount = item" v-for="item in filterQuickAmountList">
+          <div class="item btn btn-amount mb10 f-din" @click="amount = item" v-for="item in filterQuickAmountList" :key="item">
             {{ item | money }}
           </div>
         </div>
@@ -562,9 +563,6 @@ export default {
       .item {
         width: 1rem;
         margin-right: 0;
-      }
-
-      .item:nth-child(3n) {
       }
     }
 
