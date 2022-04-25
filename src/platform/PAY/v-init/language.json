@@ -23,7 +23,7 @@
                 "txt_5": "အသိပေးချက်",
                 "txt_6": "သွင်းငွေပမာဏ：တစ်ကြောင်းလျှင်အနိမ့်ဆုံး{{minAmount}}{{moneyUnit}},အမြင့်ဆုံး{{maxAmount}}{{moneyUnit}}",
                 "txt_7": "မှတ်ချက်：မိနစ်30အတွင်း ငွေကိုလွှဲပါ",
-                "txt_8": "充值方式"
+                "txt_8": "ငွေပြန်သွင်းနည်း"
             }
         }
     },
@@ -37,7 +37,21 @@
                 "txt_5": "คำเตือน",
                 "txt_6": "จำนวนเงินที่เติม: จำนวนเงินที่เติมขั้นต่ำสำหรับธุรกรรมหนึ่งครั้งคือ {{minAmount}} {{moneyUnit}} และจำนวนเงินสูงสุดคือ {{maxAmount}} {{moneyUnit}}",
                 "txt_7": "จำกัด เวลาในการเติมเงิน: กรุณาเติมเงินให้เสร็จภายใน 30 นาที",
-                "txt_8": "充值方式"
+                "txt_8": "วิธีเติมเงิน"
+            }
+        }
+    },
+    "en": {
+        "bank-my": {
+            "index": {
+                "txt_1": "Choose Bank",
+                "txt_2": "Recharge amount",
+                "txt_3": "Please enter the amount",
+                "txt_4": "Next",
+                "txt_5": "Tips",
+                "txt_6": "Recharge amount: The minimum recharge amount for a single transaction is{{minAmount}}{{moneyUnit}}，maximum {{maxAmount}}{{moneyUnit}}",
+                "txt_7": "Recharge time limit: Please complete the recharge within 30 minutes",
+                "txt_8": "Deposit Method"
             }
         }
     }
