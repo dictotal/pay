@@ -13,7 +13,6 @@
 
 <script>
 import IndexTools from '@/common/z-index';
-import Tools from '@/common/tools';
 import {injectLanguage} from "@/common/i18n";
 import lang from "./language.json";
 
@@ -58,8 +57,9 @@ export default {
   border-radius: 20px 20px 0 0;
   overflow: hidden;
   background: $skin-bg5;
-  height: 208px;
-  padding-bottom: env(safe-area-inset-bottom);
+//   height: 208px;
+  padding-bottom: 15px;
+  padding-bottom: calc(15px + env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   width: 375px;
@@ -88,6 +88,8 @@ export default {
       border: 0;
       font-size: 14px;
       color: $skin-font1;
+      line-height: 30px;
+      display: block;
       &::placeholder {
         color: $skin-font4;
       }
