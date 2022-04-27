@@ -19,8 +19,8 @@
         }
         // 通知父级页面, toThirdChargePage 异步方法
         function noticeParentPage() {
-            dsBridge.call('toThirdChargePage', {url: paymentInfo.qrCodeInfo.thirdUrl})
-            $tools.postMessage('toThirdChargePage', { url: paymentInfo.qrCodeInfo.thirdUrl})
+            dsBridge.call('toThirdChargePage', {url: paymentInfo.url})
+            $tools.postMessage('toThirdChargePage', { url: paymentInfo.url})
         }
         // 点击body再次通知
         function reloadFn(){
