@@ -214,7 +214,7 @@ export default {
         sign: config.sign,
         token: encryptPublicLong(this.$$tools.map2get(queryMap), config.publicKey),
         lang: this.lang
-      }, "/p/pay?lang=" + this.lang);
+      }, "/p/ttsportsPay?lang=" + this.lang);
     },
 
     // 选择付款方式
