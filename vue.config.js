@@ -1,6 +1,7 @@
 
 const publicPathMap = {
-    "TT":"tt3"
+    "TT": "tt3",
+    "QR": "tt7"
 }
 
 
@@ -21,23 +22,23 @@ let platform = ARGV_LIST.slice(-1)||"YYM";
 console.log("VUE_APP_PLATFORM:"+platform);
 let publicPath = publicPathMap[platform]||"third";
 module.exports = {
-    
+
     css: {
         loaderOptions: {
             postcss:{
               plugins:[postcss]
             },
             sass: {
-                
+
                 prependData: `@import "@/scss/global.scss";`
             }
         }
     },
     publicPath:`/pay/${publicPath}/`,
-    
+
     productionSourceMap: isDEV,
     configureWebpack: config => {
-        if (isDEV) { 
+        if (isDEV) {
             config.devtool = 'cheap-module-eval-source-map'
         }
     },
