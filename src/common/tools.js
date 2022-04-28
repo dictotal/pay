@@ -121,7 +121,20 @@ let tools = {
 			isCalled = true;
 			fn();
 		};
-	},
+    },
+    // 获取url参数
+    getUrlParams () {
+        var url = location.href.split('?')
+        var obj = {}
+        if (url[1]) {
+            var arr = url[1].split('&')
+            for (var i = 0; i < arr.length; i++) {
+                var temp = arr[i].split('=')
+                obj[temp[0]] = temp[1]
+            }
+        }
+        return obj
+    },
 	moneyInternational(money) {
 		return money ? money.toString().replace(/\B(?=(?:\d{3})+\b)/g, ",") : "";
 	}

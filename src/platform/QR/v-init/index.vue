@@ -128,6 +128,10 @@ export default {
                 rechargeFees: actPayment.rechargeFees,
                 paymentAmount: this.amount,
             }
+            var queryParams = this.$$tools.getUrlParams()
+            if (queryParams.origin) {
+                queryMap.origin = queryParams.origin
+            }
             this.$$tools.formSubmit({
                 sign: config.sign,
                 token: encryptPublicLong(this.$$tools.map2get(queryMap), config.publicKey),
