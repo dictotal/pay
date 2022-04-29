@@ -48,7 +48,7 @@
 				</div>
 				<div class="item-notice">
 					<em>2</em>
-					{{ $i18n("bank-my.index.txt_7", "充值时限：请在30分钟内完成充值") }}
+					{{ $i18n("bank-my.index.txt_7",{minute: minute}, "充值时限：请在10分钟内完成充值") }}
 				</div>
 			</div>
 		</div>
@@ -91,7 +91,6 @@ export default {
 
         init(){
             let cfg = this.config;
-
             this.paymentMethodList = cfg.paymentMethodList||[];
         },
 
@@ -170,6 +169,9 @@ export default {
             return quickAmountList.filter(function(item){
                 return item>=minAmount&&item<=maxAmount;
             });
+        },
+        minute() {
+            return this.config.minute || 10
         }
     }
 }
