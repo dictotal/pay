@@ -39,7 +39,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="btn btn-cancel" @click="cancelHandel">{{ $i18n("detail.index.txt_7", "撤销订单") }}</div>
+		<div class="btn btn-cancel" v-if="status === 'wait'" @click="cancelHandel">{{ $i18n("detail.index.txt_7", "撤销订单") }}</div>
 	</div>
 </template>
 
@@ -106,8 +106,12 @@ export default {
             },5000)
         },
         endCount() {
+            if (this.status === 'wait') {
+                this.$$alert(this.$i18n('detail.index.txt_6','倒计时结束，请重新提交充值申请！'), () => {
+                    this.withdrawal()
+                })
+            }
 
-            this.$$alert(this.$i18n('detail.index.txt_6','倒计时结束，请重新提交充值申请！'))
         },
 		copy() {
 			this.$$msg.show(this.$i18n('detail.index.txt_4','复制成功,请粘贴使用'));
