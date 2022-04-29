@@ -137,7 +137,7 @@ export default {
 		},
 		withdrawal() {
 			let config = this.config, qrCodeInfo = this.qrCodeInfo;
-			window.location.href = `/p/cancel?sign=${encodeURIComponent(config.sign)}&paymentAmount=${qrCodeInfo.amount}&paymentId=${config.paymentId}&lang=${config.lang}`
+			window.location.href = `/p/cancelQrCode?sign=${encodeURIComponent(config.sign)}&paymentAmount=${qrCodeInfo.amount}&paymentId=${config.paymentId}&lang=${config.lang}`
 		}
     },
     computed: {

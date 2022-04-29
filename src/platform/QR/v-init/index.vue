@@ -171,7 +171,7 @@ export default {
             });
         },
         minute() {
-            return this.config.minute || 10
+            return this.config.minute || 30
         }
     }
 }
