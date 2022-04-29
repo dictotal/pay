@@ -19,12 +19,15 @@
 			</div>
 		</div>
 		<div class="card-view bank-view">
-			<div class="tips-view">
-				{{ $i18n("detail.index.txt_1", "支持以下银行的手机应用程序扫描二维码进行支付") }}
-			</div>
-			<div class="bank-imgs">
-				<img v-for="i in 4" :src="require(`./images/bank${i}.png`)" />
-			</div>
+            <template v-if="sopportBankList.length > 0">
+                <div class="tips-view">
+                    {{ $i18n("detail.index.txt_1", "支持以下银行的手机应用程序扫描二维码进行支付") }}
+                </div>
+                <div class="bank-imgs">
+                    <img v-for="i in 4" :src="require(`./images/bank${i}.png`)" />
+                </div>
+            </template>
+            <div class="tips-view empty-bottom" v-else> {{ $i18n("detail.index.txt_11", "请使用银行的手机应用程序扫描二维码进行支付") }} </div>
 		</div>
 		<div class="card-view order-view">
 			<div class="order-item">
@@ -162,6 +165,9 @@ export default {
         isMobile() {
             return this.$$tools.isMobile();
         },
+        sopportBankList() {
+            return []
+        }
     },
     components: {countDown}
 }
@@ -180,7 +186,9 @@ export default {
 			display: flex;
 		}
 	}
-
+    .empty-bottom {
+        padding-bottom: 20px;
+    }
 	.card-view {
 		background-color: #ffffff;
 		border: 1px #f0f0f0 solid;
