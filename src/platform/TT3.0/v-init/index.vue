@@ -181,11 +181,11 @@ export default {
         },
 
         maxAmount(){
-            return  this.actBank.maxAmount||this.actPayment.maxAmount;
+            return  this.actBank?.maxAmount||this.actPayment?.maxAmount;
         },
 
         minAmount(){
-            return  this.actBank.minAmount||this.actPayment.minAmount;
+            return  this.actBank?.minAmount||this.actPayment?.minAmount;
         },
         amountIsRight(){
             let amount = this.amount;
