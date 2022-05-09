@@ -1,7 +1,7 @@
 
 const publicPathMap = {
     "TT": "tt3",
-    "QR": "tt5"
+    "QR": "tt6"
 }
 
 
