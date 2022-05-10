@@ -92,6 +92,8 @@ export default {
         init(){
             let cfg = this.config;
             this.paymentMethodList = cfg.paymentMethodList||[];
+            this.$$tools.postMessage('showPayBtn', {})
+            dsBridge.call('showPayBtn', {})
         },
 
         limitAmountHandel(){

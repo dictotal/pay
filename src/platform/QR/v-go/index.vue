@@ -1,6 +1,27 @@
 <template>
 	<div id="v-detail" class="view-bg-gray" :class="status">
-		<div class="card-view">
+        <!-- onlinebank -->
+        <template v-if="config && config.paymentId === 'zz_vader_online'">
+            <div class="cancel-top flex">
+                <div class="cancel-left-info">
+                    <div class="cancel-left-item flex">
+                        <div class="cancel-left-label">Deposit amount:</div>
+                        <div class="cancel-left-value">{{config.paymentAmount}} {{config.currency}}</div>
+                    </div>
+                    <div class="cancel-left-item flex">
+                        <div class="cancel-left-label">Order number:</div>
+                        <div class="cancel-left-value">{{ orderNo }}</div>
+					    <img class="cancel-copy-icon" src="./images/copy.png" @click="copy" />
+                    </div>
+                </div>
+		        <div class="cancel-top-btn btn" @click="cancelHandel">{{ $i18n("detail.index.txt_7", "撤销订单") }}</div>
+            </div>
+            <div class="iframe-el-container">
+                <iframe class="iframe-el" :src="config.url" frameborder="0"></iframe>
+            </div>
+        </template>
+        <template v-else>
+            <div class="card-view">
 			<div class="logo-view">
 				<img src="./images/qrLogo.png" />
 			</div>
@@ -43,6 +64,8 @@
 			</div>
 		</div>
 		<div class="btn btn-cancel" v-if="status === 'wait'" @click="cancelHandel">{{ $i18n("detail.index.txt_7", "撤销订单") }}</div>
+        </template>
+
 	</div>
 </template>
 
@@ -52,6 +75,7 @@ import countDown from '@/components/count-down';
 import QRious from 'qrious';
 import {injectLanguage} from "@/common/i18n";
 import lang from "./language.json";
+import { config } from 'process';
 injectLanguage(lang);
 export default {
     name: "v-detail",
@@ -78,13 +102,40 @@ export default {
 
         this.countDownSecond = [this.qrCodeInfo.ttlSeconds * 1000];
     },
+    beforeDestroy() {
+        window.removeEventListener('message', this.messageHandle)
+    },
     methods: {
         init() {
 
             this.moneyUnit = this.config.currencyUnit;
             let {amount,orderNo}= this.qrCodeInfo;
-            this.orderNo = orderNo;
+            this.orderNo = orderNo || this.config.orderNo;
             this.orderAmount = amount;
+            if (this.config.paymentId === 'zz_vader_online') {
+                this.listenMessage()
+            }
+        },
+        // 处理消息
+        listenMessage() {
+            // url有参数才能发正常渲染数据，提交的时候是form post， 无参数不能由客户端再次加载
+            let href = location.href
+            let noJump = href.indexOf('isJump') === -1
+            if (href.indexOf('zz_vader_online') && noJump) {
+                dsBridge.call('toThirdChargePage', location.href + '&isJump=1')
+            }
+            this.$$tools.postMessage('toThirdChargePage', { url: location.href})
+            window.removeEventListener('message', this.messageHandle)
+            window.addEventListener('message', this.messageHandle)
+        },
+        // 消息处理
+        messageHandle({data}) {
+            switch(data.action) {
+                case 'payComplete':
+                    dsBridge.call('payComplete', {})
+                    this.$$tools.postMessage('payComplete', data.params)
+                default: '';
+            }
         },
         initQr(){
 
@@ -139,8 +190,8 @@ export default {
 					this.$i18n('detail.index.txt_9','暂不撤销'));
 		},
 		withdrawal() {
-			let config = this.config, qrCodeInfo = this.qrCodeInfo;
-			window.location.href = `/p/cancelQrCode?sign=${encodeURIComponent(config.sign)}&paymentAmount=${qrCodeInfo.amount}&paymentId=${config.paymentId}&lang=${config.lang}`
+			let config = this.config
+			window.location.href = `/p/cancelQrCode?sign=${encodeURIComponent(config.sign)}&paymentAmount=${config.paymentAmount}&paymentId=${config.paymentId}&lang=${config.lang}`
 		}
     },
     computed: {
@@ -208,6 +259,47 @@ export default {
 			margin-top: -20px;
 		}
 	}
+    .cancel-top {
+        background-color: #fff;
+        height: 77px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 12px;
+        align-self: flex-start;
+        min-width: 375px;
+        .cancel-left-item {
+            line-height: 19px;
+            font-size: 13px;
+            align-items: center;
+            &:first-child {
+                margin-bottom: 10px;
+            }
+            .cancel-left-label {
+                color: #b3b3b3
+            }
+        }
+        .cancel-copy-icon {
+            width: 17px;
+            height: 17px;
+            display: block;
+        }
+        .cancel-top-btn {
+            border-color: #b3b3b3;
+            color: #b3b3b3;
+            font-size: 13px;
+        }
+    }
+    .iframe-el-container {
+        height: calc(100vh - 77px);
+        width: 100%;
+        overflow: hidden;
+        .iframe-el {
+            height: 50%;
+            display: block;
+            width: 50%;
+            transform: translate(50%, 50%) scale(2);
+        }
+    }
 	.logo-view {
 		width: 100%;
 		height: 47px;
