@@ -14,7 +14,7 @@
 					    <img class="cancel-copy-icon" src="./images/copy.png" @click="copy" />
                     </div>
                 </div>
-		        <div class="cancel-top-btn btn" @click="cancelHandel">{{ $i18n("detail.index.txt_7", "撤销订单") }}</div>
+		        <div class="cancel-top-btn btn" v-if="status === 'wait'" @click="cancelHandel">{{ $i18n("detail.index.txt_7", "撤销订单") }}</div>
             </div>
             <div class="iframe-el-container">
                 <iframe class="iframe-el" :src="config.url" frameborder="0"></iframe>
@@ -122,7 +122,8 @@ export default {
             let href = location.href
             let noJump = href.indexOf('isJump') === -1
             if (href.indexOf('zz_vader_online') && noJump) {
-                dsBridge.call('toThirdChargePage', location.href + '&isJump=1')
+                // dsBridge.call('toThirdChargePage', location.href + '&isJump=1')
+								dsBridge.call('hidePayBtn', {})
             }
             this.$$tools.postMessage('toThirdChargePage', { url: location.href})
             window.removeEventListener('message', this.messageHandle)
