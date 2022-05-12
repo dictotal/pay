@@ -43,8 +43,8 @@ export default {
       })
     },
     close() {
+      this.$$mask.hidden(this.maskId);
       this.isShow = false
-      this.$$mask.hidden(this.maskUid);
     }
   }
 }

@@ -13,8 +13,8 @@ function _fetch(method = "POST", url, data = {}) {
 	if (method !== "GET") {
 		cfg.body = JSON.stringify(data);
 	}
-
-	return fetch(url, cfg).then(response => {
+    url = '/sportpay' + url + '?lang=' + sessionStorage.getItem('lang')
+    return fetch(url, cfg).then(response => {
 		return response.json().then(json => {
 			if (response.ok) {
 				return json || {};

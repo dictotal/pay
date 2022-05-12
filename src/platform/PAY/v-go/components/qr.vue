@@ -330,6 +330,9 @@ export default {
       }
     }
   }
+  .btn{
+      text-align: center
+  }
 }
 @media screen and (min-width: 780px) {
   #v-detail {

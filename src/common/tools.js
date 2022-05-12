@@ -124,7 +124,19 @@ let tools = {
 	},
 	moneyInternational(money) {
 		return money ? money.toString().replace(/\B(?=(?:\d{3})+\b)/g, ",") : "";
-	}
+    },
+    // 获取url参数
+    getUrlQuery (url = location.href) {
+        const obj = {}
+        if (url.indexOf('?') > 0) {
+            let arr = url.split('?')[1].split('&')
+            for (let i of arr) {
+                let temp = i.split('=')
+                obj[temp[0]] = temp[1]
+            }
+        }
+        return obj
+    }
 };
 
 tools.postMessage = function (action, params) {

@@ -313,6 +313,8 @@ export default {
 		.btn {
 			width: 170px;
 			height: 45px;
+            line-height: 45px;
+            text-align: center;
 			border-radius: 10px;
 			border: solid 1px $skin-font3;
 			box-sizing: border-box;
@@ -341,6 +343,7 @@ export default {
 	}
 	.panel-notice {
 		color: $skin-font3;
+        margin-top: 20px
 	}
 	.v-count-down {
 		.time {
@@ -369,6 +372,7 @@ export default {
 			width: 100%;
 			margin: 30px auto;
 			border-radius: 10px;
+            justify-content: center;
 		}
 	}
 }
@@ -416,4 +420,3 @@ export default {
 }
 
 </style>
-	

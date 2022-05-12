@@ -6,25 +6,27 @@
 <script>
 import qrcode from './components/qr'
 import transfer from './components/transfer'
+import {
+    qrcodeData,
+    transferData
+} from '@/data'
 export default {
   name: 'v-go',
-  props: {
-    config: {
-      type: Object,
-    }
-  },
   data() {
     return {
-      viewName: 'transfer'
+      viewName: '',
+      config: {}
     }
   },
   created() {
-    if (this.config.qrCodeInfo) {
-      this.viewName = 'qrcode'
-    } else if (this.config.transferInfo) {
+    console.log(this.$route.query)
+    if (this.$route.query.paymentType === 'transpay') {
       this.viewName = 'transfer'
+      this.config = transferData
+    } else if (this.$route.query.paymentType === 'third') {
+       this.viewName = 'qrcode'
+       this.config = qrcodeData
     }
-    console.log(this.config)
   },
   components: {
     transfer,

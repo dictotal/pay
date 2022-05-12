@@ -4,7 +4,6 @@ let currLanguage = "zh";
 
 function changeLanguage(curr) {
 	currLanguage = curr || "zh";
-
 	document.body.setAttribute("lang", "lan-" + curr);
 }
 

@@ -77,7 +77,7 @@ export default {
 			vertical-align: middle;
 			text-align: center;
 			background: $skin-font4;
-      color: $skin-font5;
+            color: $skin-font5;
 			border-radius: 100%;
 			flex-shrink: 0;
 		}

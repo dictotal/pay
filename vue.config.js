@@ -1,12 +1,4 @@
-
-const publicPathMap = {
-    "TT":"third",
-    "PAY":"sports_pay"
-}
-
-
 const px2rem = require("postcss-px2rem");
-
 const postcss = px2rem({
     remUnit:100
 })
@@ -18,12 +10,17 @@ function resolve(dir) {
 
 const ARGV_LIST = process.argv;
 
-let platform = ARGV_LIST.slice(-1)||"YYM";
+let platform = ARGV_LIST.slice(-1) || "YYM";
 console.log(platform, 'platform')
-console.log("VUE_APP_PLATFORM:"+platform);
-let publicPath = publicPathMap[platform]||"third";
 module.exports = {
-
+    devServer: {
+        proxy:{
+            "/sportpay/":{
+                // target:'http://localhost:3000'//本地mock
+                target: 'http://p.mdybet77.com/'
+            },
+        }
+    },
     css: {
         loaderOptions: {
             postcss:{
@@ -35,8 +32,7 @@ module.exports = {
             }
         }
     },
-    publicPath:`/pay/${publicPath}/`,
-
+    publicPath: '/',
     productionSourceMap: isDEV,
     configureWebpack: config => {
         if (isDEV) {

@@ -1,19 +1,29 @@
 <template>
 	<div id="app">
-		<v-index />
+        <router-view />
 	</div>
 </template>
 <script type="text/ecmascript-6">
-
-
-const vIndex = ()=>import("@platform/index");
+import {changeLanguage} from "@/common/i18n";
+let input  = document.querySelector("body > input[type=hidden]");
+const CONFIG = input?JSON.parse(input.value):{};
 export default {
     name: "app",
     data() {
         return {}
     },
-    components:{
-        vIndex
+    created() {
+        console.error()
+        const query = this.$$tools.getUrlQuery()
+        let lang = sessionStorage.getItem('lang')
+        if (query.lang) {
+            changeLanguage(query.lang);
+            sessionStorage.setItem('lang', query.lang)
+        } else if (lang) {
+            changeLanguage(lang);
+        } else {
+            changeLanguage('en');
+        }
     }
 }
 </script>

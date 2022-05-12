@@ -67,7 +67,9 @@ import confirmName from '@/components/confirm-name'
 let injectOnce = Tools.once(function () {
   injectLanguage(lang);
 });
-
+import {
+    initData,
+} from '@/data'
 export default {
   name: "v-init",
   data() {
@@ -78,7 +80,6 @@ export default {
           name: 'Bank Transfer',
           bankCardList: [],
           selected: false,
-          icon: require('./images/transfer.png'),
           type: 'transpay',
           activeIdx: 0
         },
@@ -86,32 +87,24 @@ export default {
           name: 'THAI QR',
           bankCardList: [],
           selected: false,
-          icon: require('./images/qrcode.png'),
           type: 'qrcode',
           activeIdx: 0
         }
       ],
       paymentMethodList: [],
       actPaymentIdx: 0,
-
       quickAmountList: [
         5000, 10000, 20000, 50000, 100000, 200000, 500000
       ],
       amount: "",
-
       moneyUnit: "Ks",
-      actPayment: {}
+      actPayment: {},
+      config: initData
     }
   },
-  props: {
-    config: Object
-  },
   created() {
-
     injectOnce();
-
     this.moneyUnit = this.config.currencyUnit;
-
     this.init();
   },
   methods: {
@@ -186,6 +179,7 @@ export default {
               if (keyword === '') {
                 this.$$msg.show(this.$i18n('confirm.txt3'))
               } else {
+                this.$refs.confirmName.close()
                 return this.postPay(keyword)
               }
             }
@@ -197,24 +191,27 @@ export default {
     },
     // 发起支付
     postPay(payerName) {
-      let config = this.config, actPayment = this.actPayment;
-      let queryMap = {
-        paymentId: config.paymentId,
-        paymentKey: actPayment.paymentKey,
-        paymentType: actPayment.paymentType,
-        rechargeFees: actPayment.rechargeFees,
-        paymentAmount: this.amount
-      }
-      if (actPayment.paymentType === 'transpay') {
-        queryMap.id = this.actBank.id
-        queryMap.payerName = payerName
-      }
-      console.log(queryMap, 'queryMap')
-      this.$$tools.formSubmit({
-        sign: config.sign,
-        token: encryptPublicLong(this.$$tools.map2get(queryMap), config.publicKey),
-        lang: this.lang
-      }, "/p/ttsportsPay?lang=" + this.lang);
+        let config = this.config, actPayment = this.actPayment;
+        let queryMap = {
+            paymentId: config.paymentId,
+            paymentKey: actPayment.paymentKey,
+            paymentType: actPayment.paymentType,
+            rechargeFees: actPayment.rechargeFees,
+            paymentAmount: this.amount
+        }
+        if (actPayment.paymentType === 'transpay') {
+            queryMap.id = this.actBank.id
+            queryMap.userName = payerName
+        }
+        //   console.log(queryMap, 'queryMap')
+        this.$router.replace(`/sports/go?paymentId=${queryMap.paymentId}&sign=${config.sign}&orderId=1234567890&paymentType=${this.actPayment.paymentType}`)
+        this.$$ajax.post('/ttsports/p/pay', {
+            sign: config.sign,
+            token: encryptPublicLong(this.$$tools.map2get(queryMap), config.publicKey),
+            lang: this.lang
+        }).then(rsp => {
+            console.log(rsp)
+        })
     },
 
     // 选择付款方式
