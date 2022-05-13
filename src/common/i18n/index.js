@@ -1,6 +1,6 @@
 let languageMap = {};
 
-let currLanguage = "zh";
+let currLanguage = sessionStorage.getItem('lang') || "zh";
 
 function changeLanguage(curr) {
 	currLanguage = curr || "zh";
@@ -28,8 +28,7 @@ function _findDeedValue(keyList, source) {
 }
 
 function _translate(id, replace) {
-	let rs = _findDeedValue(id.split("."), languageMap);
-
+    let rs = _findDeedValue(id.split("."), languageMap);
 	if (rs) {
 		if (replace) {
 			if (replace.el) {
@@ -37,7 +36,6 @@ function _translate(id, replace) {
 					return replace.el.replace("$$", $1);
 				});
 			}
-
 			rs = rs.replace(/\{\{([^}]+)\}\}/g, function (match, $1) {
 				return replace[$1];
 			});
@@ -98,10 +96,8 @@ function injectLanguage(langMap, isSingleLanguage) {
 		mergeObject(languageMap, lang);
 	}
 }
-
 changeLanguage(currLanguage);
 export default {
 	install
 };
-
 export {_$i18n, changeLanguage, injectLanguage};

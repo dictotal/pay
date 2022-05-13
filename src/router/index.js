@@ -29,6 +29,15 @@ const routers = new VueRouter({
             }
         },
         {
+            path: '/sports/auto',
+            name: 'Auto',
+            component: () => import('@/platform/PAY/v-auto'),
+            meta: {
+                title: '公告订单详情',
+                id: 'sports-go'
+            }
+        },
+        {
             path: '/404',
             name: '404',
             component: () => import('@/pages/not-found'),

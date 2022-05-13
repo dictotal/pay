@@ -7,10 +7,10 @@
                     <h2 class="title-s1">{{ $i18n("bank-my.index.txt_8", "充值方式") }}</h2>
                     <div class="choose-list">
                         <template v-for="(item, index) in bankChooseList">
-                            <div class="choose-pay-mode" @click="choosePayWay(index)" :class="{ 'choose-active': index === activeIndex }" v-if="item.bankCardList.length" :key="index">
+                            <div class="choose-pay-mode" @click="choosePayWay(index)" :class="{ 'choose-active': index === activeIndex }" :key="index">
                                 <div class="choose-item-top">
                                     <img class="choose-pay-icon" alt="pay-icon" :src="item.icon" />
-                                    <div class="choose-item-type">{{ item.name }}</div>
+                                    <div class="choose-item-type">{{ item.keyName }}</div>
                                     <img class="choose-icon" v-if="item.selected" src="./images/selected.png" alt="choose" />
                                     <img class="choose-icon" v-else src="./images/un-select.png" alt="choose" />
                                 </div>
@@ -33,20 +33,23 @@
                         </template>
                     </div>
                 </template>
-
-                <h2 class="title-s1">{{ $i18n("bank-my.index.txt_2", "存款金额") }}-{{ config.currency }}</h2>
-                <div class="quick-amount-box">
-                    <div class="item btn btn-amount mb10 f-din" @click="amount = item" v-for="item in filterQuickAmountList" :key="item">
-                        {{ item | money }}
+                <!-- 选择金额部分 -->
+                <template v-if="actPayment.paymentId !== 'zz_c'">
+                    <h2 class="title-s1">{{ $i18n("bank-my.index.txt_2", "存款金额") }}-{{ config.currency }}</h2>
+                    <div class="quick-amount-box">
+                        <div class="item btn btn-amount mb10 f-din" @click="amount = item" v-for="item in filterQuickAmountList" :key="item">
+                            {{ item | money }}
+                        </div>
+                        <template v-if="filterQuickAmountList.length % 3 !== 0">
+                            <div class="item no-bg" v-for="(fast, i) in 3 - (filterQuickAmountList.length % 3)" :key="'d' + i"></div>
+                        </template>
                     </div>
-                    <template v-if="filterQuickAmountList.length % 3 !== 0">
-                        <div class="item no-bg" v-for="(fast, i) in 3 - (filterQuickAmountList.length % 3)" :key="'d' + i"></div>
-                    </template>
-                </div>
-                <div class="input-amount-warp">
-                    <div class="amount-type">{{ minAmount }}~{{ maxAmount }}{{ $$tools.moneyKey }}</div>
-                    <input type="number" class="input-amount f-din" v-model="amount" @blur="limitAmountHandel" maxlength="10" :placeholder="$i18n('bank-my.index.txt_3', '请输入金额')" />
-                </div>
+                    <div class="input-amount-warp">
+                        <div class="amount-type">{{ minAmount }}~{{ maxAmount }}{{ $$tools.moneyKey }}</div>
+                        <input type="number" class="input-amount f-din" v-model="amount" @blur="limitAmountHandel" maxlength="10" :placeholder="$i18n('bank-my.index.txt_3', '请输入金额')" />
+                    </div>
+                </template>
+                <!-- 选择金额部分 -->
             </div>
             <div class="mt30 pb30 w-row w-center">
                 <div class="btn btn-submit" :class="{ disable: !amountIsRight }" @click="submitHandel">
@@ -61,36 +64,23 @@
 <script type="text/ecmascript-6">
 
 import Tools from '@/common/tools';
-import {injectLanguage} from "@/common/i18n";
+import {injectLanguage, changeLanguage} from "@/common/i18n";
 import lang from "./language.json";
 import confirmName from '@/components/confirm-name'
 let injectOnce = Tools.once(function () {
   injectLanguage(lang);
 });
+changeLanguage(sessionStorage.getItem('lang'))
 import {
     initData,
 } from '@/data'
+import QueryString from 'qs';
 export default {
   name: "v-init",
   data() {
     return {
       activeIndex: 0,
-      bankChooseList: [
-        {
-          name: 'Bank Transfer',
-          bankCardList: [],
-          selected: false,
-          type: 'transpay',
-          activeIdx: 0
-        },
-        {
-          name: 'THAI QR',
-          bankCardList: [],
-          selected: false,
-          type: 'qrcode',
-          activeIdx: 0
-        }
-      ],
+      bankChooseList: [],
       paymentMethodList: [],
       actPaymentIdx: 0,
       quickAmountList: [
@@ -116,14 +106,16 @@ export default {
                 ...item,
                 ...this.bankChooseList[index],
                 bankCardList: item.paymentMethodList,
-                type: item.paymentType
+                type: item.paymentType,
+                activeIdx: 0
             })
-        } else if (item.paymentType === 'transpay') {
+        } else {
             this.$set(this.bankChooseList, index, {
                 ...item,
                 ...this.bankChooseList[index],
                 bankCardList: item.bankCardList,
-                type: item.paymentType
+                type: item.paymentType,
+                 activeIdx: 0
             })
         }
       })
@@ -133,13 +125,14 @@ export default {
     // 获取激活的支付方式
     getActPayment() {
         let obj = {}
-        console.log(this.bankChooseList, this.activeIndex, this.bankChooseList[this.activeIndex])
+        console.log(this.activeIndex, 'this.activeIndex')
         if (this.bankChooseList.length > 0) {
             if (this.bankChooseList[this.activeIndex].type === 'transpay') {
                 obj = this.bankChooseList[this.activeIndex]
             } else if (this.bankChooseList[this.activeIndex].type === 'third') {
                 obj = this.bankChooseList[this.activeIndex].bankCardList[this.bankChooseList[this.activeIndex].activeIdx]
             } else {
+                obj = this.bankChooseList[this.activeIndex]
                 console.error('暂未配置当前支付方式')
             }
         }
@@ -170,11 +163,11 @@ export default {
       if (!this.amountIsRight) {
         return false;
       }
-      if (this.actPayment.paymentType === 'transpay') {
+        console.log('txzasdfasd')
+      if (this.actPayment.paymentType === 'transpay' && this.actPayment.paymentId !== 'zz_c') {
         this.$refs.confirmName.show({
           content: '',
           success: ((bool, {keyword}) => {
-              console.log(bool, keyword)
             if (bool) {
               if (keyword === '') {
                 this.$$msg.show(this.$i18n('confirm.txt3'))
@@ -193,7 +186,7 @@ export default {
     postPay(payerName) {
         let config = this.config, actPayment = this.actPayment;
         let queryMap = {
-            paymentId: config.paymentId,
+            paymentId: actPayment.paymentId,
             paymentKey: actPayment.paymentKey,
             paymentType: actPayment.paymentType,
             rechargeFees: actPayment.rechargeFees,
@@ -203,8 +196,13 @@ export default {
             queryMap.id = this.actBank.id
             queryMap.userName = payerName
         }
-        //   console.log(queryMap, 'queryMap')
-        this.$router.replace(`/sports/go?paymentId=${queryMap.paymentId}&sign=${config.sign}&orderId=1234567890&paymentType=${this.actPayment.paymentType}`)
+        let queryString = `paymentId=${queryMap.paymentId}&sign=${config.sign}&orderId=1234567890&paymentType=${this.actPayment.paymentType}`
+        if (queryMap.paymentId === 'zz_c') {
+            this.$router.replace(`/sports/auto?${queryString}`)
+        } else {
+            this.$router.replace(`/sports/go?${queryString}`)
+        }
+
         this.$$ajax.post('/ttsports/p/pay', {
             sign: config.sign,
             token: encryptPublicLong(this.$$tools.map2get(queryMap), config.publicKey),
@@ -259,6 +257,7 @@ export default {
     },
     amountIsRight() {
       let amount = this.amount;
+      console.log(this.minAmount, this.maxAmount)
       return amount >= this.minAmount && amount <= this.maxAmount
     },
     lang() {
@@ -279,8 +278,8 @@ export default {
     },
     // 銀行卡激活
     actBank() {
-        let index = this.bankChooseList.findIndex(item => item.selected)
-        if (index === 0) {
+        let index = this.activeIndex
+        if (index > -1 && this.bankChooseList[index].paymentType === 'transpay') {
             let index2 = this.bankChooseList[index].activeIdx
             if (index2 > -1) {
                 const o = this.bankChooseList[index].bankCardList[index2]
@@ -291,6 +290,10 @@ export default {
             }
         }
         return null
+    },
+    // 是否是自动订单
+    autoOrder() {
+        return ['zz_c'].includes(this.actPayment.paymentId)
     }
   },
   components: {

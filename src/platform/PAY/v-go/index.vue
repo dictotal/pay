@@ -5,6 +5,7 @@
 </template>
 <script>
 import qrcode from './components/qr'
+import onlineBank from './components/onlineBank'
 import transfer from './components/transfer'
 import {
     qrcodeData,
@@ -19,18 +20,21 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query)
     if (this.$route.query.paymentType === 'transpay') {
       this.viewName = 'transfer'
       this.config = transferData
     } else if (this.$route.query.paymentType === 'third') {
        this.viewName = 'qrcode'
        this.config = qrcodeData
+    } else if (this.$route.query.paymentId === 'zz_vader_online') {
+        this.viewName = 'onlineBank'
+        this.config = qrcodeData
     }
   },
   components: {
     transfer,
-    qrcode
+    qrcode,
+    onlineBank
   }
 }
 </script>

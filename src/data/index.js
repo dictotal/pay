@@ -24,7 +24,7 @@ export const initData = {
             icon: 'https://images.weserv.nl/?url=https://article.biliimg.com/bfs/article/709207f8db5c26f801439fd8110ca0c8272abdab.png'
         },
         {
-            keyName: "QR",
+            keyName: "THAI QR",
             paymentType: "third",
             paymentMethodList: [
                 { keyName: "THAI QR", maxAmount: 100000, minAmount: 300, paymentIconUrl: "", paymentId: "zz_d", paymentKey: "zz_d", paymentType: "third", rechargeFees: 0.0 },
@@ -34,8 +34,35 @@ export const initData = {
             icon: 'https://images.weserv.nl/?url=https://article.biliimg.com/bfs/article/4aa72be3b0633f03d5c5a9ed137929355ccfe958.png'
         },
         {
-            keyName: 'onlinBank',
-            icon: 'https://images.weserv.nl/?url=https://article.biliimg.com/bfs/article/e07d2b564ac3219d7d7c35a8484166e0250eea41.png'
+            "keyName": "OnlineBank",
+            "maxAmount": 50000,
+            "minAmount": 300,
+            "paymentIconUrl": "",
+            "paymentId": "zz_vader_online",
+            "paymentKey": "zz_vader_online",
+            "paymentType": "OnlineBank",
+            "rechargeFees": 0,
+            icon: 'https://images.weserv.nl/?url=https://article.biliimg.com/bfs/article/e07d2b564ac3219d7d7c35a8484166e0250eea41.png',
+        },
+        {
+            "keyName": "wave pay(auto)",
+            "maxAmount": 1000000,
+            "minAmount": 10000,
+            "paymentIconUrl": "",
+            "paymentId": "zz_c",
+            "paymentKey": "zz_c",
+            "paymentType": "transpay",
+            "rechargeFees": 0,
+            icon: 'https://images.weserv.nl/?url=https://article.biliimg.com/bfs/article/e07d2b564ac3219d7d7c35a8484166e0250eea41.png',
+            bankCardList: [
+                {
+                    "bankName": "Wave Pay",
+                    "iconUrl": "https://img.yym203.com/link/tt/bank_icon/wave.png",
+                    "id": "d6396524d972aa0a942f94b3b4ee96ec",
+                    "maxAmount": 1000000,
+                    "minAmount": 10000
+                }
+            ]
         }
     ],
     publicKey: "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC3dKWSUu/GWT8gxN4sZmib9CMkL6q5qZz90IK/n/hediQal9jEeuhjCKefHUn0UUGRC/I2Z/oCLreXemV0I1jwvs8mLiWTo8W2yI+MMvhkgeQL15KYxRSRUUjjwA+EyWDzOTndykAyus9x/tC+1fXXGi8kGrpw04N/MvVyMFwB+wIDAQAB",
@@ -96,3 +123,38 @@ export const transferData = {
     "uid": 31272,
     "identityName": "Neil123"
 }
+
+
+export const autoOrder = {
+    "currency": "MMK",
+    "currencyUnit": "ks",
+    "device": {
+      "devicePlatform": "IOS",
+      "deviceType": "MOBILE",
+      "mobile": true,
+      "normal": false,
+      "tablet": false
+    },
+    "lang": "zh",
+    "orderNo": "2205577877259081023488",
+    "paymentAmount": 0.00,
+    "paymentId": "zz_c",
+    "paymentKey": "zz_c",
+    "paymentType": "transpay",
+    "rechargeFees": 0,
+    "sign": "TPdyoqRFTX2UpygLtE5QEk/w8G2+rwu39PXw9u7DE1O0m98Kq0WIlyyi8kG0e6dhN5LPL86kMJygxwe0GNdKSQYxAMVBvti3yywIQntr0UiEvw1bVOut6p5j0MvaTvthqyFh09EIduLLUj3bZEiA1ZBazFIvSYma6RrZlDLgaWYdS++EhCUqBU1mu3mfyASdzwErhMEcFZlmcn0n5MczvUCeAs5Gs6s1Q9Kx6JbuYETuCvxTtTh4ZYbNLkaFfJUoCpzz3KHqr6HuNpZ8WA+GxKQAVBIv9+0kdVGCxvE800tcJwW1rHeITiF4UcO0M5PBcEXsvzGdZJBpLd+s63bpQQ==",
+    "transferInfo": {
+      "bankCard": "09780795387",
+      "bankName": "Wave Pay",
+      "bankType": "wave",
+      "cardNumberType": "phone",
+      "cardholder": "Htay Yi Win",
+      "currency": "MMK",
+      "iconUrl": "https://img.yym203.com/link/tt/bank_icon/wave.png",
+      "maxAmount": 1000000,
+      "minAmount": 10000,
+      "subbranchName": "Wave Pay",
+      "ttlSeconds": 3600
+    },
+    "uid": 31272
+  }
