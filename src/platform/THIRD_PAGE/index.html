@@ -37,7 +37,6 @@
         }
         // 通知父级页面, toThirdChargePage 异步方法
         function noticeParentPage() {
-            console.log('noticeMessage')
             dsBridge.call('toThirdChargePage', {url: paymentInfo.url})
             $tools.postMessage('toThirdChargePage', { url: paymentInfo.url})
         }
@@ -54,7 +53,6 @@
         }
         var params = parseUrl()
         function init() {
-            console.log('init')
             if (params.client) {
                 payComplete(params.client)
             } else {

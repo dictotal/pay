@@ -132,10 +132,7 @@ export default {
     mounted() {
 
         injectOnce();
-        console.log(this.config)
         this.moneyUnit = this.config.currencyUnit;
-        console.log(this.config)
-
         this.init();
     },
     methods: {
@@ -323,7 +320,7 @@ export default {
 			justify-content: space-between;
 			padding: 20px 0;
 			height: 70px;
-			border-bottom: 0.5px solid $skin-font5;
+			border-bottom: 1px solid $skin-font5;
 			&.form-item-mini {
 				height: 44px;
 				padding: 0;

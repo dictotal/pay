@@ -125,7 +125,6 @@ export default {
     // 获取激活的支付方式
     getActPayment() {
         let obj = {}
-        console.log(this.activeIndex, 'this.activeIndex')
         if (this.bankChooseList.length > 0) {
             if (this.bankChooseList[this.activeIndex].type === 'transpay') {
                 obj = this.bankChooseList[this.activeIndex]
@@ -136,7 +135,6 @@ export default {
                 console.error('暂未配置当前支付方式')
             }
         }
-        console.log(obj)
         this.actPayment = obj
     },
     limitAmountHandel() {
@@ -163,7 +161,6 @@ export default {
       if (!this.amountIsRight) {
         return false;
       }
-        console.log('txzasdfasd')
       if (this.actPayment.paymentType === 'transpay' && this.actPayment.paymentId !== 'zz_c') {
         this.$refs.confirmName.show({
           content: '',
@@ -257,7 +254,6 @@ export default {
     },
     amountIsRight() {
       let amount = this.amount;
-      console.log(this.minAmount, this.maxAmount)
       return amount >= this.minAmount && amount <= this.maxAmount
     },
     lang() {
@@ -512,6 +508,7 @@ export default {
             }
             &.no-bg {
                 background: transparent;
+                border-color: transparent;
             }
         }
     }

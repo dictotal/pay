@@ -123,7 +123,6 @@ export default {
       let newStatus = cfg[status]||"failed";
       // 不是waiting跳转到充值订单详情，改版中
       let url = `/p/detail?sign=${encodeURIComponent(this.config.sign)}&orderNo=${this.config.orderNo}&type=chargeStatus&status=${newStatus}`
-      console.log(url)
       return newStatus
     },
     cancelHandel() {

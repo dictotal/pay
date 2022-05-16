@@ -263,7 +263,7 @@ export default {
 			justify-content: space-between;
 			padding: 20px 0;
 			height: 70px;
-			border-bottom: 0.5px solid $skin-font5;
+			border-bottom: 1px solid $skin-font5;
 			&.form-item-mini {
 				height: 44px;
 				padding: 0;

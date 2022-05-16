@@ -67,7 +67,6 @@ export default {
     init() {
       this.config.orderInfo.status = 'failed'
       this.orderInfo = this.config.orderInfo || {}
-      console.log(this.orderInfo, 'this.orderInfo')
     },
     // 复制文本
     copy(txt) {
