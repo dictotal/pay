@@ -1,7 +1,7 @@
 <template>
 	<div id="v-detail" class="view-bg-gray" :class="status">
         <!-- onlinebank -->
-        <template v-if="config && config.paymentId === 'zz_vader_online'">
+        <template v-if="config && config.url">
             <div class="cancel-top flex">
                 <div class="cancel-left-info">
                     <div class="cancel-left-item flex">
@@ -75,7 +75,6 @@ import countDown from '@/components/count-down';
 import QRious from 'qrious';
 import {injectLanguage} from "@/common/i18n";
 import lang from "./language.json";
-import { config } from 'process';
 injectLanguage(lang);
 export default {
     name: "v-detail",
