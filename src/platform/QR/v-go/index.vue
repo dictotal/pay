@@ -111,19 +111,14 @@ export default {
             let {amount,orderNo}= this.qrCodeInfo;
             this.orderNo = orderNo || this.config.orderNo;
             this.orderAmount = amount;
-            if (this.config.paymentId === 'zz_vader_online') {
-                this.listenMessage()
-            }
+            this.listenMessage()
         },
         // 处理消息
         listenMessage() {
             // url有参数才能发正常渲染数据，提交的时候是form post， 无参数不能由客户端再次加载
             let href = location.href
             let noJump = href.indexOf('isJump') === -1
-            if (href.indexOf('zz_vader_online') && noJump) {
-                // dsBridge.call('toThirdChargePage', location.href + '&isJump=1')
-								dsBridge.call('hidePayBtn', {})
-            }
+			dsBridge.call('hidePayBtn', {})
             this.$$tools.postMessage('toThirdChargePage', { url: location.href})
             window.removeEventListener('message', this.messageHandle)
             window.addEventListener('message', this.messageHandle)
