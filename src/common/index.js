@@ -4,9 +4,8 @@ import Msg from "./msg";
 import Tools from "./tools";
 import Filter from "./filters";
 import Config from "../config";
-
 import I18n from "./i18n";
-import {$$ajax} from "./ajax";
+import { $$ajax } from "./ajax";
 export default {
 	install(Vue) {
 		Object.defineProperties(Vue.prototype, {

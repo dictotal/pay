@@ -1,30 +1,20 @@
 <template>
-	<div id="app">
-        <router-view />
-	</div>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 <script type="text/ecmascript-6">
-import {changeLanguage} from "@/common/i18n";
-let input  = document.querySelector("body > input[type=hidden]");
-const CONFIG = input?JSON.parse(input.value):{};
+import {changeLanguage, injectLanguage} from "@/common/i18n";
+import language from '@/common/i18n/language.json'
+changeLanguage(window.lang)
 export default {
     name: "app",
     data() {
-        return {}
-    },
-    created() {
-        console.error()
-        const query = this.$$tools.getUrlQuery()
-        let lang = sessionStorage.getItem('lang')
-        if (query.lang) {
-            changeLanguage(query.lang);
-            sessionStorage.setItem('lang', query.lang)
-        } else if (lang) {
-            changeLanguage(lang);
-        } else {
-            changeLanguage('en');
-        }
-    }
+      return {}
+  },
+  created () {
+    injectLanguage(language)
+  }
 }
 </script>
 <style lang="scss">
@@ -32,6 +22,6 @@ export default {
 @import "scss/common";
 @import "scss/mobile";
 #app {
-	height: 100%;
+  height: 100%;
 }
 </style>

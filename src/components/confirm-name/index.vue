@@ -106,7 +106,7 @@ export default {
     line-height: 41px;
     background-color: $skin-color1;
     border-radius: 41px;
-    color: $skin-bg1;
+    color: $skin-font1;
     font-size: 17px;
     text-align: center;
     margin: 10px auto 0;

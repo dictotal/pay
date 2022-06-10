@@ -1,21 +1,8 @@
 <template>
   <div id="v-detail" class="view-bg-gray" :class="status">
-    <div class="cancel-top flex">
-        <div class="cancel-left-info">
-            <div class="cancel-left-item flex">
-                <div class="cancel-left-label">Deposit amount:</div>
-                <div class="cancel-left-value">{{config.paymentAmount}} {{config.currency}}</div>
-            </div>
-            <div class="cancel-left-item flex">
-                <div class="cancel-left-label">Order number:</div>
-                <div class="cancel-left-value">{{ orderNo }}</div>
-                <img class="cancel-copy-icon" src="../images/copy.png" @click="copy" />
-            </div>
-        </div>
-        <div class="cancel-top-btn btn" v-if="status === 'wait'" @click="cancelHandel">{{ $i18n("detail.index.txt_7", "撤销订单") }}</div>
-    </div>
+    <cancel-order :config="config" @cancelHandel="cancelHandel" :status="status"></cancel-order>
     <div class="iframe-el-container">
-        <iframe class="iframe-el" :src="config.url || 'https://m.baidu.com'" frameborder="0"></iframe>
+      <iframe class="iframe-el" :src="config.url || 'https://m.baidu.com'" frameborder="0"></iframe>
     </div>
     <div class="empty-padding"></div>
   </div>
@@ -25,6 +12,7 @@
 
 import countDown from '@/components/count-down';
 import QRious from 'qrious';
+import CancelOrder from '@/components/cancel-order'
 import {injectLanguage} from "@/common/i18n";
 import lang from "../language.json";
 injectLanguage(lang);
@@ -60,11 +48,7 @@ export default {
     },
     listenMessage() {
         // url有参数才能发正常渲染数据，提交的时候是form post， 无参数不能由客户端再次加载
-        let href = location.href
-        let noJump = href.indexOf('isJump') === -1
-        if (href.indexOf('zz_vader_online') && noJump) {
-            dsBridge.call('hidePayBtn', {})
-        }
+        dsBridge.call('hidePayBtn', {})
         this.$$tools.postMessage('toThirdChargePage', { url: location.href})
         window.removeEventListener('message', this.messageHandle)
         window.addEventListener('message', this.messageHandle)
@@ -147,7 +131,7 @@ export default {
       return this.$$tools.isMobile();
     },
   },
-  components: {countDown}
+  components: {countDown, CancelOrder}
 }
 </script>
 
@@ -168,52 +152,18 @@ export default {
     height: 50px;
     height: calc(20px + env(safe-area-inset-bottom));
   }
-  .cancel-top {
-        background-color: #fff;
-        height: 77px;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 12px;
-        align-self: flex-start;
-        min-width: 375px;
-        .cancel-left-item {
-            line-height: 19px;
-            font-size: 13px;
-            align-items: center;
-            &:first-child {
-                margin-bottom: 10px;
-            }
-            .cancel-left-label {
-                color: #b3b3b3
-            }
-        }
-        .cancel-copy-icon {
-            width: 17px;
-            height: 17px;
-            display: block;
-        }
-        .cancel-top-btn {
-            color: #b3b3b3;
-            font-size: 13px;
-            height: 32px;
-            border-radius: 4px;
-            border: 1px solid #b3b3b3;
-            line-height: 32px;
-            padding: 0 2px;
-        }
-    }
-    .iframe-el-container {
-        height: calc(100vh - 77px);
-        width: 100%;
-        overflow: hidden;
-        .iframe-el {
-            height: 50%;
-            display: block;
-            width: 50%;
-            transform: translate(50%, 50%) scale(2);
-        }
-    }
 
+  .iframe-el-container {
+    height: calc(100vh - 67px);
+    width: 100%;
+    overflow: hidden;
+    .iframe-el {
+      height: 50%;
+      display: block;
+      width: 50%;
+      transform: translate(50%, 50%) scale(2);
+    }
+  }
   .time-view {
     width: 130px;
     height: 27px;
@@ -308,8 +258,8 @@ export default {
       }
     }
   }
-  .btn{
-      text-align: center
+  .btn {
+    text-align: center;
   }
 }
 @media screen and (min-width: 780px) {
@@ -463,5 +413,4 @@ export default {
     height: 220px;
   }
 }
-
 </style>

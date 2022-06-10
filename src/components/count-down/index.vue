@@ -151,10 +151,13 @@ export default {
 	.time {
 		min-width: 28px;
 		@include h-lh(28px);
-		background: #556091;
+		background: #fff;
 		box-shadow: 0 2px 2px rgba(0, 0, 0, 0.6);
 		border-radius: 4px;
 		text-align: center;
+    color: $skin-bg1;
+    font-family: DIN;
+    font-size: 16px;
 	}
 	.dot {
 		display: flex;

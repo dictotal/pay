@@ -4,29 +4,27 @@
   </div>
 </template>
 <script>
-import Tools from '@/common/tools'
-import transfer from './components/transfer'
-import langAuto from './language.json'
-import {injectLanguage} from "@/common/i18n";
-import lang from "@/platform/PAY/v-go/language.json";
-let injectOnce = Tools.once(function(){
-  injectLanguage(lang);
-  injectLanguage(langAuto);
-});
-import {
-    autoOrder
-} from '@/data'
+import Tools from "@/common/tools"
+import transfer from "./components/transfer"
+import { injectLanguage } from "@/common/i18n"
+import lang from "@/platform/PAY/v-go/language.json"
+import langAuto from "./language.json"
+autoOrder.qrCodeInfo = autoOrder.transferInfo
+let injectOnce = Tools.once(function () {
+  injectLanguage(lang)
+  injectLanguage(langAuto)
+})
+import { autoOrder } from "@/data"
 export default {
-  name: 'v-go',
+  name: "v-go",
   data() {
     return {
-      viewName: 'transfer',
-      config: {}
+      viewName: "transfer",
+      config: autoOrder
     }
   },
   created() {
     injectOnce()
-    this.config = autoOrder
   },
   components: {
     transfer

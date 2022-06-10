@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "PAY_DEV": "vue-cli-service serve  --config-name PAY",
+    "dev": "vue-cli-service serve  --config-name PAY",
     "DETAIL_DEV": "vue-cli-service serve  --config-name DETAIL",
     "PAY_BUILD": "vue-cli-service build  --config-name PAY",
-    "DETAIL_BUILD": "vue-cli-service build  --config-name DETAIL"
+    "build": "vue-cli-service build  --config-name DETAIL"
   },
   "dependencies": {
     "core-js": "^3.6.5",

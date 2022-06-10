@@ -180,7 +180,7 @@ $red: #f56c6c;
 	.btn-ok {
 		background: linear-gradient(90deg, #4664c4, #2a3e83);
 	}
-	
+
 	.wrap-ipt {
 		margin-bottom: 20px;
 		input {
@@ -258,7 +258,7 @@ $red: #f56c6c;
 			border-radius: 10px;
 			border: none;
 		}
-    
+
 		.btn-cancel {
 			color: $skin-font6;
 			background: $skin-bg2;
@@ -266,7 +266,6 @@ $red: #f56c6c;
 		.btn-ok {
 			margin-top: 10px;
 			background: $skin-color1;
-			color: $skin-font5;
 		}
 	}
 }

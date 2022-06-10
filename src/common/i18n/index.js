@@ -1,9 +1,10 @@
 let languageMap = {};
 
-let currLanguage = sessionStorage.getItem('lang') || "zh";
+console.log(window.lang, 'window.lang')
+let currLanguage = window.lang || 'en'
 
 function changeLanguage(curr) {
-	currLanguage = curr || "zh";
+	currLanguage = curr || window.lang;
 	document.body.setAttribute("lang", "lan-" + curr);
 }
 

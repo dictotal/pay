@@ -1,3 +1,4 @@
+import '@/common/i18n/default-lang'
 import Vue from "vue";
 import App from "./App.vue";
 import Common from "./common";

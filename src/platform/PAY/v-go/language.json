@@ -1,162 +1,162 @@
 {
-    "zh": {
-        "detail": {
-            "index": {
-                "txt_1": "银行名称",
-                "txt_2": "银行卡",
-                "txt__2": "手机号",
-                "txt_3": "复制",
-                "txt_4": "开户姓名",
-                "txt_5": "存款金额",
-                "txt_6": "请在[[30分钟]]内存入[[{{amount}}{{moneyUnit}}]]到上述银行卡，不是 [[{{baseAmount}}{{moneyUnit}}]] ，否则您的存款不能实时到账。",
-                "txt_7": "撤销订单",
-                "txt_8": "注意",
-                "txt_9": "如果您想修改支付金额，请先撤销订单，然后重新发起新的订单请求；",
-                "txt_10": "如果您已完成汇款，请勿点击“撤销订单”按钮，成功汇款超过3分钟未到账，请联系 在线客服， 我们将尽快为您处理。",
-                "txt_11": "倒计时结束，请重新提交充值申请！",
-                "txt_12": "如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！",
-                "txt_14": "暂不撤销",
-                "txt_15": "复制成功,请粘贴使用",
-                "txt_13": "提示",
-                "txt_16": "付款人开户名",
-                "txt_17": "充值方式",
-                "txt_18": "银行卡转账",
-                "txt_19": "THAI QR",
-                "txt_20": "我已付款",
-                "txt_21": "确定您已存入[[{{amount}}{{moneyUnit}}]]?"
-            },
-            "qrcode": {
-                "txt_1": "支持以下银行的手机应用程序扫描二维码进行支付",
-                "txt_2": "支付成功",
-                "txt_3": "支付失败",
-                "txt_4": "复制成功,请粘贴使用",
-                "txt_5": "扫描二维码支付",
-                "txt_6": "倒计时结束，请重新提交充值申请！",
-                "txt_7": "撤销订单",
-                "txt_8": "如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！",
-                "txt_9": "暂不撤销",
-                "txt_10": "提示"
-            }
-        }
-    },
-    "my": {
-        "detail": {
-            "index": {
-                "txt_1": "ဘဏ်အမည်",
-                "txt_2": "အကောင့်နံပါတ်",
-                "txt__2": "ဖုန်းနံပါတ်",
-                "txt_3": "ကူးယူရန်",
-                "txt_4": "အကောင့်အမည်",
-                "txt_5": "လွှဲရမည့်ပမာဏ",
-                "txt_6": "[[{{amount}}{{moneyUnit}}]]ကိုမိနစ်[[30]]အတွင်းလွှဲပါ၊[[{{baseAmount}}{{moneyUnit}}]]လွှဲရန်မဟုတ်၊သို့မဟုတ်လျှင် လူကြီးမင်း၏ငွေလွှဲလုပ်ငန်းစဥ်သည် အချိန်မီရောက်ရှိနိုင်မည်မဟုတ်ပါ။",
-                "txt_7": "ပယ်ဖျက်မည်",
-                "txt_8": "သတိပြုရန်",
-                "txt_9": "လွှဲငွေပမာဏကိုပြုပြင်လိုလျှင် ပယ်ဖျက်မည်ကိုဦးစွာနှိပ်ပြီး လုပ်ငန်းစဥ်အသစ်ကိုပြန်လည်လုပ်ဆောင်ပါ။",
-                "txt_10": "ငွေလွှဲပြီးလျှင်ပယ်ဖျက်မည်ကိုမနှိပ်ပါနှင့်၊ငွေလွှဲပြီး၃မိနစ် အကောင့်ထဲသို့ငွေမရောက်လျှင်ဧည့်၀န်ဆောင်မှုကိုဆက်သွယ်လိုက်ပါ၊အမြန်ဆုံးဖြေရှင်းပေးပါမည်။",
-                "txt_11": "ကျေးဇူးပြုပြီးလျှောက်လွှာကိုပြန်လည်တင်သွင်းပါ။",
-                "txt_12": "ငွေလွှဲပြီးလျှင်ပယ်ဖျက်မည်ကိုမနှိပ်ပါနှင့်၊သို့မဟုတ်လျှင် လူကြီးမင်း၏ငွေလွဲလုပ်ငန်းစဥ်သည် အချိန်မီရောက်ရှိနိုင်မည်မဟုတ်ပါ။",
-                "txt_14": "မပယ်ဖျက်ပါ",
-                "txt_15": "Copy successfully, please paste",
-                "txt_13": "အသိပေးချက်",
-                "txt_16": "ငွေပေးသူအကောင့်အမည်",
-                "txt_17": "ငွေပြန်သွင်းနည်း",
-                "txt_18": "ဘဏ်ကဒ်မှငွေလွှဲခြင်း",
-                "txt_19": "THAI QR",
-                "txt_20": "ပေးပြီးသွားပြီ",
-                "txt_21": "ငွေသွင်းပြီးတာသေချာပါသလား [[{{amount}}{{moneyUnit}}]]?"
-            },
-            "qrcode": {
-                "txt_1": "အောက်ပါဘဏ်များ၏ မိုဘိုင်းအက်ပ်ဖြင့် ပေးချေရန် QR ကုဒ်ကို စကင်န်ဖတ်ပါ။",
-                "txt_2": "ငွေပေးချေမှုအောင်မြင်ပါသည်",
-                "txt_3": "ငွေပေးချေမှုမအောင်မြင်ပါ",
-                "txt_4": "ကူးယူမှုအောင်မြင်ပါသည်၊ ကျေးဇူးပြု၍ ကူးထည့်ပြီးအသုံးပြုနိုုင်ပါပြီ",
-                "txt_5": "ငွေပေးချေရန် QR ကုဒ်ကို စကင်န်ဖတ်ပါ။",
-                "txt_6": "ကျေးဇူးပြုပြီးလျှောက်လွှာကိုပြန်လည်တင်သွင်းပါ။",
-                "txt_7": "ပယ်ဖျက်မည်",
-                "txt_8": "ငွေလွှဲပြီးလျှင်ပယ်ဖျက်မည်ကိုမနှိပ်ပါနှင့်၊သို့မဟုတ်လျှင် လူကြီးမင်း၏ငွေလွဲလုပ်ငန်းစဥ်သည် အချိန်မီရောက်ရှိနိုင်မည်မဟုတ်ပါ။",
-                "txt_9": "ပယ်ဖျက်မည်",
-                "txt_10": "အသိပေးချက်"
-            }
-        }
-    },
-    "th": {
-        "detail": {
-            "index": {
-                "txt_1": "ชื่อธนาคาร",
-                "txt_2": "บัตรธนาคาร",
-                "txt__2": "เบอร์มือถือ",
-                "txt_3": "คัดลอก",
-                "txt_4": "ชื่อ",
-                "txt_5": "จำนวนเงินฝาก",
-                "txt_6": "โปรดฝากเงิน [[{{amount}} {{moneyUnit}}]] ลงในบัตรธนาคารด้านบนภายใน [[30 นาที]] แทน [{{baseAmount}} {{moneyUnit}}]]",
-                "txt_7": "ยกเลิกคำสั่งซื้อ",
-                "txt_8": "โปรดระวัง",
-                "txt_9": "หากคุณต้องการแก้ไขจำนวนเงินที่ชำระโปรดยกเลิกคำสั่งซื้อก่อนจากนั้นจึงเริ่มต้นคำขอสั่งซื้อใหม่",
-                "txt_10": "อย่าคลิก \"ยกเลิกคำสั่งซื้อ\" หลังจากเสร็จสิ้นการโอนเงิน โปรดติดต่อฝ่ายบริการลูกค้าออนไลน์หากไม่ได้รับบัญชีภายใน 3 นาที",
-                "txt_11": "การนับถอยหลังสิ้นสุดลงแล้วโปรดส่งแอปพลิเคชันเติมเงินอีกครั้ง!",
-                "txt_12": "โปรดอย่ายกเลิกคำสั่งซื้อหากคุณได้ส่งเงินเราจะดำเนินการให้คุณโดยเร็วที่สุดและการยกเลิกคำสั่งซื้อจะส่งผลต่อการมาถึงบัญชีแบบเรียลไทม์!",
-                "txt_14": "ฉันไม่ยกเลิก",
-                "txt_15": "คัดลอกเรียบร้อย โปรดวาง",
-                "txt_13": "คำเตือน",
-                "txt_16": "ชื่อบัญชีผู้ชำระเงิน",
-                "txt_17": "วิธีเติมเงิน",
-                "txt_18": "โอนผ่านบัตรธนาคาร",
-                "txt_19": "THAI QR",
-                "txt_20": "จ่ายเงินแล้ว",
-                "txt_21": "คุณแน่ใจหรือว่าได้ฝากเงิน [[{{amount}}{{moneyUnit}}]]แล้ว?"
-            },
-            "qrcode": {
-                "txt_1": "แอพมือถือของธนาคารต่อไปนี้รองรับการสแกนรหัส QR สำหรับการชำระเงิน",
-                "txt_2": "ชำระเงินสำเร็จ",
-                "txt_3": "การชำระเงินล้มเหลว",
-                "txt_4": "คัดลอกเรียบร้อย โปรดวาง",
-                "txt_5": "สแกน QR code เพื่อชำระเงิน",
-                "txt_6": "การนับถอยหลังสิ้นสุดลงแล้วโปรดส่งแอปพลิเคชันเติมเงินอีกครั้ง!",
-                "txt_7": "ยกเลิกคำสั่งซื้อ",
-                "txt_8": "โปรดอย่ายกเลิกคำสั่งซื้อหากคุณได้ส่งเงินเราจะดำเนินการให้คุณโดยเร็วที่สุดและการยกเลิกคำสั่งซื้อจะส่งผลต่อการมาถึงบัญชีแบบเรียลไทม์!",
-                "txt_9": "ฉันไม่ยกเลิก",
-                "txt_10": "คำเตือน"
-            }
-        }
-    },
-    "en": {
-        "detail": {
-            "index": {
-                "txt_1": "Bank Name",
-                "txt_2": "Bank Card",
-                "txt__2": "phone number",
-                "txt_3": "Copy",
-                "txt_4": "Account name",
-                "txt_5": "Deposit amount",
-                "txt_6": "Please deposit [[{{amount}}{{moneyUnit}}]] to the above bank card within [[30 minutes]], not [[{{baseAmount}}{{moneyUnit}}]], otherwise your deposit cannot be Account in real time.",
-                "txt_7": "Cancel order",
-                "txt_8": "Notice",
-                "txt_9": "If you want to modify the payment amount, please cancel the order first, and then re-initiate a new order request;",
-                "txt_10": "If you have completed the remittance, please do not click the \"Cancel Order\" button. The successful remittance has not arrived in the account for more than 3 minutes, please contact the online customer service and we will handle it for you as soon as possible.",
-                "txt_11": "The countdown is over, please resubmit the recharge application!",
-                "txt_12": "If the remittance has been remitted, please do not cancel it, we will process it for you as soon as possible, and canceling the order will affect the real-time arrival!",
-                "txt_14": "Not to be revoked",
-                "txt_15": "Copy successfully, please paste and use",
-                "txt_13": "Tips",
-                "txt_16": "Payer account name",
-                "txt_17": "Deposit Method",
-                "txt_18": "Bank Transfer",
-                "txt_19": "THAI QR",
-                "txt_20": "I have paid",
-                "txt_21": "Are you sure you have deposited [[{{amount}}{{moneyUnit}}]]?"
-            },
-            "qrcode": {
-                "txt_1": "Scan the QR code to pay with the mobile app of the following banks",
-                "txt_2": "Payment Successful",
-                "txt_3": "Payment Failed",
-                "txt_4": "Copy successfully, please paste and use",
-                "txt_5": "Scan QR code to pay",
-                "txt_6": "The countdown is over, please resubmit the recharge application!",
-                "txt_7": "Cancel order",
-                "txt_8": "If the remittance has been remitted, please do not cancel it, we will process it for you as soon as possible, and canceling the order will affect the real-time arrival!",
-                "txt_9": "Cancel",
-                "txt_10": "Tips"
-            }
-        }
+  "zh": {
+    "detail": {
+      "index": {
+        "txt_1": "银行名称",
+        "txt_2": "银行卡",
+        "txt__2": "手机号",
+        "txt_3": "复制",
+        "txt_4": "开户姓名",
+        "txt_5": "存款金额",
+        "txt_6": "请在[[30分钟]]内存入[[{{amount}}{{moneyUnit}}]]到上述银行卡，不是 [[{{baseAmount}}{{moneyUnit}}]] ，否则您的存款不能实时到账。",
+        "txt_7": "撤销订单",
+        "txt_8": "注意",
+        "txt_9": "如果您想修改支付金额，请先撤销订单，然后重新发起新的订单请求；",
+        "txt_10": "如果您已完成汇款，请勿点击“撤销订单”按钮，成功汇款超过3分钟未到账，请联系 在线客服， 我们将尽快为您处理。",
+        "txt_11": "倒计时结束，请重新提交充值申请！",
+        "txt_12": "如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！",
+        "txt_14": "暂不撤销",
+        "txt_15": "复制成功,请粘贴使用",
+        "txt_13": "提示",
+        "txt_16": "付款人开户名",
+        "txt_17": "充值方式",
+        "txt_18": "银行卡转账",
+        "txt_19": "THAI QR",
+        "txt_20": "我已付款",
+        "txt_21": "确定您已存入[[{{amount}}{{moneyUnit}}]]?"
+      },
+      "qrcode": {
+        "txt_1": "支持以下银行的手机应用程序扫描二维码进行支付",
+        "txt_2": "支付成功",
+        "txt_3": "支付失败",
+        "txt_4": "复制成功,请粘贴使用",
+        "txt_5": "扫描二维码支付",
+        "txt_6": "倒计时结束，请重新提交充值申请！",
+        "txt_7": "撤销订单",
+        "txt_8": "如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！",
+        "txt_9": "暂不撤销",
+        "txt_10": "提示"
+      }
     }
+  },
+  "my": {
+    "detail": {
+      "index": {
+        "txt_1": "ဘဏ်အမည်",
+        "txt_2": "အကောင့်နံပါတ်",
+        "txt__2": "ဖုန်းနံပါတ်",
+        "txt_3": "ကူးယူရန်",
+        "txt_4": "အကောင့်အမည်",
+        "txt_5": "လွှဲရမည့်ပမာဏ",
+        "txt_6": "[[{{amount}}{{moneyUnit}}]]ကိုမိနစ်[[30]]အတွင်းလွှဲပါ၊[[{{baseAmount}}{{moneyUnit}}]]လွှဲရန်မဟုတ်၊သို့မဟုတ်လျှင် လူကြီးမင်း၏ငွေလွှဲလုပ်ငန်းစဥ်သည် အချိန်မီရောက်ရှိနိုင်မည်မဟုတ်ပါ။",
+        "txt_7": "ပယ်ဖျက်မည်",
+        "txt_8": "သတိပြုရန်",
+        "txt_9": "လွှဲငွေပမာဏကိုပြုပြင်လိုလျှင် ပယ်ဖျက်မည်ကိုဦးစွာနှိပ်ပြီး လုပ်ငန်းစဥ်အသစ်ကိုပြန်လည်လုပ်ဆောင်ပါ။",
+        "txt_10": "ငွေလွှဲပြီးလျှင်ပယ်ဖျက်မည်ကိုမနှိပ်ပါနှင့်၊ငွေလွှဲပြီး၃မိနစ် အကောင့်ထဲသို့ငွေမရောက်လျှင်ဧည့်၀န်ဆောင်မှုကိုဆက်သွယ်လိုက်ပါ၊အမြန်ဆုံးဖြေရှင်းပေးပါမည်။",
+        "txt_11": "ကျေးဇူးပြုပြီးလျှောက်လွှာကိုပြန်လည်တင်သွင်းပါ။",
+        "txt_12": "ငွေလွှဲပြီးလျှင်ပယ်ဖျက်မည်ကိုမနှိပ်ပါနှင့်၊သို့မဟုတ်လျှင် လူကြီးမင်း၏ငွေလွဲလုပ်ငန်းစဥ်သည် အချိန်မီရောက်ရှိနိုင်မည်မဟုတ်ပါ။",
+        "txt_14": "မပယ်ဖျက်ပါ",
+        "txt_15": "Copy successfully, please paste",
+        "txt_13": "အသိပေးချက်",
+        "txt_16": "ငွေပေးသူအကောင့်အမည်",
+        "txt_17": "ငွေပြန်သွင်းနည်း",
+        "txt_18": "ဘဏ်ကဒ်မှငွေလွှဲခြင်း",
+        "txt_19": "THAI QR",
+        "txt_20": "ပေးပြီးသွားပြီ",
+        "txt_21": "ငွေသွင်းပြီးတာသေချာပါသလား [[{{amount}}{{moneyUnit}}]]?"
+      },
+      "qrcode": {
+        "txt_1": "အောက်ပါဘဏ်များ၏ မိုဘိုင်းအက်ပ်ဖြင့် ပေးချေရန် QR ကုဒ်ကို စကင်န်ဖတ်ပါ။",
+        "txt_2": "ငွေပေးချေမှုအောင်မြင်ပါသည်",
+        "txt_3": "ငွေပေးချေမှုမအောင်မြင်ပါ",
+        "txt_4": "ကူးယူမှုအောင်မြင်ပါသည်၊ ကျေးဇူးပြု၍ ကူးထည့်ပြီးအသုံးပြုနိုုင်ပါပြီ",
+        "txt_5": "ငွေပေးချေရန် QR ကုဒ်ကို စကင်န်ဖတ်ပါ။",
+        "txt_6": "ကျေးဇူးပြုပြီးလျှောက်လွှာကိုပြန်လည်တင်သွင်းပါ။",
+        "txt_7": "ပယ်ဖျက်မည်",
+        "txt_8": "ငွေလွှဲပြီးလျှင်ပယ်ဖျက်မည်ကိုမနှိပ်ပါနှင့်၊သို့မဟုတ်လျှင် လူကြီးမင်း၏ငွေလွဲလုပ်ငန်းစဥ်သည် အချိန်မီရောက်ရှိနိုင်မည်မဟုတ်ပါ။",
+        "txt_9": "ပယ်ဖျက်မည်",
+        "txt_10": "အသိပေးချက်"
+      }
+    }
+  },
+  "th": {
+    "detail": {
+      "index": {
+        "txt_1": "ชื่อธนาคาร",
+        "txt_2": "บัตรธนาคาร",
+        "txt__2": "เบอร์มือถือ",
+        "txt_3": "คัดลอก",
+        "txt_4": "ชื่อ",
+        "txt_5": "จำนวนเงินฝาก",
+        "txt_6": "โปรดฝากเงิน [[{{amount}} {{moneyUnit}}]] ลงในบัตรธนาคารด้านบนภายใน [[30 นาที]] แทน [{{baseAmount}} {{moneyUnit}}]]",
+        "txt_7": "ยกเลิกคำสั่งซื้อ",
+        "txt_8": "โปรดระวัง",
+        "txt_9": "หากคุณต้องการแก้ไขจำนวนเงินที่ชำระโปรดยกเลิกคำสั่งซื้อก่อนจากนั้นจึงเริ่มต้นคำขอสั่งซื้อใหม่",
+        "txt_10": "อย่าคลิก \"ยกเลิกคำสั่งซื้อ\" หลังจากเสร็จสิ้นการโอนเงิน โปรดติดต่อฝ่ายบริการลูกค้าออนไลน์หากไม่ได้รับบัญชีภายใน 3 นาที",
+        "txt_11": "การนับถอยหลังสิ้นสุดลงแล้วโปรดส่งแอปพลิเคชันเติมเงินอีกครั้ง!",
+        "txt_12": "โปรดอย่ายกเลิกคำสั่งซื้อหากคุณได้ส่งเงินเราจะดำเนินการให้คุณโดยเร็วที่สุดและการยกเลิกคำสั่งซื้อจะส่งผลต่อการมาถึงบัญชีแบบเรียลไทม์!",
+        "txt_14": "ฉันไม่ยกเลิก",
+        "txt_15": "คัดลอกเรียบร้อย โปรดวาง",
+        "txt_13": "คำเตือน",
+        "txt_16": "ชื่อเจ้าของบัญชี",
+        "txt_17": "วิธีเติมเงิน",
+        "txt_18": "โอนผ่านบัตรธนาคาร",
+        "txt_19": "THAI QR",
+        "txt_20": "ชำระเงินเเล้ว",
+        "txt_21": "คุณแน่ใจหรือไม่ ว่าคุณได้ฝากเงิน [[{{amount}}{{moneyUnit}}]] แล้ว"
+      },
+      "qrcode": {
+        "txt_1": "แอพมือถือของธนาคารต่อไปนี้รองรับการสแกนรหัส QR สำหรับการชำระเงิน",
+        "txt_2": "ชำระเงินสำเร็จ",
+        "txt_3": "การชำระเงินล้มเหลว",
+        "txt_4": "คัดลอกเรียบร้อย โปรดวาง",
+        "txt_5": "สแกน QR code เพื่อชำระเงิน",
+        "txt_6": "การนับถอยหลังสิ้นสุดลงแล้วโปรดส่งแอปพลิเคชันเติมเงินอีกครั้ง!",
+        "txt_7": "ยกเลิกคำสั่งซื้อ",
+        "txt_8": "โปรดอย่ายกเลิกคำสั่งซื้อหากคุณได้ส่งเงินเราจะดำเนินการให้คุณโดยเร็วที่สุดและการยกเลิกคำสั่งซื้อจะส่งผลต่อการมาถึงบัญชีแบบเรียลไทม์!",
+        "txt_9": "ฉันไม่ยกเลิก",
+        "txt_10": "คำเตือน"
+      }
+    }
+  },
+  "en": {
+    "detail": {
+      "index": {
+        "txt_1": "Bank Name",
+        "txt_2": "Bank Card",
+        "txt__2": "phone number",
+        "txt_3": "Copy",
+        "txt_4": "Account name",
+        "txt_5": "Deposit amount",
+        "txt_6": "Please deposit [[{{amount}}{{moneyUnit}}]] to the above bank card within [[30 minutes]], not [[{{baseAmount}}{{moneyUnit}}]], otherwise your deposit cannot be Account in real time.",
+        "txt_7": "Cancel order",
+        "txt_8": "Notice",
+        "txt_9": "If you want to modify the payment amount, please cancel the order first, and then re-initiate a new order request;",
+        "txt_10": "If you have completed the remittance, please do not click the \"Cancel Order\" button. The successful remittance has not arrived in the account for more than 3 minutes, please contact the online customer service and we will handle it for you as soon as possible.",
+        "txt_11": "The countdown is over, please resubmit the recharge application!",
+        "txt_12": "If the remittance has been remitted, please do not cancel it, we will process it for you as soon as possible, and canceling the order will affect the real-time arrival!",
+        "txt_14": "Not to be revoked",
+        "txt_15": "Copy successfully, please paste and use",
+        "txt_13": "Tips",
+        "txt_16": "Payer account name",
+        "txt_17": "Deposit Method",
+        "txt_18": "Bank Transfer",
+        "txt_19": "THAI QR",
+        "txt_20": "I have paid",
+        "txt_21": "Are you sure you have deposited [[{{amount}}{{moneyUnit}}]]?"
+      },
+      "qrcode": {
+        "txt_1": "Scan the QR code to pay with the mobile app of the following banks",
+        "txt_2": "Payment Successful",
+        "txt_3": "Payment Failed",
+        "txt_4": "Copy successfully, please paste and use",
+        "txt_5": "Scan QR code to pay",
+        "txt_6": "The countdown is over, please resubmit the recharge application!",
+        "txt_7": "Cancel order",
+        "txt_8": "If the remittance has been remitted, please do not cancel it, we will process it for you as soon as possible, and canceling the order will affect the real-time arrival!",
+        "txt_9": "Cancel",
+        "txt_10": "Tips"
+      }
+    }
+  }
 }
