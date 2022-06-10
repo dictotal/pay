@@ -1,6 +1,6 @@
 <template>
   <div id="v-detail" class="view-bg-gray">
-    <cancel-order :config="config" @cancelHandel="cancelHandel" :status="status"></cancel-order>
+    <cancel-order :config="config" v-if="config.paymentId" @cancelHandel="cancelHandel" :status="status"></cancel-order>
     <top-tips
       :content="
         $i18n(
@@ -174,8 +174,17 @@ export default {
           this.$i18n('detail.index.txt_14','暂不撤销'));
     },
     withdrawal() {
-      let config = this.config, transferInfo = this.transferInfo;
-      window.location.href = `/p/cancel?sign=${encodeURIComponent(config.sign)}&paymentAmount=${transferInfo.amount}&paymentId=${config.paymentId}&lang=${config.lang}`
+      let transferInfo = this.transferInfo;
+      this.$$ajax.post('recharge/cancelRecharge', {
+        amount: transferInfo.amount,
+        paymentAmount: transferInfo.baseAmount,
+        paymentId: this.config.paymentId
+      }).then(() => {
+        window.config = undefined
+        this.$router.replace('/')
+      }).catch(err => {
+        this.$$msg.show(err)
+      })
     },
     confirmHandel() {
       this.$$confirm(this.$i18n('detail.index.txt_21', {
@@ -188,8 +197,6 @@ export default {
             }
           }, this.$i18n('detail.index.txt_13','提示'),
           ''
-          // this.$i18n('detail.index.txt_7','撤销订单'),
-          // this.$i18n('detail.index.txt_14','暂不撤销')
       );
     },
     // 确认已经付款

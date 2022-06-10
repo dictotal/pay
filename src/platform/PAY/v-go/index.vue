@@ -6,7 +6,6 @@
 <script>
 import onlineBank from "./components/onlineBank"
 import transfer from "./components/transfer"
-import { qrcodeData, transferData } from "@/data"
 export default {
   name: "v-go",
   data() {
@@ -16,15 +15,15 @@ export default {
     }
   },
   created() {
-    if (this.$route.query.paymentType === "transpay") {
+    let storeKey = window.commonParams.currency + this.$route.query.paymentId
+    let storeData = JSON.parse(localStorage.getItem(storeKey))
+    if (this.$route.query.modelType === "transfer") {
       this.viewName = "transfer"
-      transferData.qrCodeInfo = transferData.transferInfo
-      this.config = transferData
+      storeData.qrCodeInfo = storeData.transferInfo
     } else {
       this.viewName = "onlineBank"
-      console.error(qrcodeData)
-      this.config = qrcodeData
     }
+    this.config = storeData
   },
   components: {
     transfer,

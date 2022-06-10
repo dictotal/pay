@@ -9,6 +9,7 @@
     "build": "vue-cli-service build  --config-name DETAIL"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "core-js": "^3.6.5",
     "dsbridge": "^3.1.4",
     "qrious": "^4.0.2",

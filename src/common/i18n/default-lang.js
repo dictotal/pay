@@ -22,6 +22,17 @@ if (params.lang) {
 }
 // 处理消息
 if (params.token) {
-  localStorage.setItem(token, params.token)
+  params.token = decodeURIComponent(params.token)
+  localStorage.setItem('commonParams', JSON.stringify(params))
+  window.commonParams = params
+} else if (localStorage.getItem('commonParams')) {
+  window.commonParams = JSON.parse(localStorage.getItem('commonParams'))
+} else {
+  window.commonParams = {
+    'lang': 'en',
+    'coinType': 'MMK',
+    'platform': 'MMK',
+    'origin': 'android'
+  }
 }
 console.log("window", window.lang)

@@ -14,11 +14,17 @@ let platform = ARGV_LIST.slice(-1) || "YYM"
 module.exports = {
   devServer: {
     proxy: {
-      "/sportpay/": {
-        // target:'http://localhost:3000'//本地mock
-        target: "http://p.kfc.com/"
+      "/a": {
+        /* 测试环境kfc */
+        target: "http://m.kfc.com/",
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          "^/a": ""
+        }
       }
-    }
+    },
+    port: 8080
   },
   css: {
     loaderOptions: {

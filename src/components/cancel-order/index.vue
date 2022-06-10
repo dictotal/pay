@@ -11,7 +11,7 @@
         <img class="cancel-copy-icon" src="/images/copy.png" @click="copy" />
       </div>
     </div>
-    <div class="cancel-top-btn btn" v-if="status === 'wait'" @click="cancelHandel">{{ $i18n("detail.index.txt_7", "撤销订单") }}</div>
+    <div class="cancel-top-btn btn" v-if="status === 'wait'" @click="cancelHandel">{{ $i18n("撤销订单") }}</div>
   </div>
 </template>
 <script>
@@ -27,7 +27,6 @@ export default {
   },
   computed: {
     orderNo() {
-      console.error(this.config, "this.config")
       return this.config.orderNo || this.config.qrCodeInfo.orderNo
     },
     paymentAmount() {

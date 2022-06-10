@@ -1,5 +1,5 @@
 <template>
-  <div id="bank-my" class="div-bg-gray" :class="{ 'pay-init-tt-pc': isMobile !== true }">
+  <div id="bank-my" class="div-bg-gray" v-if="config" :class="{ 'pay-init-tt-pc': isMobile !== true }">
     <div class="layout-wrap">
       <div class="panel-main box-shadow">
         <!-- 银行卡支付方式 -->
@@ -71,9 +71,6 @@ let injectOnce = Tools.once(function () {
 	injectLanguage(lang);
 });
 changeLanguage(sessionStorage.getItem('lang'))
-import {
-	initData,
-} from '@/data'
 export default {
 	name: "v-init",
 	data () {
@@ -88,21 +85,42 @@ export default {
 			amount: "",
 			moneyUnit: "Ks",
 			actPayment: {},
-			config: initData
+      config: null,
+      imagesConfig: {
+        zz_b: {
+          iconUrl: '/images/transfer01.png'
+        },
+        zz_c: {
+          iconUrl: '/images/auto.png'
+        },
+        zz_d: {
+          iconUrl: '/images/qrcode.png'
+        },
+        thqr: {
+          iconUrl: '/images/online-bank.png'
+        }
+      }
 		}
 	},
 	created () {
 		injectOnce();
-		this.moneyUnit = this.config.currencyUnit;
 		this.init();
 	},
 	methods: {
-		init () {
-			let cfg = this.config;
-			cfg.paymentMethodList.forEach((item, index) => {
+    async init () {
+      let cfg
+      if (!window.config) {
+        cfg = await this.getData()
+      } else {
+        cfg = JSON.parse(JSON.stringify(window.config))
+      }
+      this.config = cfg
+      console.log(this.config, 'this.config')
+      this.moneyUnit = this.config.currencyUnit;
+			cfg.paymentList.forEach((item, index) => {
 				if (item.paymentType === 'third') {
 					this.$set(this.bankChooseList, index, {
-						...item,
+            ...item,
 						...this.bankChooseList[index],
 						bankCardList: item.paymentMethodList,
 						type: item.paymentType,
@@ -111,7 +129,8 @@ export default {
 				} else {
 					this.$set(this.bankChooseList, index, {
 						...item,
-						...this.bankChooseList[index],
+            ...this.bankChooseList[index],
+            icon: this.imagesConfig[item.paymentId].iconUrl,
 						bankCardList: item.bankCardList,
 						type: item.paymentType,
 						activeIdx: 0
@@ -120,7 +139,20 @@ export default {
 			})
 			this.$set(this.bankChooseList[0], 'selected', true)
 			this.getActPayment()
-		},
+    },
+    getData () {
+      return new Promise((resolve, reject) => {
+        this.$$ajax.post('recharge/rechargeInitS').then(res => {
+          if (res.paymentList && res.paymentList.length > 0) {
+            resolve(res)
+          } else {
+            this.toDetail(res)
+          }
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
 		// 获取激活的支付方式
 		getActPayment () {
 			let obj = {}
@@ -189,25 +221,23 @@ export default {
 				paymentAmount: this.amount
 			}
 			if (actPayment.paymentType === 'transpay') {
-				queryMap.id = this.actBank.id
-				queryMap.userName = payerName
-			}
-			let queryString = `paymentId=${queryMap.paymentId}&sign=${config.sign}&orderId=1234567890&paymentType=${this.actPayment.paymentType}`
-			if (queryMap.paymentId === 'zz_c') {
-				this.$router.replace(`/sports/auto?${queryString}`)
-			} else {
-				this.$router.replace(`/sports/go?${queryString}`)
-			}
-
-			this.$$ajax.post('/ttsports/p/pay', {
-				sign: config.sign,
-				token: encryptPublicLong(this.$$tools.map2get(queryMap), config.publicKey),
-				lang: this.lang
-			}).then(rsp => {
-				console.log(rsp)
-			})
+				queryMap.bandId = this.actBank.id
+				queryMap.payAccount = payerName
+      }
+      this.$$ajax.post('recharge/pay', queryMap).then(res => {
+        this.toDetail(res)
+      })
 		},
-
+    toDetail (data) {
+      let url = '/sports/auto'
+      localStorage[data.currency + data.paymentId] = JSON.stringify(data)
+      if (data.modelType === 'transfer') {
+        url = '/sports/go'
+      } else if (data.modelType === 'qrcode') {
+        url = '/sports/go'
+      }
+      this.$router.replace(`${url}?paymentId=${data.paymentId}&modelType=${data.modelType}`)
+    },
 		// 选择付款方式
 		choosePayWay (index) {
 			this.activeIndex = index
@@ -269,12 +299,12 @@ export default {
 		},
 		// 是否显示支付方式
 		showPayWay () {
-			return this.bankChooseList[0].bankCardList.length > 0 && this.bankChooseList[1].bankCardList.length > 0
+			return true
 		},
 		// 銀行卡激活
 		actBank () {
 			let index = this.activeIndex
-			if (index > -1 && this.bankChooseList[index].paymentType === 'transpay') {
+			if (index > -1 && this.bankChooseList.length > 0 && this.bankChooseList[index].paymentType === 'transpay') {
 				let index2 = this.bankChooseList[index].activeIdx
 				if (index2 > -1) {
 					const o = this.bankChooseList[index].bankCardList[index2]
