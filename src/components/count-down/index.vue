@@ -156,7 +156,7 @@ export default {
 		border-radius: 4px;
 		text-align: center;
     color: $skin-bg1;
-    font-family: DIN;
+    font-family: Barlow;
     font-size: 16px;
 	}
 	.dot {

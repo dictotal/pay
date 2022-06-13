@@ -288,7 +288,7 @@ export default {
   .color-333 {
     color: $skin-font1;
     font-size: 14px;
-    font-family: DIN;
+    font-family: Barlow;
   }
   .copy-icon {
     width: 21px;

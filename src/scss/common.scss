@@ -3,8 +3,8 @@
 $scss-file: "~@/scss";
 
 @font-face {
-   font-family: "DIN";
-   src:url("#{$scss-file}/font/DIN-Bold.otf");
+   font-family: "Barlow";
+   src:url("#{$scss-file}/font/barlow-medium.otf"); // 修改字体
 }
 .f-din{
   font-family: "DIN";
