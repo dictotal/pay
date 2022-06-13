@@ -145,7 +145,6 @@ export default {
 			this.countDownSecond = [this.transferInfo.ttlSeconds * 1000];
 		},
 		endCount () {
-
 			this.$$alert(this.$i18n('detail.index.txt_11', '倒计时结束，请重新提交充值申请！'))
 		},
 		data () {
@@ -159,18 +158,25 @@ export default {
 		cancelHandel () {
 			this.$$confirm(this.$i18n('detail.index.txt_12', '如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！'), rs => {
 				if (rs) {
-
-					this.withdrawal();
+					this.cancelOrder();
 				}
 			}, this.$i18n('detail.index.txt_13', '提示'),
 				'',
 				this.$i18n('detail.index.txt_7', '撤销订单'),
 				this.$i18n('detail.index.txt_14', '暂不撤销'));
 		},
-		withdrawal () {
-			let config = this.config, transferInfo = this.transferInfo;
-			// window.location.href = `/p/cancel?sign=${encodeURIComponent(config.sign)}&paymentAmount=${transferInfo.amount}&paymentId=${config.paymentId}&lang=${config.lang}`
-			this.$router.replace('/')
+		cancelOrder () {
+			let transferInfo = this.transferInfo;
+      this.$$ajax.post('recharge/cancelRecharge', {
+        amount: transferInfo.amount,
+        paymentAmount: transferInfo.baseAmount,
+        paymentId: this.config.paymentId
+      }).then(() => {
+        window.config = undefined
+        this.$router.replace('/')
+      }).catch(err => {
+        this.$$msg.show(err)
+      })
 		},
 		// 录入订单
 		confirmHandel () {
@@ -183,7 +189,26 @@ export default {
 			} else if (this.depositNo.length !== 6) {
 				this.isShow = true
 			} else {
-				this.$$msg.show('SUBMIT SUCCESS')
+        let data = {
+          paymentId: this.config.paymentId,
+        }
+        if (this.isRequest) {
+          return
+        }
+        this.isRequest = true
+        setTimeout(() => {
+          this.isRequest = false
+        })
+        this.$$ajax.post('recharge/verifyOrder', data).then(res => {
+          if (res.operateResult) {
+            this.$router.replace('/')
+          }
+          this.$$msg.show(res.tips)
+          this.isRequest = false
+        }).catch(err => {
+          this.isRequest = false
+				  this.$$msg.show(err)
+        })
 			}
 		},
 		copy (str) {
@@ -211,8 +236,10 @@ export default {
     },
     // 显示类型
     setShowTip () {
+      console.log(this.transferInfo, 'transferInfo')
+      console.log(this.transferInfo.bankType, 'bankType')
       this.$refs.guildTip.show({
-        bankType: 'wave'
+        bankType: this.transferInfo.bankType
       })
     }
 	},

@@ -1,5 +1,7 @@
 import DateUtils from "@/common/utils/date-utils"
 import { _$i18n } from "@/common/i18n"
+import $$tools from '@/common/tools'
+import {Msg} from '@/common/msg'
 let isDEV = process.env.NODE_ENV === "development"
 const defaultData = { timeZone: DateUtils.getLocalTimeZone(), isWap: true }
 export default function (ref, { isLoading }) {
@@ -33,6 +35,13 @@ export default function (ref, { isLoading }) {
       if (status === "ok") {
         return rs.content
       } else {
+        if (status === 'need_login') {
+          $$tools.postMessage('login', {from: 'pay'})
+          window.dsBridge.call('login', { from: 'pay' }, (res) => {
+            console.log(res)
+          })
+          Msg.show(rs.msg)
+        }
         return Promise.reject(rs.msg)
       }
     },
