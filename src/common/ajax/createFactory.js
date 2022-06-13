@@ -1,8 +1,10 @@
 import DateUtils from "@/common/utils/date-utils"
 import { _$i18n } from "@/common/i18n"
 import $$tools from '@/common/tools'
-import {Msg} from '@/common/msg'
+import { Msg } from '@/common/msg'
+import {Mask} from "@/common/mask";
 let isDEV = process.env.NODE_ENV === "development"
+var loadingUid
 const defaultData = { timeZone: DateUtils.getLocalTimeZone(), isWap: true }
 export default function (ref, { isLoading }) {
   ref.interceptors.request.use(
@@ -21,9 +23,15 @@ export default function (ref, { isLoading }) {
       config.data = data
       config.data.currency = window.commonParams.currency
       config.headers["X-Access-Token"] = window.commonParams.token
+      if (isLoading) {
+				loadingUid = Mask.loading();
+			}
       return config
     },
     function (error) {
+      if (isLoading) {
+				Mask.hidden(loadingUid);
+			}
       return Promise.reject(error)
     }
   )
@@ -32,6 +40,9 @@ export default function (ref, { isLoading }) {
     data => {
       rs = data.data
       let status = rs.status
+      if (isLoading) {
+				Mask.hidden(loadingUid);
+			}
       if (status === "ok") {
         return rs.content
       } else {

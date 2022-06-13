@@ -165,17 +165,16 @@ export default {
     cancelHandel() {
       this.$$confirm(this.$i18n('detail.index.txt_12','如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！'), rs => {
             if (rs) {
-
-              this.withdrawal();
+              this.cancelOrder();
             }
           }, this.$i18n('detail.index.txt_13','提示'),
           '',
           this.$i18n('detail.index.txt_7','撤销订单'),
           this.$i18n('detail.index.txt_14','暂不撤销'));
     },
-    withdrawal() {
+    cancelOrder() {
       let transferInfo = this.transferInfo;
-      this.$$ajax.post('recharge/cancelRecharge', {
+      this.$$ajaxLoading.post('recharge/cancelRecharge', {
         amount: transferInfo.amount,
         paymentAmount: transferInfo.baseAmount,
         paymentId: this.config.paymentId
@@ -193,16 +192,25 @@ export default {
             moneyUnit: this.moneyUnit
           }, '确定您已存入[[{{amount}}{{moneyUnit}}]]?'), rs => {
             if (rs) {
-              this.confirmDrawal();
+              this.confirmOrder();
             }
           }, this.$i18n('detail.index.txt_13','提示'),
           ''
       );
     },
     // 确认已经付款
-    confirmDrawal() {
-      let config = this.config, transferInfo = this.transferInfo;
-      window.location.href = `/p/confirm?sign=${encodeURIComponent(config.sign)}&paymentAmount=${transferInfo.amount}&paymentId=${config.paymentId}&lang=${config.lang}`
+    confirmOrder() {
+      const data = {
+        paymentId: this.config.paymentId,
+        orderNo: this.config.orderNo
+      }
+      this.$$ajax.post('recharge/payConfirm', data).then((res) => {
+        res.keyName = 'Bank transfer'
+        localStorage.setItem(`chargeDetail${data.orderNo}`, JSON.stringify(res))
+        this.$router.replace(`/charge/status/${data.orderNo}`)
+      }).catch(err => {
+        this.$$msg.show(err)
+      })
     },
     copy(str) {
       this.$$msg.show(this.$i18n('detail.index.txt_15','复制成功,请粘贴使用'));

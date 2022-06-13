@@ -9,7 +9,7 @@
             <template v-for="(item, index) in bankChooseList">
               <div class="choose-pay-mode" @click="choosePayWay(index)" :class="{ 'choose-active': index === activeIndex }" :key="index">
                 <div class="choose-item-top">
-                  <img class="choose-pay-icon" alt="pay-icon" :src="item.icon" />
+                  <img class="choose-pay-icon" alt="pay-icon" :src="item.paymentIconUrl" @error="src = errorSrc" />
                   <div class="choose-item-type">{{ item.keyName }}</div>
                   <img class="choose-icon" v-if="item.selected" src="./images/selected.png" alt="choose" />
                   <img class="choose-icon" v-else src="./images/un-select.png" alt="choose" />
@@ -21,7 +21,7 @@
                       <div class="bank-name">{{ bank.bankName }}</div>
                     </div>
                   </template>
-                  <template v-else-if="item.type === 'third'">
+                  <template v-else-if="item.qrList">
                     <div class="choose-bank-item" :class="{ active: idx === item.activeIdx }" v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)" :key="`${index}-${idx}`">
                       <img class="bank-icon" v-if="bank.paymentIconUrl" :src="bank.iconUrl" alt="" />
                       <img class="bank-icon" v-else src="./images/qrcode.png" alt="" />
@@ -86,20 +86,7 @@ export default {
 			moneyUnit: "Ks",
 			actPayment: {},
       config: null,
-      imagesConfig: {
-        zz_b: {
-          iconUrl: '/images/transfer01.png'
-        },
-        zz_c: {
-          iconUrl: '/images/auto.png'
-        },
-        zz_d: {
-          iconUrl: '/images/qrcode.png'
-        },
-        thqr: {
-          iconUrl: '/images/online-bank.png'
-        }
-      }
+      errorSrc: 'https://img.yym203.com/link/tt/payment_icon/transfer01.png',
 		}
 	},
 	created () {
@@ -115,22 +102,20 @@ export default {
         cfg = JSON.parse(JSON.stringify(window.config))
       }
       this.config = cfg
-      console.log(this.config, 'this.config')
       this.moneyUnit = this.config.currencyUnit;
 			cfg.paymentList.forEach((item, index) => {
-				if (item.paymentType === 'third') {
+				if (item.qrList) {
 					this.$set(this.bankChooseList, index, {
             ...item,
-						...this.bankChooseList[index],
-						bankCardList: item.paymentMethodList,
-						type: item.paymentType,
+            ...this.bankChooseList[index],
+						bankCardList: item.qrList,
+            type: item.paymentType,
 						activeIdx: 0
 					})
 				} else {
 					this.$set(this.bankChooseList, index, {
 						...item,
             ...this.bankChooseList[index],
-            icon: this.imagesConfig[item.paymentId].iconUrl,
 						bankCardList: item.bankCardList,
 						type: item.paymentType,
 						activeIdx: 0
@@ -159,7 +144,7 @@ export default {
 			if (this.bankChooseList.length > 0) {
 				if (this.bankChooseList[this.activeIndex].type === 'transpay') {
 					obj = this.bankChooseList[this.activeIndex]
-				} else if (this.bankChooseList[this.activeIndex].type === 'third') {
+				} else if (this.bankChooseList[this.activeIndex].qrList && this.bankChooseList[this.activeIndex].qrList.length > 0) {
 					obj = this.bankChooseList[this.activeIndex].bankCardList[this.bankChooseList[this.activeIndex].activeIdx]
 				} else {
 					obj = this.bankChooseList[this.activeIndex]
@@ -218,20 +203,23 @@ export default {
 				paymentKey: actPayment.paymentKey,
 				paymentType: actPayment.paymentType,
 				rechargeFees: actPayment.rechargeFees,
-				paymentAmount: this.amount
+        paymentAmount: this.amount,
+        origin: window.commonParams.origin
 			}
 			if (actPayment.paymentType === 'transpay') {
 				queryMap.bandId = this.actBank.id
 				queryMap.payAccount = payerName
       }
-      this.$$ajax.post('recharge/pay', queryMap).then(res => {
+      this.$$ajaxLoading.post('recharge/pay', queryMap).then(res => {
         this.toDetail(res)
+      }).catch(err => {
+        this.$$msg.show(err)
       })
 		},
     toDetail (data) {
       let url = '/sports/auto'
       localStorage[data.currency + data.paymentId] = JSON.stringify(data)
-      if (data.modelType === 'transfer') {
+      if (data.modelType === 'transfer' || data.modelType === 'online') {
         url = '/sports/go'
       } else if (data.modelType === 'qrcode') {
         url = '/sports/go'

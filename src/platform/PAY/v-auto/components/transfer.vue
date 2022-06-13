@@ -125,7 +125,7 @@ export default {
 		return {
 			countDownSecond: [],
 			moneyUnit: "Ks",
-			step: 2,
+			step: 1,
 			amount: '',
 			depositNo: '',
       isShow: false,

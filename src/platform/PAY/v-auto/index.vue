@@ -25,6 +25,8 @@ export default {
     let storeKey = window.commonParams.currency + this.$route.query.paymentId
     let storeData = JSON.parse(localStorage.getItem(storeKey))
     storeData.qrCodeInfo = storeData.transferInfo
+    storeData.qrCodeInfo.amount = null
+    storeData.paymentAmount = null
     this.config = storeData
     injectOnce()
   },

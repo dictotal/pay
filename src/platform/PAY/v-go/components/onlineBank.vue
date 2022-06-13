@@ -2,7 +2,7 @@
   <div id="v-detail" class="view-bg-gray" :class="status">
     <cancel-order :config="config" @cancelHandel="cancelHandel" :status="status"></cancel-order>
     <div class="iframe-el-container">
-      <iframe class="iframe-el" :src="config.url || 'https://m.baidu.com'" frameborder="0"></iframe>
+      <iframe class="iframe-el" :src="config.url" frameborder="0"></iframe>
     </div>
     <div class="empty-padding"></div>
   </div>
@@ -13,125 +13,159 @@
 import countDown from '@/components/count-down';
 import QRious from 'qrious';
 import CancelOrder from '@/components/cancel-order'
-import {injectLanguage} from "@/common/i18n";
+import { injectLanguage } from "@/common/i18n";
 import lang from "../language.json";
 injectLanguage(lang);
 export default {
-  name: "v-detail",
-  data() {
-    return {
-      countDownSecond: [],
-      moneyUnit:"Ks",
-      orderNo: '',
-      orderAmount: 0,
-    }
+	name: "v-detail",
+	data () {
+		return {
+			countDownSecond: [],
+			moneyUnit: "Ks",
+			orderNo: '',
+			orderAmount: 0,
+		}
+	},
+	props: {
+		config: Object
+	},
+	mounted () {
+		this.init();
+		if (this.status !== "wait") {
+			return false;
+		}
+		this.initQr();
+		this.iniLoop();
+		this.countDownSecond = [this.qrCodeInfo.ttlSeconds * 1000];
   },
-  props: {
-    config: Object
-  },
-  mounted() {
-    this.init();
-    if(this.status !== "wait"){
-      return false;
-    }
-    this.initQr();
-    this.iniLoop();
-    this.countDownSecond = [this.qrCodeInfo.ttlSeconds * 1000];
+  beforeDestroy () {
+    this.clearTimeout()
   },
   methods: {
-    init() {
-        this.moneyUnit = this.config.currencyUnit;
-        let {amount,orderNo}= this.qrCodeInfo;
-        this.orderNo = orderNo;
-        this.orderAmount = amount;
-        this.listenMessage()
+    clearTimeout () {
+      if (this.timeOut) {
+        clearTimeout(this.timeOut)
+      }
     },
-    listenMessage() {
-        // url有参数才能发正常渲染数据，提交的时候是form post， 无参数不能由客户端再次加载
-        dsBridge.call('hidePayBtn', {})
-        this.$$tools.postMessage('toThirdChargePage', { url: location.href})
-        window.removeEventListener('message', this.messageHandle)
-        window.addEventListener('message', this.messageHandle)
+		init () {
+			this.moneyUnit = this.config.currencyUnit;
+			let { amount, orderNo } = this.qrCodeInfo;
+			this.orderNo = orderNo;
+			this.orderAmount = amount;
+			this.listenMessage()
+		},
+		listenMessage () {
+			// url有参数才能发正常渲染数据，提交的时候是form post， 无参数不能由客户端再次加载
+			dsBridge.call('hidePayBtn', {})
+			this.$$tools.postMessage('toThirdChargePage', { url: location.href })
+			window.removeEventListener('message', this.messageHandle)
+			window.addEventListener('message', this.messageHandle)
+		},
+		// 消息处理
+		messageHandle ({ data }) {
+      console.log(data)
+			switch (data.action) {
+				case 'payComplete':
+					dsBridge.call('payComplete', {})
+					this.$$tools.postMessage('payComplete', data.params)
+				default: '';
+			}
+		},
 
-    },
-    initQr(){
-      let qr = new QRious({
-        element: this.$refs.qr,
-        value: this.qrCodeInfo.thirdUrl
-      });
-      qr.size = 440;
-
-    },
-    iniLoop(){
-      if(this.status !== "wait") {
-        return false;
+		initQr () {
+			let qr = new QRious({
+				element: this.$refs.qr,
+				value: this.qrCodeInfo.thirdUrl
+			});
+			qr.size = 440;
+		},
+		iniLoop () {
+			if (this.status !== "wait") {
+				return false;
+			}
+      if (this.timeOut) {
+        clearTimeout(this.timeOut)
       }
-      setTimeout(()=>{
-        this.$$ajax.get("/p/recharge/payStatus",{orderNo:this.orderNo}).then(resp=>{
-          this.qrCodeInfo.status  =  resp.orderStatus;
-        }).finally(()=>{
-          this.iniLoop();
-        })
-      },5000)
+			this.timeOut = setTimeout(() => {
+				this.$$ajax.post("/recharge/payStatus", { orderNo: this.orderNo }).then(resp => {
+					this.qrCodeInfo.status = resp.orderStatus;
+				}).finally(() => {
+					this.iniLoop();
+				})
+			}, 5000)
     },
-    endCount() {
-
-      this.$$alert(this.$i18n('detail.qrcode.txt_6','倒计时结束，请重新提交充值申请！'))
-    },
-    copy() {
-      this.$$msg.show(this.$i18n('detail.qrcode.txt_4','复制成功,请粘贴使用'));
-      this.$$tools.copyToClipboard(this.orderNo);
-    },
-    getStatus(status){
-      let cfg = {
-        pay$waiting:"wait",
-        pay$success:"success",
-        pay$failed:"failed"
-      }
-      let newStatus = cfg[status]||"failed";
-      // 不是waiting跳转到充值订单详情，改版中
-      let url = `/p/detail?sign=${encodeURIComponent(this.config.sign)}&orderNo=${this.config.orderNo}&type=chargeStatus&status=${newStatus}`
-      console.log(url)
-      return newStatus
-    },
-    cancelHandel() {
-      this.$$confirm(this.$i18n('detail.qrcode.txt_8','如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！'), rs => {
-            if (rs) {
-              this.withdrawal();
-            }
-          }, this.$i18n('detail.qrcode.txt_10','提示'),
-          '',
-          this.$i18n('detail.qrcode.txt_7','撤销订单'),
-          this.$i18n('detail.qrcode.txt_9','暂不撤销'));
-    },
-    withdrawal() {
-      let config = this.config, qrCodeInfo = this.qrCodeInfo;
-      window.location.href = `/p/cancel?sign=${encodeURIComponent(config.sign)}&paymentAmount=${qrCodeInfo.amount}&paymentId=${config.paymentId}&lang=${config.lang}`
-    }
-  },
-  computed: {
-    status(){
-      return this.getStatus(this.qrCodeInfo.status);
-    },
-    result() {
-      if (this.status === "wait"){
-        return {}
-      }
-      let message = this.$i18n('detail.qrcode.txt_3','支付失败')
-      if (this.status === 'success') {
-        message = this.$i18n('detail.qrcode.txt_2','支付成功')
-      }
-      let image = require(`../images/${this.status}.png`)
-      return {image, message}
-    },
-    qrCodeInfo() {
-      return this.config.qrCodeInfo || {};
-    },
-    isMobile() {
-      return this.$$tools.isMobile();
-    },
-  },
-  components: {countDown, CancelOrder}
+		endCount () {
+			this.$$alert(this.$i18n('detail.qrcode.txt_6', '倒计时结束，请重新提交充值申请！'))
+		},
+		copy () {
+			this.$$msg.show(this.$i18n('detail.qrcode.txt_4', '复制成功,请粘贴使用'));
+			this.$$tools.copyToClipboard(this.orderNo);
+		},
+		getStatus (status) {
+			let cfg = {
+				pay$waiting: "wait",
+				pay$success: "success",
+				pay$failed: "failed"
+			}
+			let newStatus = cfg[status] || "failed";
+			// 不是waiting跳转到充值订单详情，改版中
+			// let url = `/charge/status/${this.config.orderNo}`
+			// if (newStatus !== 'wait') {
+			//   config.qrCodeInfo.status = status
+			//   localStorage.setItem(`charge${config.orderNo}`, JSON.stringify(this.config))
+			//   this.$router.replace(url)
+			// }
+			return newStatus
+		},
+		cancelHandel () {
+			this.$$confirm(this.$i18n('detail.qrcode.txt_8', '如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！'), rs => {
+				if (rs) {
+					this.cancelOrder();
+				}
+			}, this.$i18n('detail.qrcode.txt_10', '提示'),
+				'',
+				this.$i18n('detail.qrcode.txt_7', '撤销订单'),
+				this.$i18n('detail.qrcode.txt_9', '暂不撤销'));
+		},
+		cancelOrder () {
+			let qrCodeInfo = this.qrCodeInfo;
+			this.$$ajaxLoading.post('recharge/cancelRecharge', {
+				amount: qrCodeInfo.amount,
+				paymentAmount: qrCodeInfo.baseAmount,
+				paymentId: this.config.paymentId
+			}).then(() => {
+				window.config = undefined
+        this.clearTimeout()
+				this.$router.replace('/')
+			}).catch(err => {
+        this.clearTimeout()
+				this.$$msg.show(err)
+			})
+		}
+	},
+	computed: {
+		status () {
+			return this.getStatus(this.qrCodeInfo.status);
+		},
+		result () {
+			if (this.status === "wait") {
+				return {}
+			}
+			let message = this.$i18n('detail.qrcode.txt_3', '支付失败')
+			if (this.status === 'success') {
+				message = this.$i18n('detail.qrcode.txt_2', '支付成功')
+			}
+			let image = require(`../images/${this.status}.png`)
+			return { image, message }
+		},
+		qrCodeInfo () {
+			return this.config.qrCodeInfo || {};
+		},
+		isMobile () {
+			return this.$$tools.isMobile();
+		},
+	},
+	components: { countDown, CancelOrder }
 }
 </script>
 

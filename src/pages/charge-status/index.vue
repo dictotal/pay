@@ -15,13 +15,13 @@
         <div class="common-item-label">{{ $i18n("充值金额") }}:</div>
         <div class="common-item-value">{{ $$tools.toMoney(orderInfo.amount) }} {{ config.currency }}</div>
       </div>
-      <div class="common-wrapper-item" v-if="config.identityName">
-        <div class="common-item-label">{{ $i18n("付款人姓名") }}</div>
-        <div class="common-item-value">{{ config.identityName }}</div>
+      <div class="common-wrapper-item" v-if="orderInfo.payAccount">
+        <div class="common-item-label">{{ $i18n("付款人开户名") }}</div>
+        <div class="common-item-value">{{ orderInfo.payAccount }}</div>
       </div>
       <div class="common-wrapper-item">
         <div class="common-item-label">{{ $i18n("充值方式") }}</div>
-        <div class="common-item-value">{{ config.paymentType === "transpay" ? $i18n("银行卡转账") : "THAI QR" }}</div>
+        <div class="common-item-value">{{ config.keyName }}</div>
       </div>
       <div class="common-wrapper-item">
         <div class="common-item-label">{{ $i18n("订单号") }}:</div>
@@ -55,15 +55,15 @@ export default {
         }
       },
       statusText: {
-        confirm: {
+        'pay$confirm': {
           title: that.$i18n("确认中"),
           icon: "/images/status-confirm.png"
         },
-        success: {
+        'pay$success': {
           title: that.$i18n("充值成功"),
           icon: "/images/status-confirm.png"
         },
-        failed: {
+        'pay$failed': {
           title: that.$i18n("支付失败"),
           icon: "/images/status-confirm.png"
         }
@@ -76,7 +76,13 @@ export default {
   methods: {
     // 初始化数据
     init() {
-      this.orderInfo = this.config.orderInfo || {}
+      if (!this.$route.query.lang) {
+        this.config = JSON.parse(localStorage.getItem(`charge${this.$route.params.id}`))
+        this.orderInfo = this.config.transferInfo || this.config.qrCodeInfo
+        this.orderInfo.orderNo = this.config.orderNo
+      } else {
+        this.orderInfo = this.config.orderInfo || {}
+      }
     },
     // 复制文本
     copy(txt) {
