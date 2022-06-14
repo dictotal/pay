@@ -102,6 +102,7 @@ export default {
         cfg = JSON.parse(JSON.stringify(window.config))
       }
       this.config = cfg
+      this.$$tools.setMoneyKey(cfg.currencyUnit)
       this.moneyUnit = this.config.currencyUnit;
 			cfg.paymentList.forEach((item, index) => {
 				if (item.qrList) {

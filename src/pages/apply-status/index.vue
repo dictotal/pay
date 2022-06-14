@@ -5,18 +5,18 @@
       <div class="active-title">
         <div class="active-title-text">{{ $i18n("提款到银行卡") }}</div>
       </div>
-      <img class="active-detail-icon" :src="statusText[orderInfo.status].icon" alt="" />
-      <div class="active-status" :class="`${orderInfo.status}`">{{ statusText[orderInfo.status].title }}</div>
+      <img class="active-detail-icon" :src="statusText[orderInfo.withdrawStatus].icon" alt="" />
+      <div class="active-status" :class="`${orderInfo.withdrawStatus}`" v-html="orderInfo.withdrawStatusName"></div>
     </div>
     <!-- 个人信息 -->
     <div class="common-wrapper">
       <div class="common-wrapper-item">
         <div class="common-item-label">{{ $i18n("提款金额") }}</div>
-        <div class="common-item-value">{{ $$tools.toMoney(orderInfo.amount) }} {{ config.currency }}</div>
+        <div class="common-item-value">{{ $$tools.toMoney(orderInfo.orderAmount) }} {{ orderInfo._currency }}</div>
       </div>
       <div class="common-wrapper-item">
         <div class="common-item-label">{{ $i18n("提款账户") }}</div>
-        <div class="common-item-value">{{ orderInfo.identityName }}</div>
+        <div class="common-item-value">{{ orderInfo.realName }}</div>
       </div>
       <div class="common-wrapper-item">
         <div class="common-item-label">{{ $i18n("提款银行卡") }}</div>
@@ -25,8 +25,8 @@
       <div class="common-wrapper-item">
         <div class="common-item-label">{{ $i18n("订单号") }}:</div>
         <div class="common-item-value">
-          {{ orderInfo.orderNo }}
-          <img class="common-copy-icon" @click="copy(orderInfo.orderNo)" src="/images/copy.png" alt="copy" />
+          {{ orderInfo.withdrawNo }}
+          <img class="common-copy-icon" @click="copy(orderInfo.withdrawNo)" src="/images/copy.png" alt="copy" />
         </div>
       </div>
     </div>
@@ -46,26 +46,31 @@ export default {
     const that = this
     return {
       statusText: {
-        confirm: {
+        'withdraw$waiting': {
           title: that.$i18n("确认中"),
           icon: "/images/status-confirm.png"
         },
-        success: {
+        'withdraw$success': {
           title: that.$i18n("提款成功"),
           icon: "/images/status-success.png"
         },
-        failed: {
+        'withdraw$failed': {
           title: that.$i18n("提款失败"),
           icon: "/images/status-fail.png"
         }
+      },
+      orderInfo: {
+        withdrawStatus: 'withdraw$waiting'
       }
     }
   },
   methods: {
     // 初始化数据
-    init() {
-      this.config.orderInfo.status = "failed"
-      this.orderInfo = this.config.orderInfo || {}
+    async init() {
+      let config = await this.$$ajaxLoading.post('withdraw/withdrawInfo', {
+        withdrawNo: this.$route.params.id
+      })
+      this.orderInfo = config
     }
   }
 }

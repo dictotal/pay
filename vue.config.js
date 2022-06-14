@@ -14,10 +14,10 @@ let platform = ARGV_LIST.slice(-1) || "YYM"
 module.exports = {
   devServer: {
     proxy: {
-      "/a": {
+      "/a/": {
         /* 测试环境kfc */
-        target: "http://m01.mdybet77.com/",
-        // target: "http://m.kfc.com/",
+        // target: "http://m01.mdybet77.com/",
+        target: "http://m.kfc.com/",
         changeOrigin: true,
         ws: true,
         pathRewrite: {
