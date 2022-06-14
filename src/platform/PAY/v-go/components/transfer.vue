@@ -175,8 +175,7 @@ export default {
     cancelOrder() {
       let transferInfo = this.transferInfo;
       this.$$ajaxLoading.post('recharge/cancelRecharge', {
-        amount: transferInfo.amount,
-        paymentAmount: transferInfo.baseAmount,
+        paymentAmount: transferInfo.amount,
         paymentId: this.config.paymentId
       }).then(() => {
         window.config = undefined
