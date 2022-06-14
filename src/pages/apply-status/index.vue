@@ -1,5 +1,5 @@
 <template>
-  <div class="active-detail">
+  <div class="active-detail" v-if="orderInfo.withdrawNo">
     <!-- 顶部状态 -->
     <div class="common-wrapper">
       <div class="active-title">

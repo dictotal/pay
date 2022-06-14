@@ -9,25 +9,28 @@ import transfer from "./components/transfer"
 import { injectLanguage } from "@/common/i18n"
 import lang from "@/platform/PAY/v-go/language.json"
 import langAuto from "./language.json"
+import orderMixin from '../mixins/init'
+
 let injectOnce = Tools.once(function () {
   injectLanguage(lang)
   injectLanguage(langAuto)
 })
 export default {
   name: "v-go",
+  mixins: [orderMixin],
   data() {
     return {
-      viewName: "transfer",
+      viewName: "",
       config: null
     }
   },
-  created() {
-    let storeKey = window.commonParams.currency + this.$route.query.paymentId
-    let storeData = JSON.parse(localStorage.getItem(storeKey))
+  async created() {
+    let storeData = await this.getOrderData()
     storeData.qrCodeInfo = storeData.transferInfo
     storeData.qrCodeInfo.amount = null
     storeData.paymentAmount = null
     this.config = storeData
+    this.viewName = 'transfer'
     injectOnce()
   },
   components: {

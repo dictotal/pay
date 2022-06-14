@@ -16,7 +16,6 @@ export default {
 					window.config = res
 					this.$router.replace('/sports/init')
 				} else if (res.transferInfo && res.transferInfo.status === 'pay$confirm') {
-					localStorage.setItem(`charge${res.orderNo}`, JSON.stringify(res))
 					this.$router.replace(`/charge/status/${res.orderNo}`)
 					return
 				} else {
@@ -28,7 +27,6 @@ export default {
 		},
 		toDetail (data) {
 			let url = '/sports/auto'
-			localStorage[data.currency + data.paymentId] = JSON.stringify(data)
 			if (data.modelType === 'transfer' || data.modelType === 'online') {
 				url = '/sports/go'
 			} else if (data.modelType === 'qrcode') {
