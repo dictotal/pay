@@ -236,8 +236,6 @@ export default {
     },
     // 显示类型
     setShowTip () {
-      console.log(this.transferInfo, 'transferInfo')
-      console.log(this.transferInfo.bankType, 'bankType')
       this.$refs.guildTip.show({
         bankType: this.transferInfo.bankType
       })

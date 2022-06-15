@@ -63,7 +63,7 @@
                 {{ transferInfo.amount | money }}
               </div>
               <span>{{ $$tools.moneyKey }}</span>
-              <img class="copy-icon" src="../images/copy.png" alt="copy" @click="copy(transferInfo.cardholder)" />
+              <img class="copy-icon" src="../images/copy.png" alt="copy" @click="copy(transferInfo.amount)" />
               <div class="ml10">
                 <span class="line-through fc-bcb">{{ transferInfo.baseAmount | money }} {{ $$tools.moneyKey }}</span>
               </div>

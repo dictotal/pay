@@ -56,14 +56,11 @@ export default {
 		},
 		listenMessage () {
 			// url有参数才能发正常渲染数据，提交的时候是form post， 无参数不能由客户端再次加载
-			dsBridge.call('hidePayBtn', {})
-			this.$$tools.postMessage('toThirdChargePage', { url: location.href })
 			window.removeEventListener('message', this.messageHandle)
 			window.addEventListener('message', this.messageHandle)
 		},
 		// 消息处理
 		messageHandle ({ data }) {
-      console.log(data)
 			switch (data.action) {
 				case 'payComplete':
 					dsBridge.call('payComplete', {})
