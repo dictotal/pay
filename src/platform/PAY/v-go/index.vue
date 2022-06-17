@@ -24,6 +24,9 @@ export default {
     } else {
       this.viewName = "onlineBank"
     }
+    if (location.protocol === 'https' && storeData.url.indexOf('http://') > -1) {
+      storeData.url = storeData.url.replace('http://', 'https://')
+    }
     this.config = storeData
   },
   components: {
