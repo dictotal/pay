@@ -126,7 +126,7 @@ export default {
 		},
 		cancelOrder () {
 			let qrCodeInfo = this.qrCodeInfo;
-			this.$$ajaxLoading.post('recharge/cancelRecharge', {
+			this.$$ajaxLoading.post('/recharge/cancelRecharge', {
 				amount: qrCodeInfo.amount,
 				paymentAmount: qrCodeInfo.baseAmount,
 				paymentId: this.config.paymentId

@@ -101,6 +101,11 @@
             <div class="set-order">{{ $i18n("提交订单") }}</div>
           </div>
         </div>
+
+        <div class="auto-tips">
+          <div class="auto-tips-title">{{ $i18n("充值编号") }}</div>
+          <img class="auto-tips-image" :src="activePayConfig.imageTip" alt="" />
+        </div>
       </template>
     </div>
     <guild-tip ref="guildTip"></guild-tip>
@@ -120,54 +125,62 @@ let injectOnce = Tools.once(function () {
 });
 
 export default {
-	name: "v-detail",
-	data () {
-		return {
-			countDownSecond: [],
-			moneyUnit: "Ks",
-			step: 1,
-			amount: '',
-			depositNo: '',
+  name: "v-detail",
+  data () {
+    return {
+      countDownSecond: [],
+      moneyUnit: "Ks",
+      step: 2,
+      amount: '',
+      depositNo: '',
       isShow: false,
-      status: 'wait'
-		}
-	},
-	props: {
-		config: Object
-	},
-	mounted () {
-		injectOnce();
-		this.moneyUnit = this.config.currencyUnit;
-		this.init();
-	},
-	methods: {
-		init () {
-			this.countDownSecond = [this.transferInfo.ttlSeconds * 1000];
-		},
-		endCount () {
-			this.$$alert(this.$i18n('detail.index.txt_11', '倒计时结束，请重新提交充值申请！'))
-		},
-		data () {
-			$i18n('detail.index.txt_6', {
-				el: '<em>$$</em>',
-				amount: $$tools.toMoney(transferInfo.amount),
-				baseAmount: $$tools.toMoney(transferInfo.baseAmount),
-				moneyUnit: moneyUnit
-			}, '见下方注释')
-		},
-		cancelHandel () {
-			this.$$confirm(this.$i18n('detail.index.txt_12', '如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！'), rs => {
-				if (rs) {
-					this.cancelOrder();
-				}
-			}, this.$i18n('detail.index.txt_13', '提示'),
-				'',
-				this.$i18n('detail.index.txt_7', '撤销订单'),
-				this.$i18n('detail.index.txt_14', '暂不撤销'));
-		},
-		cancelOrder () {
-			let transferInfo = this.transferInfo;
-      this.$$ajax.post('recharge/cancelRecharge', {
+      status: 'wait',
+      payConfig: {
+        'wave': {
+          imageTip: '/images/wave-tips.png'
+        },
+        'kbzp': {
+          imageTip: '/images/kbzp-tips.png'
+        }
+      }
+    }
+  },
+  props: {
+    config: Object
+  },
+  mounted () {
+    injectOnce();
+    this.moneyUnit = this.config.currencyUnit;
+    this.init();
+  },
+  methods: {
+    init () {
+      this.countDownSecond = [this.transferInfo.ttlSeconds * 1000];
+    },
+    endCount () {
+      this.$$alert(this.$i18n('detail.index.txt_11', '倒计时结束，请重新提交充值申请！'))
+    },
+    data () {
+      $i18n('detail.index.txt_6', {
+        el: '<em>$$</em>',
+        amount: $$tools.toMoney(transferInfo.amount),
+        baseAmount: $$tools.toMoney(transferInfo.baseAmount),
+        moneyUnit: moneyUnit
+      }, '见下方注释')
+    },
+    cancelHandel () {
+      this.$$confirm(this.$i18n('detail.index.txt_12', '如已汇款请勿撤销，我们将尽快为您处理，撤销订单将影响实时到帐！'), rs => {
+        if (rs) {
+          this.cancelOrder();
+        }
+      }, this.$i18n('detail.index.txt_13', '提示'),
+        '',
+        this.$i18n('detail.index.txt_7', '撤销订单'),
+        this.$i18n('detail.index.txt_14', '暂不撤销'));
+    },
+    cancelOrder () {
+      let transferInfo = this.transferInfo;
+      this.$$ajax.post('/recharge/cancelRecharge', {
         amount: transferInfo.amount,
         paymentAmount: transferInfo.baseAmount,
         paymentId: this.config.paymentId
@@ -177,18 +190,18 @@ export default {
       }).catch(err => {
         this.$$msg.show(err)
       })
-		},
-		// 录入订单
-		confirmHandel () {
-			this.step = 2
-		},
-		// 提交订单成功
-		submitOrder () {
-			if (!this.amount) {
-				return
-			} else if (this.depositNo.length !== 6) {
-				this.isShow = true
-			} else {
+    },
+    // 录入订单
+    confirmHandel () {
+      this.step = 2
+    },
+    // 提交订单成功
+    submitOrder () {
+      if (!this.amount) {
+        return
+      } else if (this.depositNo.length !== 6) {
+        this.isShow = true
+      } else {
         let data = {
           paymentId: this.config.paymentId,
         }
@@ -199,7 +212,7 @@ export default {
         setTimeout(() => {
           this.isRequest = false
         })
-        this.$$ajax.post('recharge/verifyOrder', data).then(res => {
+        this.$$ajax.post('/recharge/verifyOrder', data).then(res => {
           if (res.operateResult) {
             this.$router.replace('/')
           }
@@ -207,32 +220,32 @@ export default {
           this.isRequest = false
         }).catch(err => {
           this.isRequest = false
-				  this.$$msg.show(err)
+          this.$$msg.show(err)
         })
-			}
-		},
-		copy (str) {
-			this.$$msg.show(this.$i18n('detail.index.txt_15', '复制成功,请粘贴使用'));
-			this.$$tools.copyToClipboard(str);
-		},
-		limitAmountHandel () {
-			let maxAmount = this.maxAmount,
-				minAmount = this.minAmount,
-				amount = this.amount;
+      }
+    },
+    copy (str) {
+      this.$$msg.show(this.$i18n('detail.index.txt_15', '复制成功,请粘贴使用'));
+      this.$$tools.copyToClipboard(str);
+    },
+    limitAmountHandel () {
+      let maxAmount = this.maxAmount,
+        minAmount = this.minAmount,
+        amount = this.amount;
 
-			if (minAmount) {
-				if (amount < minAmount) {
-					amount = minAmount;
-				}
-			}
+      if (minAmount) {
+        if (amount < minAmount) {
+          amount = minAmount;
+        }
+      }
 
-			if (maxAmount) {
-				if (amount > maxAmount) {
-					amount = maxAmount;
-				}
-			}
+      if (maxAmount) {
+        if (amount > maxAmount) {
+          amount = maxAmount;
+        }
+      }
 
-			this.amount = amount;
+      this.amount = amount;
     },
     // 显示类型
     setShowTip () {
@@ -240,20 +253,23 @@ export default {
         bankType: this.transferInfo.bankType
       })
     }
-	},
-	computed: {
-		transferInfo () {
-			return this.config.transferInfo;
-		},
-		isMobile () {
-			return this.$$tools.isMobile();
-		},
-		maxAmount () {
-			return this.transferInfo.maxAmount
-		},
-		minAmount () {
-			return this.transferInfo.minAmount
-		}
+  },
+  computed: {
+    transferInfo () {
+      return this.config.transferInfo;
+    },
+    isMobile () {
+      return this.$$tools.isMobile();
+    },
+    maxAmount () {
+      return this.transferInfo.maxAmount
+    },
+    minAmount () {
+      return this.transferInfo.minAmount
+    },
+    activePayConfig () {
+      return this.transferInfo && this.payConfig[this.transferInfo.bankType] ? this.payConfig[this.transferInfo.bankType] : {}
+    }
 	},
 	watch: {
 		depositNo (value) {
@@ -272,6 +288,18 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+.auto-tips {
+  display: block;
+  width: 265px;
+  margin: 5px auto 0;
+  text-align: center;
+  color: $skin-font3;
+  font-size: 13px;
+  line-height: 28px;
+  .auto-tips-title {
+    margin-bottom: 10px;
+  }
+}
 #v-detail {
   .color-898 {
     color: $skin-font3;

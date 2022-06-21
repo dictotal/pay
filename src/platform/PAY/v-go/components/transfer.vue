@@ -174,7 +174,7 @@ export default {
     },
     cancelOrder() {
       let transferInfo = this.transferInfo;
-      this.$$ajaxLoading.post('recharge/cancelRecharge', {
+      this.$$ajaxLoading.post('/recharge/cancelRecharge', {
         paymentAmount: transferInfo.amount,
         paymentId: this.config.paymentId
       }).then(() => {
@@ -203,7 +203,7 @@ export default {
         paymentId: this.config.paymentId,
         orderNo: this.config.orderNo
       }
-      this.$$ajax.post('recharge/payConfirm', data).then((res) => {
+      this.$$ajax.post('/recharge/payConfirm', data).then((res) => {
         localStorage.setItem(`charge${data.orderNo}`, JSON.stringify(this.config))
         this.$router.replace(`/charge/status/${data.orderNo}`)
       }).catch(err => {

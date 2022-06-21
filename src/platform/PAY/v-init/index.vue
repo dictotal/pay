@@ -128,7 +128,7 @@ export default {
     },
     getData () {
       return new Promise((resolve, reject) => {
-        this.$$ajax.post('recharge/rechargeInitS').then(res => {
+        this.$$ajax.post('/recharge/rechargeInitS').then(res => {
           if (res.paymentList && res.paymentList.length > 0) {
             resolve(res)
           } else {
@@ -211,7 +211,7 @@ export default {
 				queryMap.bandId = this.actBank.id
 				queryMap.payAccount = payerName
       }
-      this.$$ajaxLoading.post('recharge/pay', queryMap).then(res => {
+      this.$$ajaxLoading.post('/recharge/pay', queryMap).then(res => {
         this.toDetail(res)
       }).catch(err => {
         this.$$msg.show(err)

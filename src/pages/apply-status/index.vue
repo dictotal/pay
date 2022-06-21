@@ -67,7 +67,7 @@ export default {
   methods: {
     // 初始化数据
     async init() {
-      let config = await this.$$ajaxLoading.post('withdraw/withdrawInfo', {
+      let config = await this.$$ajaxLoading.post('/withdraw/withdrawInfo', {
         withdrawNo: this.$route.params.id
       })
       this.orderInfo = config
