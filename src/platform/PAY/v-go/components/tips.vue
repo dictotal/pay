@@ -36,4 +36,16 @@ export default {
     }
   }
 }
+@media screen and (min-width: 780px) {
+  .transfer-payout {
+    border-radius: 0;
+    .transfer-icon {
+      width: 18px;
+      height: 18px;
+    }
+    .transfer-content {
+      font-size: 14px;
+    }
+  }
+}
 </style>

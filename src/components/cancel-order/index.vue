@@ -2,11 +2,11 @@
   <div class="cancel-top flex">
     <div class="cancel-left-info">
       <div class="cancel-left-item flex" v-if="paymentAmount * 1 > 0">
-        <div class="cancel-left-label">{{ $i18n('充值金额') }}:</div>
+        <div class="cancel-left-label">{{ $i18n("充值金额") }}:</div>
         <div class="cancel-left-value">{{ $$tools.toMoney(paymentAmount) }} {{ config.currency }}</div>
       </div>
       <div class="cancel-left-item flex">
-        <div class="cancel-left-label">{{ $i18n('订单号') }}:</div>
+        <div class="cancel-left-label">{{ $i18n("订单号") }}:</div>
         <div class="cancel-left-value">{{ orderNo }}</div>
         <img class="cancel-copy-icon" src="/images/copy.png" @click="copy" />
       </div>
@@ -56,7 +56,7 @@ export default {
   align-items: center;
   padding: 15px 12px;
   align-self: flex-start;
-  min-width: 375px;
+  width: 100%;
   .cancel-left-item {
     display: flex;
     line-height: 19px;
@@ -82,6 +82,7 @@ export default {
     width: 17px;
     height: 17px;
     display: block;
+    cursor: pointer;
   }
   .cancel-top-btn {
     font-size: 13px;
@@ -93,6 +94,24 @@ export default {
     padding: 0 2px;
     width: 100px;
     text-align: center;
+  }
+}
+@media screen and (min-width: 780px) {
+  .cancel-top {
+    background: none;
+    font-weight: bold;
+    .cancel-left-item {
+      .cancel-left-value {
+        color: $skin-font5;
+        max-width: initial;
+      }
+    }
+    .cancel-top-btn {
+      background: $skin-color1;
+      color: $skin-font1;
+      border: 0;
+      cursor: pointer;
+    }
   }
 }
 </style>

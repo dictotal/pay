@@ -106,12 +106,10 @@ input::-webkit-input-placeholder {
 
 .layout-wrap {
   max-width: 1000px;
-  padding: 30px 50px;
 }
 .panel-main {
   padding: 0 20px;
   color: #fff;
-  background: $skin-bg2;
   border: 1px solid transparent;
   border-radius: 10px;
 }
@@ -124,3 +122,23 @@ input::-webkit-input-placeholder {
   background: #f9f9fc;
 }
 
+@media screen and (min-width: 780px) {
+  #app {
+    padding: 1px;
+  }
+  body {
+    background: $pc-bg1;
+    .layout-wrap {
+      padding: 10px 0 0;
+    }
+    #bank-my {
+      background: $pc-bg0;
+      margin: 20px;
+      border-radius: 10px;
+      .title-s1 {
+        color: $skin-font5;
+        margin: 0;
+      }
+    }
+  }
+}

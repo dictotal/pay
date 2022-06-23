@@ -86,4 +86,13 @@ export default {
     opacity: 0;
   }
 }
+@media screen and (min-width: 780px) {
+  .guild-tip {
+    width: 300px;
+    .guild-tip-image {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
 </style>

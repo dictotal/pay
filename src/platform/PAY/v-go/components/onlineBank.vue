@@ -37,6 +37,7 @@ export default {
 		this.initQr();
 		this.iniLoop();
 		this.countDownSecond = [this.qrCodeInfo.ttlSeconds * 1000];
+    this.$$tools.postMessage('addFrameHeight', {value: 1280})
   },
   beforeDestroy () {
     this.clearTimeout()
@@ -295,11 +296,18 @@ export default {
 }
 @media screen and (min-width: 780px) {
   #v-detail {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
     position: relative;
+    background: #fff;
+    .iframe-el-container {
+      height: auto;
+      width: 100%;
+      .iframe-el {
+        width: 60%;
+        transform: initial;
+        margin: 20px auto;
+        height: 1128px;
+      }
+    }
     &.success,
     &.failed {
       .time-view,
@@ -315,133 +323,10 @@ export default {
       min-height: 262px;
       margin: 0 17px 12px;
       border-radius: 24px;
+      margin: 20px;
+      overflow: hidden;
+      border-radius: 10px;
     }
-    .card-view {
-      position: relative;
-      margin: 0;
-      width: 269px;
-      border-radius: 24px;
-      &.bank-view,
-      &.order-view {
-        position: absolute;
-        right: 30px;
-        width: 471px;
-      }
-      &.bank-view {
-        position: absolute;
-        background-color: unset;
-        border: unset;
-        top: 0;
-        padding: 36px 0 20px;
-        margin: 0;
-        justify-content: flex-start;
-        align-items: flex-start;
-        .bank-imgs {
-          position: relative;
-          width: 100%;
-          height: unset;
-          justify-content: flex-start;
-          img {
-            width: 100px;
-            height: 30px;
-            margin-left: 20px;
-            &:first-child {
-              margin-left: 0;
-            }
-          }
-        }
-        &:after {
-          content: " ";
-          position: absolute;
-          bottom: 0;
-          right: 0;
-          height: 1px;
-          background-color: #ebebeb;
-          width: 471px;
-        }
-      }
-      &.order-view {
-        bottom: 70px;
-        height: 130px;
-        background-color: #fffef2;
-        border: 1px #f0f0f0 solid;
-        border-radius: 10px;
-        padding: 0 30px;
-        justify-content: space-around;
-        align-items: center;
-        .order-item {
-          margin: 0;
-          color: $skin-font5;
-          .order-title {
-            color: #808080;
-          }
-        }
-      }
-      .logo-view {
-        height: 60px;
-        border-radius: 24px 24px 0px 0px;
-        justify-content: space-between;
-        align-items: center;
-        img {
-          margin-left: 24px;
-        }
-      }
-      .time-view {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 60px;
-        margin: 0;
-        background-color: #00366a;
-        border-radius: 0 24px 0px 0px;
-        border: unset;
-        .v-count-down {
-          .time {
-            font-size: 24px;
-            background-color: #00366a;
-            color: #fff500;
-            box-shadow: none;
-            border-radius: 3px;
-            text-align: center;
-          }
-          .dot {
-            &::before,
-            &::after {
-              margin-top: 5px;
-              background: #fff500;
-            }
-          }
-        }
-      }
-      .qrcode-view {
-        padding: 16px 0;
-        margin: 0;
-        width: 100%;
-        border: 2px #00366a solid;
-        border-radius: 0px 0px 24px 24px;
-        span {
-          display: block;
-          font-size: 18px;
-          color: #00366a;
-          margin-top: 16px;
-        }
-      }
-    }
-    .result-view {
-      padding: 16px 0;
-      margin: 0;
-      width: 100%;
-      border: 2px #00366a solid;
-      border-radius: 0px 0px 24px 24px;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 95px 0;
-    }
-  }
-  canvas {
-    width: 220px;
-    height: 220px;
   }
 }
 </style>

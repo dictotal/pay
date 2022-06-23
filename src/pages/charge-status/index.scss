@@ -7,7 +7,8 @@
   padding: 1px;
 }
 .common-wrapper {
-  width: 355px;
+  margin: 0 auto;
+  width: calc(100% - calc(20px));
   border-radius: 10px;
   background: $skin-bg2;
   margin: 10px auto;
@@ -85,5 +86,42 @@
     height: 16px;
     display: block;
     margin-right: 5px;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .active-detail {
+    background-color: $pc-bg0;
+    // margin: 20px;
+    border-radius: 10px;
+  }
+  .active-title {
+    color: $skin-font1;
+    .active-title-icon {
+      width: 20px;
+    }
+  }
+  .common-wrapper-item {
+    font-weight: bold;
+    border-bottom: 1px solid $skin-font1;
+    margin: 0 20px;
+    padding: 20px 0;
+  }
+  .active-status  {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .common-wrapper {
+    width: calc(100% - 40px);
+    background: $pc-bg1;
+    color: $skin-bg1;
+    font-size: 16px;
+  }
+  .customer-area {
+    background-color: $pc-bg2;
+    color: $skin-bg1;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
   }
 }

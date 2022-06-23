@@ -29,6 +29,16 @@ $skin-color7: #fff8eb;
 
 $skin-other1: #707070;
 
+$pc-bg0: white;
+$pc-bg1:#f9f9fc;
+$pc-bg2: #f5f6f7;
+
+$pc-font1: #333;
+$pc-font2: #666;
+$pc-font3: #999;
+$pc-font4: #aaa;
+$pc-font5: #f5f5f5;
+$pc-font6: #fff;
 //========================其它公共方法===========================
 @mixin h-lh($h,$ph:0px){
   height: $h;

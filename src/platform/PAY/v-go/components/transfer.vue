@@ -23,7 +23,7 @@
             <div class="img-wrap">
               <img :src="transferInfo.iconUrl" alt="" />
             </div>
-            <div class="ml10">
+            <div class="ml10 bank-left-padding">
               <p class="fw-100 f14 color-898">{{ $i18n("detail.index.txt_1", "银行名称") }}</p>
               <p class="b mt5 color-333">{{ transferInfo.bankName }}</p>
             </div>
@@ -144,10 +144,11 @@ export default {
     this.moneyUnit = this.config.currencyUnit;
 
     this.init();
+    // 修改PC端提供的iframe高度
+    this.$$tools.postMessage('addFrameHeight', {value: 675})
   },
   methods: {
     init() {
-
       this.countDownSecond = [this.transferInfo.ttlSeconds * 1000];
     },
     endCount() {
@@ -247,6 +248,7 @@ export default {
   .copy-icon {
     width: 21px;
     height: 21px;
+    cursor: pointer;
     transform: translateY(5px);
   }
   .img-wrap {
@@ -428,6 +430,27 @@ export default {
 }
 
 @media screen and (min-width: 780px) {
+  #v-detail {
+    .color-333 {
+      color: $skin-font5;
+    }
+    .panel-notice {
+      color: $skin-font4;
+      font-size: 13px;
+      .title-notice-text {
+        background: $pc-bg0;
+      }
+      .item-notice {
+        // tex
+        em {
+          background: $pc-bg0;
+          &::after {
+            content:'.'
+          }
+        }
+      }
+    }
+  }
   .layout-wrap {
     max-width: 100%;
     padding: 20px 20px;
@@ -435,17 +458,20 @@ export default {
   .panel-main {
     position: relative;
     width: 100%;
-    //min-height: 420px;
-    background-color: $skin-bg1;
+    background-color: $pc-bg0;
     border: 2px dashed #e5e5eb;
     border-radius: 10px;
     padding: 10px 40px 10px 104px;
+    .color-333 {
+      color: $skin-font5;
+    }
+    .bank-left-padding {
+      margin-left: 0 !important;
+    }
   }
   .pay-btns {
-    margin-top: 300px !important;
-    margin-left: 100px;
-    .btn-cancel {
-      margin-right: 20px !important;
+    .btn {
+      max-width: 50%;
     }
   }
   .img-wrap {

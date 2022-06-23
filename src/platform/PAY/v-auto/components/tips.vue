@@ -1,8 +1,8 @@
 <template>
-<div class="transfer-payout">
-  <img class="transfer-icon" src="../images/notice.png" alt="">
-  <div  class="transfer-content"  v-html="content"></div>
-</div>
+  <div class="transfer-payout">
+    <img class="transfer-icon" src="../images/notice.png" alt="" />
+    <div class="transfer-content" v-html="content"></div>
+  </div>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
   props: {
     content: {
       type: String,
-      default: ''
+      default: ""
     }
   }
 }
@@ -36,7 +36,20 @@ export default {
     height: 34px;
     line-height: 34px;
     em {
-      color: $skin-color3
+      color: $skin-color3;
+    }
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .transfer-payout {
+    border-radius: 0;
+    .transfer-icon {
+      width: 18px;
+      height: 18px;
+    }
+    .transfer-content {
+      font-size: 14px;
     }
   }
 }

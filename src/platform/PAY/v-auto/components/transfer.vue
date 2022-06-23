@@ -37,7 +37,7 @@
               <div class="img-wrap">
                 <img :src="transferInfo.iconUrl" alt="" />
               </div>
-              <div class="ml10">
+              <div class="ml10 bank-padding">
                 <p class="fw-100 f14 color-898">{{ $i18n("detail.index.txt_1", "银行名称") }}</p>
                 <p class="b mt5 color-333">{{ transferInfo.bankName }}</p>
               </div>
@@ -72,7 +72,7 @@
           <h2 class="title-s1">{{ $i18n("存款金额") }}-{{ config.currency }}</h2>
           <div class="input-amount-warp">
             <div class="amount-type">{{ minAmount }}~{{ maxAmount }}{{ $$tools.moneyKey }}</div>
-            <input type="number" class="input-amount f-din" v-model="amount" :maxlength="maxAmount.toString().length" @blur="limitAmountHandel" :placeholder="$i18n('请输入金额')" />
+            <input type="number" class="input-amount f-din" @keyup="amount = amount.substring(0, maxAmount.toString().length)" v-model="amount" :maxlength="maxAmount.toString().length" @blur="limitAmountHandel" :placeholder="$i18n('请输入金额')" />
           </div>
           <h2 class="title-s1">{{ $i18n("存款编号") }}</h2>
           <div class="input-amount-warp">
@@ -130,7 +130,7 @@ export default {
     return {
       countDownSecond: [],
       moneyUnit: "Ks",
-      step: 2,
+      step: 1,
       amount: '',
       depositNo: '',
       isShow: false,
@@ -152,6 +152,7 @@ export default {
     injectOnce();
     this.moneyUnit = this.config.currencyUnit;
     this.init();
+    this.$$tools.postMessage('addFrameHeight', {value: 825})
   },
   methods: {
     init () {
@@ -287,7 +288,7 @@ export default {
 }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss" scoped>
 .auto-tips {
   display: block;
   width: 265px;
@@ -296,6 +297,9 @@ export default {
   color: $skin-font3;
   font-size: 13px;
   line-height: 28px;
+  img {
+    width: 100%;
+  }
   .auto-tips-title {
     margin-bottom: 10px;
   }
@@ -320,6 +324,7 @@ export default {
     width: 21px;
     height: 21px;
     transform: translateY(5px);
+    cursor: pointer;
   }
   .img-wrap {
     width: 44px;
@@ -385,6 +390,7 @@ export default {
       padding: 20px 0;
       height: 70px;
       border-bottom: 1px solid $skin-font5;
+      position: relative;
       &.form-item-mini {
         height: 44px;
         padding: 0;
@@ -576,6 +582,82 @@ export default {
 }
 
 @media screen and (min-width: 780px) {
+  #v-detail {
+    margin: 20px;
+    background: $pc-bg0;
+    border-radius: 10px;
+    .bank-padding {
+      margin-left: 0!important;
+    }
+    .color-898 {
+      color: $pc-font2;
+      font-weight: bold;
+    }
+    .color-333 {
+      color: $pc-font1;
+    }
+    .title-s1 {
+      color: $skin-bg1;
+    }
+    .order-step {
+      width: 500px;
+      transform: translateY(15%) scale(1.5);
+
+      &::before {
+        width: 260px;
+      }
+    }
+    .input-amount-warp {
+      background: $pc-bg2;
+      color: $skin-bg1;
+      .input-amount {
+        color: $skin-bg1;
+        max-width: 90%;
+        &::placeholder {
+          font-weight: bold;
+          color: $pc-font3;
+        }
+      }
+    }
+    .question-tip-icon {
+      width: 26px;
+      height: 26px;
+    }
+    .input-error-msg {
+      margin: 10px auto 20px;
+    }
+    .auto-tips {
+      width: 300px;
+    }
+    .form-s1 {
+      .form-item {
+        border-bottom: 1px solid #f2f2f8 !important;
+        padding: 0;
+        height: 100px;
+        padding-left: 60px;
+        .label {
+          color: $pc-font2;
+          font-weight: bold;
+          font-size: 16px;
+        }
+        .h5 {
+          font-size: 14px;
+          color: #898c98;
+        }
+        .p {
+          color: #333333;
+          vertical-align: middle;
+        }
+      }
+      .img-wrap {
+        position: absolute;
+        top: 30px;
+        left: 0px;
+        height: 44px;
+        width: 44px;
+      }
+    }
+  }
   .layout-wrap {
     max-width: 100%;
     padding: 20px 20px;
@@ -583,36 +665,18 @@ export default {
   .panel-main {
     position: relative;
     width: 100%;
-    //min-height: 420px;
-    background-color: $skin-bg1;
+    background-color: $pc-bg0;
     border: 2px dashed #e5e5eb;
     border-radius: 10px;
-    padding: 10px 40px 10px 104px;
   }
+
   .pay-btns {
-    margin-top: 300px !important;
-    margin-left: 100px;
+    margin-left: 0;
     .btn-cancel {
       margin-right: 20px !important;
     }
-  }
-  .img-wrap {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    height: 44px;
-    width: 44px;
-  }
-
-  .form-item {
-    border-bottom: 1px solid #f2f2f8 !important;
-    .h5 {
-      font-size: 14px;
-      color: #898c98;
-    }
-    .p {
-      color: #333333;
-      vertical-align: middle;
+    .panel-main {
+      background: $pc-bg1;
     }
   }
 }

@@ -92,6 +92,7 @@ export default {
 	created () {
 		injectOnce();
 		this.init();
+    this.$$tools.postMessage('removeFrameHeight', {})
 	},
 	methods: {
     async init () {
@@ -320,7 +321,6 @@ export default {
 #bank-my {
   .btn-amount {
     margin-right: 10px;
-
     &:hover {
       color: #fff;
       border-color: #ff0000;
@@ -344,7 +344,6 @@ export default {
   .choose-item-top {
     display: flex;
     flex-flow: row nowrap;
-    width: 321px;
     height: 44px;
     background-color: $skin-font5;
     margin: 10px 0;
@@ -616,4 +615,59 @@ export default {
     }
   }
 }
+
+
+@media screen and (min-width: 780px) {
+  body {
+    #bank-my {
+      .title-s1 {
+        color: $skin-font5;
+        margin: 0;
+      }
+      .choose-item-top {
+        background: $pc-bg2;
+        color: $skin-font5;
+        font-weight: bold;
+        margin: 20px 0 20px;
+      }
+      .choose-bank-list {
+        margin: 20px 0 30px;
+        .choose-bank-item {
+          background: $pc-bg2;
+          color: $skin-font5;
+          font-weight: bold;
+          border-color: $pc-bg2;
+        }
+        .bank-icon {
+          width: 22px;
+          height: 22px;
+        }
+      }
+      .quick-amount-box {
+        margin: 20px 0 20px;
+        .item {
+          max-width: 1.4rem;
+          flex: 1;
+          min-width: 0;
+          background: $pc-bg2;
+          border-color: transparent;
+          color: $skin-font5;
+          font-weight: bold;
+          &:hover {
+            color: $skin-font5;
+          }
+        }
+      }
+      .input-amount-warp {
+        background: $pc-bg2;
+        color: $skin-font5;
+        .input-amount {
+          color: $skin-font5;
+        }
+      }
+
+    }
+  }
+}
+
 </style>
