@@ -46,28 +46,28 @@ export default {
     const that = this
     return {
       statusText: {
-        'withdraw$waiting': {
+        withdraw$waiting: {
           title: that.$i18n("确认中"),
           icon: "/images/status-confirm.png"
         },
-        'withdraw$success': {
+        withdraw$success: {
           title: that.$i18n("提款成功"),
           icon: "/images/status-success.png"
         },
-        'withdraw$failed': {
+        withdraw$failed: {
           title: that.$i18n("提款失败"),
           icon: "/images/status-fail.png"
         }
       },
       orderInfo: {
-        withdrawStatus: 'withdraw$waiting'
+        withdrawStatus: "withdraw$waiting"
       }
     }
   },
   methods: {
     // 初始化数据
     async init() {
-      let config = await this.$$ajaxLoading.post('/withdraw/withdrawInfo', {
+      let config = await this.$$ajaxLoading.post("/withdraw/withdrawInfo", {
         withdrawNo: this.$route.params.id
       })
       this.orderInfo = config
@@ -82,5 +82,12 @@ export default {
   border-radius: 10px 10px 0 0;
   color: $skin-font1;
   font-weight: bold;
+}
+@media screen and (min-width: 780px) {
+  .active-title {
+    background: $skin-color1;
+    color: $skin-font1;
+    font-weight: bold;
+  }
 }
 </style>
