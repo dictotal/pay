@@ -198,13 +198,16 @@ export default {
     },
     // 提交订单成功
     submitOrder () {
-      if (!this.amount) {
+      if (!this.amount || !/\d+/.test(this.amount)) {
         return
       } else if (this.depositNo.length !== 6) {
         this.isShow = true
       } else {
         let data = {
           paymentId: this.config.paymentId,
+          depositNo: '',
+          paymentAmount: this.amount,
+          serialNumber: this.depositNo
         }
         if (this.isRequest) {
           return
