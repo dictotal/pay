@@ -265,11 +265,11 @@ export default {
 			return this.$$tools.isMobile();
 		},
 		maxAmount () {
-			return this.actBank?.maxAmount || this.actPayment?.maxAmount;
+			return (this.actBank ? this.actBank.maxAmount : '') || (this.actPayment ? this.actPayment.maxAmount : '');
 		},
 
 		minAmount () {
-			return this.actBank?.minAmount || this.actPayment?.minAmount;
+			return (this.actBank ? this.actBank.minAmount : '') || (this.actPayment ? this.actPayment.minAmount : '');
 		},
 		amountIsRight () {
 			let amount = this.amount;
