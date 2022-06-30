@@ -11,15 +11,18 @@ $skin-bg2: #23232C;
 $skin-bg3: #393946;
 $skin-bg4: #f5f6f7;
 $skin-bg5: #2C2C38;
+$skin-white: #FFF;
+$skin-color333: #333333;
 
 $skin-font1: #FFFFFF;
 $skin-font2: #D4D5DB;
-$skin-font3: #9598A5;
+$skin-font3: #808080;
 $skin-font4: #5B5F6F;
 $skin-font5: #33333E;
 $skin-font6: #d4d5db;
+$skin-font7: #B3B3B3;
 
-$skin-color1: #FF0058;
+$skin-color1: #FFCA00;
 $skin-color2: #FF5252;
 $skin-color3: #FF7600;
 $skin-color4: #306BFF;
@@ -39,6 +42,16 @@ $pc-font3: #999;
 $pc-font4: #aaa;
 $pc-font5: #f5f5f5;
 $pc-font6: #fff;
+
+$skin-main1: #FFCA00;
+$skin-main2: #09C45C;
+$skin-main3: #306BFF;
+$skin-main4: #306BFF;
+@mixin skin-linear1 {
+  bakground-image: linear-gradient(269deg,#FFCA00, #FFA700)
+}
+
+
 //========================其它公共方法===========================
 @mixin h-lh($h,$ph:0px){
   height: $h;

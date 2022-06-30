@@ -6,7 +6,7 @@
         <div class="active-title-text">{{ $i18n("提款到银行卡") }}</div>
       </div>
       <img class="active-detail-icon" :src="statusText[orderInfo.withdrawStatus].icon" alt="" />
-      <div class="active-status" :class="`${orderInfo.withdrawStatus}`" v-html="orderInfo.withdrawStatusName"></div>
+      <div class="active-status" :class="`${statusText[orderInfo.withdrawStatus].className}`" v-html="orderInfo.withdrawStatusName"></div>
     </div>
     <!-- 个人信息 -->
     <div class="common-wrapper">
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="customer-area flex w-middle w-center" @click="toCustomer">
-      <img class="customer-area-icon" src="/images/customer.png" alt="" />
+      <!-- <img class="customer-area-icon" src="/images/customer.png" alt="" /> -->
       <div class="customer-area-text">{{ $i18n("客服服务") }}</div>
     </div>
   </div>
@@ -48,15 +48,18 @@ export default {
       statusText: {
         withdraw$waiting: {
           title: that.$i18n("确认中"),
-          icon: "/images/status-confirm.png"
+          icon: "/images/status-confirm.png",
+          className: 'confirm',
         },
         withdraw$success: {
           title: that.$i18n("提款成功"),
-          icon: "/images/status-success.png"
+          icon: "/images/status-success.png",
+          className: 'success'
         },
         withdraw$failed: {
           title: that.$i18n("提款失败"),
-          icon: "/images/status-fail.png"
+          icon: "/images/status-fail.png",
+          className: 'failed'
         }
       },
       orderInfo: {
@@ -67,9 +70,28 @@ export default {
   methods: {
     // 初始化数据
     async init() {
-      let config = await this.$$ajaxLoading.post("/withdraw/withdrawInfo", {
-        withdrawNo: this.$route.params.id
-      })
+      // let config = await this.$$ajaxLoading.post("/withdraw/withdrawInfo", {
+      //   withdrawNo: this.$route.params.id
+      // })
+      let config = {
+        _account: "cherry02",
+        _balUsable: 17631.08,
+        _balWdl: 0,
+        _currency: "MMK",
+        _currencyUnit: "ks",
+        _hasAgentPermission: "no",
+        _userGroup: "u",
+        bankCard: "012222",
+        bankName: "AYA Pay",
+        createDate: "2022-05-26 21:04:47",
+        iconUrl: "https://img.yym203.com/link/tt/bank_icon/aya_pay.png",
+        orderAmount: 10000,
+        realName: "cherry",
+        remark: "-",
+        withdrawNo: "2205582752699650621440",
+        withdrawStatus: "withdraw$waiting",
+        withdrawStatusName: "<font color='#FF7600'>已发起(汇款中)</font>"
+      }
       this.orderInfo = config
     }
   }
@@ -78,9 +100,9 @@ export default {
 
 <style scoped lang="scss">
 .active-title {
-  background: $skin-bg5;
+  background: #ebebeb;
   border-radius: 10px 10px 0 0;
-  color: $skin-font1;
+  color: $skin-color333;
   font-weight: bold;
 }
 @media screen and (min-width: 780px) {

@@ -7,7 +7,7 @@
         <div class="active-title-text">{{ orderInfo.rechargeTypeName }}</div>
       </div>
       <img class="active-detail-icon" :src="statusText[orderInfo.rechargeStatus].icon" alt="" />
-      <div class="active-status" :class="`${orderInfo.rechargeStatus}`">{{ statusText[orderInfo.rechargeStatus].title }}</div>
+      <div class="active-status" :class="`${statusText[orderInfo.rechargeStatus].className}`">{{ statusText[orderInfo.rechargeStatus].title }}</div>
     </div>
     <!-- 个人信息 -->
     <div class="common-wrapper">
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="customer-area flex w-middle w-center" @click="toCustomer">
-      <img class="customer-area-icon" src="/images/customer.png" alt="" />
+      <!-- <img class="customer-area-icon" src="/images/customer.png" alt="" /> -->
       <div class="customer-area-text">{{ $i18n("客服服务") }}</div>
     </div>
   </div>
@@ -51,19 +51,23 @@ export default {
       statusText: {
         'pay$waiting': {
           title: that.$i18n("确认中"),
-          icon: "/images/status-confirm.png"
+          icon: "/images/status-confirm.png",
+          className: 'confirm'
         },
         'pay$confirm': {
           title: that.$i18n("确认中"),
-          icon: "/images/status-confirm.png"
+          icon: "/images/status-confirm.png",
+          className: 'confirm'
         },
         'pay$success': {
           title: that.$i18n("充值成功"),
-          icon: "/images/status-success.png"
+          icon: "/images/status-success.png",
+          className: 'success'
         },
         'pay$failed': {
           title: that.$i18n("支付失败"),
-          icon: "/images/status-fail.png"
+          icon: "/images/status-fail.png",
+          className: 'failed'
         }
       },
       orderInfo: {

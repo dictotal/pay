@@ -207,7 +207,7 @@ export default {
     .v-count-down {
       .time {
         font-size: 16px;
-        background-color: $skin-bg5;
+        background-color: $skin-white;
         color: $skin-font1;
         box-shadow: none;
         border-radius: 3px;
@@ -265,7 +265,7 @@ export default {
   }
   .order-view {
     padding: 15px 17px 0;
-    background: $skin-bg5;
+    background: $skin-white;
     border-color: $skin-font5;
     .order-item {
       width: 100%;

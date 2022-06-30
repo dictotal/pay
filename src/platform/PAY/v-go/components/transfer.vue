@@ -60,12 +60,11 @@
             <h5 class="label color-898">{{ $i18n("detail.index.txt_5", "存款金额") }}</h5>
             <div class="w-row f14 copy-para">
               <div class="b fc-red">
-                {{ transferInfo.amount | money }}
+                {{ transferInfo.amount | money }}{{ config.currency }}
               </div>
-              <span>{{ $$tools.moneyKey }}</span>
               <img class="copy-icon" src="../images/copy.png" alt="copy" @click="copy(transferInfo.amount)" />
               <div class="ml10">
-                <span class="line-through fc-bcb">{{ transferInfo.baseAmount | money }} {{ $$tools.moneyKey }}</span>
+                <span class="line-through fc-bcb">{{ transferInfo.baseAmount | money }} {{ config.currency }}</span>
               </div>
             </div>
           </div>
@@ -241,7 +240,7 @@ export default {
     }
   }
   .color-333 {
-    color: $skin-font1;
+    color: $skin-color333;
     font-size: 14px;
     font-family: Barlow;
   }
@@ -278,7 +277,7 @@ export default {
       justify-content: space-between;
       padding: 20px 0;
       height: 70px;
-      border-bottom: 1px solid $skin-font5;
+      border-bottom: 1px solid $skin-bg4;
       &.form-item-mini {
         height: 44px;
         padding: 0;
@@ -305,7 +304,7 @@ export default {
   }
 
   .fc-bcb {
-    color: $skin-font4;
+    color: $skin-font7;
   }
 
   .tips-box {
@@ -343,7 +342,7 @@ export default {
       background: $skin-color1;
       border: 1px solid $skin-color1;
       font-size: 17px;
-      color: $skin-font1;
+      color: $skin-color333;
     }
   }
 
@@ -358,7 +357,7 @@ export default {
     }
   }
   .panel-notice {
-    color: $skin-font3;
+    color: $skin-font7;
     margin-top: 20px;
     padding-bottom: 10px;
     .title-notice {
@@ -368,6 +367,7 @@ export default {
       &::after {
         content: "";
         border-bottom: 1px dashed $skin-font3;
+        transform: scaleY(0.5);
         display: block;
         width: 100%;
         position: absolute;
@@ -376,7 +376,7 @@ export default {
       }
       &-text {
         padding: 0 10px;
-        background: $skin-bg1;
+        background: $skin-bg4;
         position: relative;
         z-index: 1;
       }
@@ -389,8 +389,8 @@ export default {
         display: inline-block;
         width: 15px;
         height: 15px;
-        background: $skin-font4;
-        color: $skin-bg1;
+        background: $skin-font7;
+        color: $skin-font1;
         border-radius: 50%;
         text-align: center;
         font-size: 11px;
@@ -403,7 +403,6 @@ export default {
       height: 27px;
       line-height: 27px;
       font-size: 16px;
-      background: $skin-font1;
       box-shadow: none;
       border-radius: 3px;
       text-align: center;
@@ -411,7 +410,7 @@ export default {
     .dot {
       &::before,
       &::after {
-        background: $skin-bg5;
+        background: $skin-white;
       }
     }
   }

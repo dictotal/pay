@@ -19,7 +19,7 @@ export default {
   width: 2rem;
   height: 0.44rem;
   line-height: 0.44rem;
-  background: $skin-bg5;
+  background: $skin-white;
   font-size: 14px;
   text-align: center;
   margin: 0.5rem auto;

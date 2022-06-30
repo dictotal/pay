@@ -67,6 +67,7 @@
               </p>
             </div>
           </div>
+          <div class="min-amount-tip color-333" v-html="$i18n('存款金额必需', {minAmount: minAmount, moneyKey: $$tools.moneyKey})"></div>
         </template>
         <template v-else-if="step === 2">
           <h2 class="title-s1">{{ $i18n("存款金额") }}-{{ config.currency }}</h2>
@@ -319,7 +320,7 @@ export default {
     }
   }
   .color-333 {
-    color: $skin-font1;
+    color: $skin-color333;
     font-size: 14px;
     font-family: Barlow;
   }
@@ -379,7 +380,7 @@ export default {
         background: $skin-color1;
         text-align: center;
         line-height: 14px;
-        color: $skin-font5;
+        color: $skin-font1;
         font-size: 12px;
         font-weight: bold;
       }
@@ -392,7 +393,7 @@ export default {
       justify-content: space-between;
       padding: 20px 0;
       height: 70px;
-      border-bottom: 1px solid $skin-font5;
+      border-bottom: 1px solid $skin-bg4;
       position: relative;
       &.form-item-mini {
         height: 44px;
@@ -421,6 +422,11 @@ export default {
 
   .fc-bcb {
     color: $skin-color4;
+  }
+
+  .min-amount-tip {
+    line-height: 44px;
+    font-size: 12px;
   }
 
   .tips-box {
@@ -452,8 +458,9 @@ export default {
         align-items: center;
         flex-flow: column nowrap;
         line-height: 1;
-        color: #fff;
+        color: $skin-color333;
         justify-content: center;
+        font-weight: bold;
         .set-order {
           font-size: 17px;
         }
@@ -512,14 +519,14 @@ export default {
     .dot {
       &::before,
       &::after {
-        background: $skin-bg5;
+        background: $skin-white;
       }
     }
   }
   .input-amount-warp {
     position: relative;
     height: 44px;
-    background: $skin-bg5;
+    background: $skin-bg4;
     overflow: hidden;
     border-radius: 7px;
     .amount-type {
@@ -542,7 +549,7 @@ export default {
       background: transparent;
       outline: none;
       border: none;
-      color: $skin-font1;
+      color: $skin-color333;
       line-height: 44px;
       &::placeholder {
         color: $skin-font4;

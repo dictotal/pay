@@ -35,7 +35,7 @@ input::-webkit-input-placeholder {
   color: #676974;
 }
 .fc-red{
-  color: $skin-color1;
+  color: $skin-main2;
 }
 .fc-333{
   color: #333;
@@ -121,7 +121,9 @@ input::-webkit-input-placeholder {
   min-height: 100%;
   background: #f9f9fc;
 }
-
+.min-amount-tip em {
+  color: $skin-color3;
+}
 @media screen and (min-width: 780px) {
   #app {
     padding: 1px;

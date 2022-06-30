@@ -31,6 +31,7 @@ export default {
     flex: 1;
     margin-left: 12px;
     color: $skin-font5;
+    font-weight: bold;
     overflow-x: auto;
     white-space: nowrap;
     height: 34px;
