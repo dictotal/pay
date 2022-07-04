@@ -331,7 +331,7 @@ export default {
   .title-s1 {
     margin-top: 30px;
     margin-bottom: 20px;
-    color: $skin-font1;
+    color: $skin-color333;
     font-weight: 600;
     line-height: 20px;
     font-size: 14px;
