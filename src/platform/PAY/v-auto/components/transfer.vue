@@ -177,8 +177,9 @@ export default {
         }
       }, this.$i18n('detail.index.txt_13', '提示'),
         '',
-        this.$i18n('detail.index.txt_7', '撤销订单'),
-        this.$i18n('detail.index.txt_14', '暂不撤销'));
+        // this.$i18n('detail.index.txt_7', '撤销订单'),
+        // this.$i18n('detail.index.txt_14', '暂不撤销')
+      );
     },
     cancelOrder () {
       let transferInfo = this.transferInfo;
@@ -235,14 +236,11 @@ export default {
     },
     limitAmountHandel () {
       let maxAmount = this.maxAmount,
-        minAmount = this.minAmount,
         amount = this.amount;
 
-      if (minAmount) {
-        if (amount < minAmount) {
-          amount = minAmount;
+      if (amount <= 1) {
+          amount = 1;
         }
-      }
 
       if (maxAmount) {
         if (amount > maxAmount) {

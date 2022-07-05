@@ -13,7 +13,7 @@
     <div class="common-wrapper">
       <div class="common-wrapper-item">
         <div class="common-item-label">{{ $i18n("充值金额") }}:</div>
-        <div class="common-item-value">{{ $$tools.toMoney(orderInfo.orderAmount) }} {{ orderInfo.currency }}</div>
+        <div class="common-item-value">{{ $$tools.toMoney(orderInfo.orderAmount) }} {{ orderInfo._currency }}</div>
       </div>
       <div class="common-wrapper-item" v-if="orderInfo.payAccount">
         <div class="common-item-label">{{ $i18n("付款人开户名") }}</div>

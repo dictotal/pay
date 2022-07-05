@@ -122,8 +122,9 @@ export default {
 				}
 			}, this.$i18n('detail.qrcode.txt_10', '提示'),
 				'',
-				this.$i18n('detail.qrcode.txt_7', '撤销订单'),
-				this.$i18n('detail.qrcode.txt_9', '暂不撤销'));
+				// this.$i18n('detail.qrcode.txt_7', '撤销订单'),
+        // this.$i18n('detail.qrcode.txt_9', '暂不撤销')
+      );
 		},
 		cancelOrder () {
 			let qrCodeInfo = this.qrCodeInfo;

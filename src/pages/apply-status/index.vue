@@ -70,28 +70,28 @@ export default {
   methods: {
     // 初始化数据
     async init() {
-      // let config = await this.$$ajaxLoading.post("/withdraw/withdrawInfo", {
-      //   withdrawNo: this.$route.params.id
-      // })
-      let config = {
-        _account: "cherry02",
-        _balUsable: 17631.08,
-        _balWdl: 0,
-        _currency: "MMK",
-        _currencyUnit: "ks",
-        _hasAgentPermission: "no",
-        _userGroup: "u",
-        bankCard: "012222",
-        bankName: "AYA Pay",
-        createDate: "2022-05-26 21:04:47",
-        iconUrl: "https://img.yym203.com/link/tt/bank_icon/aya_pay.png",
-        orderAmount: 10000,
-        realName: "cherry",
-        remark: "-",
-        withdrawNo: "2205582752699650621440",
-        withdrawStatus: "withdraw$waiting",
-        withdrawStatusName: "<font color='#FF7600'>已发起(汇款中)</font>"
-      }
+      let config = await this.$$ajaxLoading.post("/withdraw/withdrawInfo", {
+        withdrawNo: this.$route.params.id
+      })
+      // let config = {
+      //   _account: "cherry02",
+      //   _balUsable: 17631.08,
+      //   _balWdl: 0,
+      //   _currency: "MMK",
+      //   _currencyUnit: "ks",
+      //   _hasAgentPermission: "no",
+      //   _userGroup: "u",
+      //   bankCard: "012222",
+      //   bankName: "AYA Pay",
+      //   createDate: "2022-05-26 21:04:47",
+      //   iconUrl: "https://img.yym203.com/link/tt/bank_icon/aya_pay.png",
+      //   orderAmount: 10000,
+      //   realName: "cherry",
+      //   remark: "-",
+      //   withdrawNo: "2205582752699650621440",
+      //   withdrawStatus: "withdraw$waiting",
+      //   withdrawStatusName: "<font color='#FF7600'>已发起(汇款中)</font>"
+      // }
       this.orderInfo = config
     }
   }
