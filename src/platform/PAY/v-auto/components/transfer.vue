@@ -67,7 +67,7 @@
               </p>
             </div>
           </div>
-          <div class="min-amount-tip color-333" v-html="$i18n('存款金额必需', {minAmount: minAmount, moneyKey: $$tools.moneyKey})"></div>
+          <!-- <div class="min-amount-tip color-333" v-html="$i18n('存款金额必需', {minAmount: minAmount, moneyKey: $$tools.moneyKey})"></div> -->
         </template>
         <template v-else-if="step === 2">
           <h2 class="title-s1">{{ $i18n("存款金额") }}-{{ config.currency }}</h2>
