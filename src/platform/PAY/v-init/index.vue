@@ -23,8 +23,8 @@
                   </template>
                   <template v-else-if="item.qrList">
                     <div class="choose-bank-item" :class="{ active: idx === item.activeIdx }" v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)" :key="`${index}-${idx}`">
-                      <img class="bank-icon" v-if="bank.paymentIconUrl" :src="bank.iconUrl" alt="" />
-                      <img class="bank-icon" v-else src="./images/qrcode.png" alt="" />
+                      <img class="bank-icon" v-if="bank.iconUrl" :src="bank.iconUrl" alt="" />
+                      <img class="bank-icon" v-else src="./images/default.png" alt="" />
                       <div class="bank-name">{{ bank.keyName }}</div>
                     </div>
                   </template>
