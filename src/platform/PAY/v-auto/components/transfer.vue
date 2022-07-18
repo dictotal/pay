@@ -1,7 +1,7 @@
 <template>
   <div id="v-detail" class="view-bg-gray">
     <cancel-order @cancelHandel="cancelHandel" :config="config" :status="status"></cancel-order>
-    <top-tips
+    <!-- <top-tips
       :content="
         $i18n(
           '存款金额限制',
@@ -14,7 +14,7 @@
           '见下方注释'
         )
       "
-    />
+    /> -->
     <!--  转账信息  -->
     <div class="layout-wrap form-s1">
       <div class="panel-main box-shadow">
@@ -71,8 +71,8 @@
         <template v-else-if="step === 2">
           <h2 class="title-s1">{{ $i18n("存款金额") }}-{{ config.currency }}</h2>
           <div class="input-amount-warp">
-            <div class="amount-type">{{ minAmount }}~{{ maxAmount }}{{ $$tools.moneyKey }}</div>
-            <input type="number" class="input-amount f-din" @keyup="amount = amount.substring(0, maxAmount.toString().length)" v-model="amount" :maxlength="maxAmount.toString().length" @blur="limitAmountHandel" :placeholder="$i18n('请输入金额')" />
+            <!-- <div class="amount-type">{{ minAmount }}~{{ maxAmount }}{{ $$tools.moneyKey }}</div> -->
+            <input type="number" class="input-amount f-din" v-model="amount" @input="limitMoney(50)" @blur="limitAmountHandel" :placeholder="$i18n('请输入金额')" />
           </div>
           <h2 class="title-s1">{{ $i18n("存款编号") }}</h2>
           <div class="input-amount-warp">
@@ -233,23 +233,27 @@ export default {
       this.$$tools.copyToClipboard(str);
     },
     limitAmountHandel () {
-      let maxAmount = this.maxAmount,
-        minAmount = this.minAmount,
-        amount = this.amount;
+      let amount = this.amount;
 
-      if (minAmount) {
-        if (amount < minAmount) {
-          amount = minAmount;
-        }
-      }
+      // if (minAmount) {
+      //   if (amount < minAmount) {
+      //     amount = minAmount;
+      //   }
+      // }
 
-      if (maxAmount) {
-        if (amount > maxAmount) {
-          amount = maxAmount;
-        }
-      }
+      // if (maxAmount) {
+      //   if (amount > maxAmount) {
+      //     amount = maxAmount;
+      //   }
+      // }
 
-      this.amount = amount;
+      this.amount = parseInt(amount);
+    },
+    limitMoney () {
+      let v = this.amount
+      v = (v + '').replace(/\D|\.\-/g, '').substring(0, 12)
+      this.amount = v
+      console.log(v)
     },
     // 显示类型
     setShowTip () {
