@@ -22,7 +22,7 @@ $skin-font5: #33333E;
 $skin-font6: #d4d5db;
 $skin-font7: #B3B3B3;
 
-$skin-color1: #FFCA00;
+$skin-color1: #EDCC7B;
 $skin-color2: #FF5252;
 $skin-color3: #FF7600;
 $skin-color4: #306BFF;
@@ -31,6 +31,8 @@ $skin-color6: #00c763;
 $skin-color7: #fff8eb;
 
 $skin-other1: #707070;
+
+
 
 $pc-bg0: white;
 $pc-bg1:#f9f9fc;
@@ -43,12 +45,12 @@ $pc-font4: #aaa;
 $pc-font5: #f5f5f5;
 $pc-font6: #fff;
 
-$skin-main1: #FFCA00;
+$skin-color1: $skin-color1;
 $skin-main2: #09C45C;
 $skin-main3: #306BFF;
 $skin-main4: #306BFF;
 @mixin skin-linear1 {
-  bakground-image: linear-gradient(269deg,#FFCA00, #FFA700)
+  bakground-image: linear-gradient(269deg,$skin-color1, #FFA700)
 }
 
 

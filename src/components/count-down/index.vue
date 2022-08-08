@@ -181,7 +181,7 @@ export default {
 @media screen and (max-width: 760px) {
     .v-count-down {
       .time {
-        color: $skin-main1;
+        color: $skin-color1;
         background: #2C2C38;
       }
       .dot::before, .dot::after {

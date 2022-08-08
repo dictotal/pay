@@ -17,7 +17,7 @@ module.exports = {
       "/a/": {
         /* 测试环境kfc */
         // target: "http://m01.mdybet77.com/",
-        target: "http://m.lol.com/",
+        target: "http://m.kya.com/",
       }
     },
     port: 8080,
