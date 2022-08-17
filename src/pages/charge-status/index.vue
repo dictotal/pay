@@ -58,7 +58,7 @@ export default {
           icon: "/images/status-confirm.png"
         },
         'pay$success': {
-          title: that.$i18n("充值成功"),
+          title: that.$i18n("支付成功"),
           icon: "/images/status-success.png"
         },
         'pay$failed': {
