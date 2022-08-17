@@ -60,7 +60,7 @@ export default {
           className: 'confirm'
         },
         'pay$success': {
-          title: that.$i18n("充值成功"),
+          title: that.$i18n("支付成功"),
           icon: "/images/status-success.png",
           className: 'success'
         },
@@ -84,6 +84,7 @@ export default {
       let config = await this.$$ajaxLoading.post('recharge/rechargeRecordInfo', {
         rechargeNo: this.$route.params.id
       })
+      config.rechargeStatus = 'pay$confirm'
       this.orderInfo = config
     },
     // 复制文本
