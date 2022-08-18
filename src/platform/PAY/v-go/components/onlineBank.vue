@@ -85,7 +85,7 @@ export default {
         clearTimeout(this.timeOut)
       }
 			this.timeOut = setTimeout(() => {
-				this.$$ajax.post("/recharge/payStatus", { orderNo: this.orderNo }).then(resp => {
+				this.$$ajaxLoading.post("/recharge/payStatus", { orderNo: this.orderNo }).then(resp => {
 					this.qrCodeInfo.status = resp.orderStatus;
 				}).finally(() => {
 					this.iniLoop();

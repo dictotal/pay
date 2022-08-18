@@ -204,7 +204,7 @@ export default {
         paymentId: this.config.paymentId,
         orderNo: this.config.orderNo
       }
-      this.$$ajax.post('/recharge/payConfirm', data).then((res) => {
+      this.$$ajaxLoading.post('/recharge/payConfirm', data).then((res) => {
         localStorage.setItem(`charge${data.orderNo}`, JSON.stringify(this.config))
         this.$router.replace(`/charge/status/${data.orderNo}`)
       }).catch(err => {
