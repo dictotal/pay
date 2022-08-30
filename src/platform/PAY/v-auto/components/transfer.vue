@@ -183,7 +183,7 @@ export default {
     },
     cancelOrder () {
       let transferInfo = this.transferInfo;
-      this.$$ajax.post('/recharge/cancelRecharge', {
+      this.$$ajaxLoading.post('/recharge/cancelRecharge', {
         amount: transferInfo.amount,
         paymentAmount: transferInfo.baseAmount,
         paymentId: this.config.paymentId
@@ -218,7 +218,7 @@ export default {
         setTimeout(() => {
           this.isRequest = false
         })
-        this.$$ajax.post('/recharge/verifyOrder', data).then(res => {
+        this.$$ajaxLoading.post('/recharge/verifyOrder', data).then(res => {
           if (res.operateResult) {
             this.$router.replace('/')
           }
