@@ -129,7 +129,7 @@ export default {
     },
     getData () {
       return new Promise((resolve, reject) => {
-        this.$$ajax.post('/recharge/rechargeInitS').then(res => {
+        this.$$ajaxLoading.post('/recharge/rechargeInitS').then(res => {
           if (res.paymentList && res.paymentList.length > 0) {
             resolve(res)
           } else {
