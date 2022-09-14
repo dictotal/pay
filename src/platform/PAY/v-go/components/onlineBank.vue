@@ -63,8 +63,8 @@ export default {
         if (iframe) {
           iframe.parentNode.removeChild(iframe)
         }
-        iframe = document.createElement('iframe-el')
-        iframe.className = 'frame'
+        iframe = document.createElement('iframe')
+        iframe.className = 'iframe-el'
         iframe.setAttribute('frameborder', '0')
         iframe.src = url
         parentEl.appendChild(iframe)
