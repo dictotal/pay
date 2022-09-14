@@ -63,7 +63,7 @@ export default {
         if (iframe) {
           iframe.parentNode.removeChild(iframe)
         }
-        iframe = document.createElement('iframe')
+        iframe = document.createElement('iframe-el')
         iframe.className = 'frame'
         iframe.setAttribute('frameborder', '0')
         iframe.src = url
