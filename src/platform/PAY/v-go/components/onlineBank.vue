@@ -1,8 +1,8 @@
 <template>
   <div id="v-detail" class="view-bg-gray" :class="status">
     <cancel-order :config="config" @cancelHandel="cancelHandel" :status="status"></cancel-order>
-    <div class="iframe-el-container">
-      <iframe class="iframe-el" :src="config.url" frameborder="0"></iframe>
+    <div class="iframe-el-container" ref="frameEl">
+      <!-- <iframe class="iframe-el" :src="config.url" frameborder="0"></iframe> -->
     </div>
     <div class="empty-padding"></div>
   </div>
@@ -52,9 +52,24 @@ export default {
 			this.moneyUnit = this.config.currencyUnit;
 			let { amount, orderNo } = this.qrCodeInfo;
 			this.orderNo = orderNo;
-			this.orderAmount = amount;
+      this.orderAmount = amount;
+      this.createIframe(this.config.url)
 			this.listenMessage()
-		},
+    },
+    createIframe (url) {
+      this.$nextTick(() => {
+        let parentEl = this.$refs.frameEl
+        let iframe = parentEl.querySelector('iframe')
+        if (iframe) {
+          iframe.parentNode.removeChild(iframe)
+        }
+        iframe = document.createElement('iframe')
+        iframe.className = 'frame'
+        iframe.setAttribute('frameborder', '0')
+        iframe.src = url
+        parentEl.appendChild(iframe)
+      })
+    },
 		listenMessage () {
 			// url有参数才能发正常渲染数据，提交的时候是form post， 无参数不能由客户端再次加载
 			window.removeEventListener('message', this.messageHandle)
@@ -164,7 +179,12 @@ export default {
 			return this.$$tools.isMobile();
 		},
 	},
-	components: { countDown, CancelOrder }
+  components: { countDown, CancelOrder },
+  watch: {
+    'config.url' (value) {
+      this.createIframe(value)
+    }
+  },
 }
 </script>
 
