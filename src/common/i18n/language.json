@@ -19,7 +19,10 @@
     "撤销订单": "撤销订单",
     "加载中": "加载中",
     "充值编号": "存款编号",
-    "存款金额必需": "存款金额必需<em>{{minAmount}}{{moneyKey}}</em>以上，否则无法增加款项"
+    "存款金额必需": "存款金额必需<em>{{minAmount}}{{moneyKey}}</em>以上，否则无法增加款项",
+    "限制": "限制:",
+    "支付方式限额": "{{name}} 限制 {{minAmount}} ~ {{maxAmount}}{{moneyKey}}",
+    "请输入充值金额": "请输入充值金额！"
   },
   "my": {
     "订单号": "အော်ဒါနံပါတ်",
@@ -41,7 +44,10 @@
     "撤销订单": "ပယ်ဖျက်မည်",
     "加载中": "တင်နေသည်။",
     "充值编号": "လုပ်ဆောင်မှုအမှတ် ဉပမာ：",
-    "存款金额必需": "အပ်ငွေပမာဏသည် <em>{{minAmount}}{{moneyKey}}</em> သို့မဟုတ် ထို့ထက်ပိုရမည်၊ မဟုတ်ပါက ပေးချေမှုကို တိုး၍မရပါ။"
+    "存款金额必需": "အပ်ငွေပမာဏသည် <em>{{minAmount}}{{moneyKey}}</em> သို့မဟုတ် ထို့ထက်ပိုရမည်၊ မဟုတ်ပါက ပေးချေမှုကို တိုး၍မရပါ။",
+    "限制": "limit:",
+    "支付方式限额": "{{name}} limit {{minAmount}} ~ {{maxAmount}}{{moneyKey}}",
+    "请输入充值金额": "Please enter the amount!"
   },
   "th": {
     "订单号": "เลขที่ใบสั่งซื้อ",
@@ -63,7 +69,10 @@
     "撤销订单": "ยกเลิกคำสั่งซื้อ",
     "加载中": "Loading",
     "充值编号": "หมายเลขเงินฝาก",
-    "存款金额必需": "จำนวนเงินฝากต้องเป็น <em>{{minAmount}}{{moneyKey}}</em> ขึ้นไป มิฉะนั้นจะไม่สามารถเพิ่มการชำระเงินได้"
+    "存款金额必需": "จำนวนเงินฝากต้องเป็น <em>{{minAmount}}{{moneyKey}}</em> ขึ้นไป มิฉะนั้นจะไม่สามารถเพิ่มการชำระเงินได้",
+    "限制": "limit:",
+    "支付方式限额": "{{name}} limit {{minAmount}} ~ {{maxAmount}}{{moneyKey}}",
+    "请输入充值金额": "Please enter the amount!"
   },
   "en": {
     "订单号": "Order No.",
@@ -85,6 +94,9 @@
     "撤销订单": "Cancel Order",
     "加载中": "Loading",
     "充值编号": "Desposit No",
-    "存款金额必需": "The deposit amount must be <em>{{minAmount}}{{moneyKey}}</em> or more, otherwise the payment cannot be increased"
+    "存款金额必需": "The deposit amount must be <em>{{minAmount}}{{moneyKey}}</em> or more, otherwise the payment cannot be increased",
+    "限制": "limit:",
+    "支付方式限额": "{{name}} limit {{minAmount}} ~ {{maxAmount}}{{moneyKey}}",
+    "请输入充值金额": "Please enter the amount!"
   }
 }

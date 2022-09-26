@@ -2,60 +2,73 @@
   <div id="bank-my" class="div-bg-gray" v-if="config" :class="{ 'pay-init-tt-pc': isMobile !== true }">
     <div class="layout-wrap">
       <div class="panel-main box-shadow">
+         <!-- 选择金额部分 -->
+         <template v-if="actPayment.paymentId !== 'zz_c'">
+          <div class="init-common">
+            <h2 class="title-s1">{{ $i18n("bank-my.index.txt_2", "存款金额") }}-{{ config.currency }}</h2>
+            <div class="quick-amount-box">
+              <div class="item btn btn-amount mb10 f-din" @click="amount = item" v-for="item in filterQuickAmountList" :key="item">
+                {{ item | money }}
+              </div>
+              <template v-if="filterQuickAmountList.length % 3 !== 0">
+                <div class="item no-bg" v-for="(fast, i) in 3 - (filterQuickAmountList.length % 3)" :key="'d' + i"></div>
+              </template>
+            </div>
+            <div class="input-amount-warp">
+              <div class="amount-type">{{ limitInfo.minAmount }}~{{ limitInfo.maxAmount }}{{ $$tools.moneyKey }}</div>
+              <input type="number" class="input-amount f-din" v-model="amount" @blur="limitAmountHandel" maxlength="10" :placeholder="$i18n('bank-my.index.txt_3', '请输入金额')" />
+            </div>
+          </div>
+        </template>
+        <!-- 选择金额部分 -->
         <!-- 银行卡支付方式 -->
         <template v-if="showPayWay">
-          <h2 class="title-s1">{{ $i18n("bank-my.index.txt_8", "充值方式") }}</h2>
-          <div class="choose-list">
-            <template v-for="(item, index) in bankChooseList">
-              <div class="choose-pay-mode" @click="choosePayWay(index)" :class="{ 'choose-active': index === activeIndex }" :key="index">
-                <div class="choose-item-top">
-                  <img class="choose-pay-icon" alt="pay-icon" :src="item.paymentIconUrl" @error="src = errorSrc" />
-                  <div class="choose-item-type">{{ item.keyName }}</div>
-                  <img class="choose-icon" v-if="item.selected" src="./images/selected.png" alt="choose" />
-                  <img class="choose-icon" v-else src="./images/un-select.png" alt="choose" />
+          <div class="init-common-pay">
+            <div class="choose-list">
+              <template v-for="(item, index) in bankChooseList">
+                <div class="choose-pay-mode" @click="choosePayWay(index)" :key="index">
+                  <div class="choose-item-top">
+                    <img class="choose-pay-icon" alt="pay-icon" :src="item.paymentIconUrl" @error="src = errorSrc" />
+                    <div class="choose-item-type">{{ item.keyName }}</div>
+                  </div>
+                  <div class="choose-bank-list" ref="bankListRef">
+                    <template v-if="item.type === 'transpay'">
+                      <div class="choose-bank-item w-row" v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)" :key="`${index}-${idx}`">
+                        <div class="choose-child-left w-cell">
+                          <div class="choose-child-left w-cell">
+                            <div class="bank-name">{{ bank.bankName }}</div>
+                            <div class="ml10 bank-limit">{{ $i18n('限制') }} {{bank.minAmount | money}} ~ {{bank.maxAmount | money}}</div>
+                          </div>
+                          <div class="choose-child-desc" v-if="bank.description">{{ bank.description }}</div>
+                        </div>
+                        <img class="bank-child-arrow" width="34" height="34" src="/images/right-arrow.png" alt="">
+                      </div>
+                    </template>
+                    <template v-else-if="item.qrList">
+                      <div class="choose-bank-item w-row" v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)" :key="`${index}-${idx}`">
+                        <div class="choose-child-left w-cell">
+                          <div class="choose-child-top w-row w-middle">
+                            <div class="bank-name">{{ bank.keyName }}</div>
+                            <div class="ml10 bank-limit">{{ $i18n('限制') }} {{bank.minAmount | money}} ~ {{bank.maxAmount | money}}</div>
+                          </div>
+                          <div class="choose-child-desc" v-if="bank.description">{{ bank.description}}</div>
+                        </div>
+                        <img class="bank-child-arrow" width="34" height="34" src="/images/right-arrow.png" alt="">
+                      </div>
+                    </template>
+                  </div>
                 </div>
-                <div class="choose-bank-list" ref="bankListRef" v-show="item.selected">
-                  <template v-if="item.type === 'transpay'">
-                    <div class="choose-bank-item" :class="{ active: idx === item.activeIdx }" v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)" :key="`${index}-${idx}`">
-                      <img class="bank-icon" :src="bank.iconUrl" alt="" />
-                      <div class="bank-name">{{ bank.bankName }}</div>
-                    </div>
-                  </template>
-                  <template v-else-if="item.qrList">
-                    <div class="choose-bank-item" :class="{ active: idx === item.activeIdx }" v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)" :key="`${index}-${idx}`">
-                      <img class="bank-icon" v-if="bank.iconUrl" :src="bank.iconUrl" alt="" />
-                      <img class="bank-icon" v-else src="./images/default.png" alt="" />
-                      <div class="bank-name">{{ bank.keyName }}</div>
-                    </div>
-                  </template>
-                </div>
-              </div>
-            </template>
-          </div>
-        </template>
-        <!-- 选择金额部分 -->
-        <template v-if="actPayment.paymentId !== 'zz_c'">
-          <h2 class="title-s1">{{ $i18n("bank-my.index.txt_2", "存款金额") }}-{{ config.currency }}</h2>
-          <div class="quick-amount-box">
-            <div class="item btn btn-amount mb10 f-din" @click="amount = item" v-for="item in filterQuickAmountList" :key="item">
-              {{ item | money }}
+              </template>
             </div>
-            <template v-if="filterQuickAmountList.length % 3 !== 0">
-              <div class="item no-bg" v-for="(fast, i) in 3 - (filterQuickAmountList.length % 3)" :key="'d' + i"></div>
-            </template>
           </div>
-          <div class="input-amount-warp">
-            <div class="amount-type">{{ minAmount }}~{{ maxAmount }}{{ $$tools.moneyKey }}</div>
-            <input type="number" class="input-amount f-din" v-model="amount" @blur="limitAmountHandel" maxlength="10" :placeholder="$i18n('bank-my.index.txt_3', '请输入金额')" />
-          </div>
+
         </template>
-        <!-- 选择金额部分 -->
       </div>
-      <div class="mt30 pb30 w-row w-center">
+      <!-- <div class="mt30 pb30 w-row w-center">
         <div class="btn btn-submit" :class="{ disable: !amountIsRight }" @click="submitHandel">
           {{ $i18n("bank-my.index.txt_4", "下一步") }}
         </div>
-      </div>
+      </div> -->
     </div>
     <confirm-name ref="confirmName"></confirm-name>
   </div>
@@ -80,7 +93,7 @@ export default {
 			paymentMethodList: [],
 			actPaymentIdx: 0,
 			quickAmountList: [
-				5000, 10000, 20000, 50000, 100000, 200000, 500000
+				200, 500, 1000, 5000, 10000, 50000
 			],
 			amount: "",
 			moneyUnit: "Ks",
@@ -141,7 +154,7 @@ export default {
       })
     },
 		// 获取激活的支付方式
-		getActPayment () {
+		getActPayment (cb) {
 			let obj = {}
 			if (this.bankChooseList.length > 0) {
 				if (this.bankChooseList[this.activeIndex].type === 'transpay') {
@@ -154,11 +167,11 @@ export default {
 				}
 			}
 			this.actPayment = obj
+      typeof cb === 'function' && cb()
 		},
 		limitAmountHandel () {
-			let maxAmount = this.maxAmount,
-				minAmount = this.minAmount,
-				amount = this.amount;
+			let amount = this.amount;
+      let {maxAmount, minAmount} = this.limitInfo
 
 			if (minAmount) {
 				if (amount < minAmount) {
@@ -238,7 +251,23 @@ export default {
 					this.$set(this.bankChooseList[x], 'selected', false)
 				}
 			})
-			this.getActPayment()
+      this.getActPayment(() => {
+        console.log(this.actPayment)
+        let {minAmount, maxAmount, keyName, bankName} = this.actPayment
+        let name = keyName || bankName
+        if (!this.amount) {
+          this.$$msg.show(this.$i18n('请输入充值金额'))
+        } else if (this.amount < minAmount || this.amount > maxAmount) {
+          return this.$$msg.show(this.$i18n('支付方式限额', {
+            name,
+            minAmount,
+            maxAmount,
+            moneyKey: this.$$tools.moneyKey
+          }, '支付方式限额'))
+        } else {
+          this.submitHandel()
+        }
+      })
 		},
 		//选择银行卡
 		chooseBankCard (e, index, idx) {
@@ -264,16 +293,21 @@ export default {
 		isMobile () {
 			return this.$$tools.isMobile();
 		},
-		maxAmount () {
-			return (this.actBank ? this.actBank.maxAmount : '') || (this.actPayment ? this.actPayment.maxAmount : '');
-		},
-
-		minAmount () {
-			return (this.actBank ? this.actBank.minAmount : '') || (this.actPayment ? this.actPayment.minAmount : '');
-		},
+    limitInfo () {
+      let mins = [],maxs = []
+      this.bankChooseList.forEach(item => {
+        item.bankCardList.forEach(child => {
+          mins.push(child.minAmount)
+          maxs.push(child.maxAmount)
+        })
+      })
+      return {
+        minAmount: Math.min(...mins),
+        maxAmount: Math.max(...maxs)
+      }
+    },
 		amountIsRight () {
-			let amount = this.amount;
-			return amount >= this.minAmount && amount <= this.maxAmount
+			return true
 		},
 		lang () {
 			return this.config.lang;
@@ -291,21 +325,6 @@ export default {
 		showPayWay () {
 			return true
 		},
-		// 銀行卡激活
-		actBank () {
-			let index = this.activeIndex
-			if (index > -1 && this.bankChooseList.length > 0 && this.bankChooseList[index].paymentType === 'transpay') {
-				let index2 = this.bankChooseList[index].activeIdx
-				if (index2 > -1) {
-					const o = this.bankChooseList[index].bankCardList[index2]
-					this.$nextTick(() => {
-						this.limitAmountHandel()
-					})
-					return o
-				}
-			}
-			return null
-		},
 		// 是否是自动订单
 		autoOrder () {
 			return ['zz_c'].includes(this.actPayment.paymentId)
@@ -319,6 +338,8 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss">
 #bank-my {
+  height: 100%;
+  background: #EEF0FE;
   .btn-amount {
     margin-right: 10px;
     &:hover {
@@ -340,6 +361,7 @@ export default {
   .choose-list {
     color: $skin-color333;
     font-weight: bold;
+    padding-bottom: env(safe-area-inset-bottom);
   }
   .choose-pay-mode.choose-active {
     .choose-item-top {
@@ -350,10 +372,6 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     height: 44px;
-    background-color: $skin-bg4;
-    margin: 10px 0;
-    border-radius: 7px;
-    padding: 0 15px;
     align-items: center;
   }
 
@@ -374,25 +392,17 @@ export default {
   }
 
   .choose-bank-list {
-    display: flex;
-    overflow-y: hidden;
-    overflow-x: auto;
-    white-space: nowrap;
-
     .choose-bank-item {
-      width: 140px;
-      min-width: 140px;
-      height: 60px;
-      background: $skin-bg4;
+      background: $skin-font1;
       border: 1px solid $skin-bg4;
       border-radius: 10px;
       vertical-align: middle;
       display: flex;
       align-items: center;
-      padding: 0 10px;
-      margin-right: 10px;
+      padding: 15px;
       box-sizing: border-box;
-      float: left;
+      margin-bottom: 9px;
+      min-height: 71px;
 
       &.active {
         border: 1px solid $skin-color1;
@@ -403,9 +413,32 @@ export default {
       vertical-align: middle;
       display: inline-block;
       max-width: 80px;
-      margin-left: 5px;
+      font-size: 14px;
     }
-
+    .bank-limit {
+      background: $skin-color1;
+      height: 20px;
+      line-height: 20px;
+      padding: 0 5px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+    .choose-child-desc {
+      font-size: 10px;
+      color: $skin-font3;
+      font-weight: normal;
+      margin-top: 7px;
+      line-height: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;  /* 超出部分省略号 */
+      word-break: break-all;  /* break-all(允许在单词内换行。) */
+      display: -webkit-box; /* 对象作为伸缩盒子模型显示 */
+      -webkit-box-orient: vertical; /* 设置或检索伸缩盒对象的子元素的排列方式 */
+      -webkit-line-clamp: 2; /* 显示的行数 */
+    }
+    .bank-child-arrow {
+      margin-left: 10px;
+    }
     .bank-icon {
       width: 30px;
       height: 30px;
@@ -523,7 +556,6 @@ export default {
 
       &:hover,
       &.active {
-        color: #ffffff;
         border: 1px solid $skin-color1;
         background: no-repeat left top $skin-color1;
         background-size: 17px 18px;
@@ -603,9 +635,15 @@ export default {
     }
 
     .panel-main {
-      padding: 0 17px 20px;
-      background: $skin-white;
+      padding: 0 0 20px;
+      background: none;
       color: $skin-font1;
+    }
+    .init-common {
+      background: $skin-font1;
+      padding: 1px 15px 15px;
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     .bank-card-list .bank-card-item {
