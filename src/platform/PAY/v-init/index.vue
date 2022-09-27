@@ -212,7 +212,7 @@ export default {
 		},
 		// 发起支付
 		postPay (payerName) {
-			let config = this.config, actPayment = this.actPayment;
+			let actPayment = this.actPayment;
 			let queryMap = {
 				paymentId: actPayment.paymentId,
 				paymentKey: actPayment.paymentKey,
@@ -220,9 +220,11 @@ export default {
 				rechargeFees: actPayment.rechargeFees,
         paymentAmount: this.amount,
         origin: window.commonParams.origin,
-        promoType: window.commonParams.promoType,
         platform: window.commonParams.platform
 			}
+      if (window.commonParams.promoType) {
+        queryMap.promoType = window.commonParams.promoType
+      }
 			if (actPayment.paymentType === 'transpay') {
 				queryMap.bandId = this.actBank.id
 				queryMap.payAccount = payerName
