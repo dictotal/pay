@@ -39,7 +39,7 @@
                             <div class="bank-name">{{ bank.bankName }}</div>
                             <div class="ml10 bank-limit">{{ $i18n('限制') }} {{bank.minAmount | money}} ~ {{bank.maxAmount | money}}</div>
                           </div>
-                          <div class="choose-child-desc" v-if="bank.description">{{ bank.description }}</div>
+                          <div class="choose-child-desc" v-if="bank.descr">{{ bank.descr }}</div>
                         </div>
                         <img class="bank-child-arrow" width="34" height="34" src="/images/right-arrow.png" alt="">
                       </div>
@@ -51,7 +51,7 @@
                             <div class="bank-name">{{ bank.keyName }}</div>
                             <div class="ml10 bank-limit">{{ $i18n('限制') }} {{bank.minAmount | money}} ~ {{bank.maxAmount | money}}</div>
                           </div>
-                          <div class="choose-child-desc" v-if="bank.description">{{ bank.description}}</div>
+                          <div class="choose-child-desc" v-if="bank.descr">{{ bank.descr}}</div>
                         </div>
                         <img class="bank-child-arrow" width="34" height="34" src="/images/right-arrow.png" alt="">
                       </div>
