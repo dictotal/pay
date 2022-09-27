@@ -220,7 +220,7 @@ export default {
 				rechargeFees: actPayment.rechargeFees,
         paymentAmount: this.amount,
         origin: window.commonParams.origin,
-        promoGiftType: window.commonParams.promoGiftType,
+        promoType: window.commonParams.promoType,
         platform: window.commonParams.platform
 			}
 			if (actPayment.paymentType === 'transpay') {
