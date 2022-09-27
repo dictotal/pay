@@ -219,7 +219,9 @@ export default {
 				paymentType: actPayment.paymentType,
 				rechargeFees: actPayment.rechargeFees,
         paymentAmount: this.amount,
-        origin: window.commonParams.origin
+        origin: window.commonParams.origin,
+        promoGiftType: window.commonParams.promoGiftType,
+        platform: window.commonParams.platform
 			}
 			if (actPayment.paymentType === 'transpay') {
 				queryMap.bandId = this.actBank.id
