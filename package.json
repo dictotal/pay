@@ -1,0 +1,33 @@
+{
+  "name": "payment-vue",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve  --config-name PAY",
+    "DETAIL_DEV": "vue-cli-service serve  --config-name DETAIL",
+    "PAY_BUILD": "vue-cli-service build  --config-name PAY",
+    "build": "vue-cli-service build  --config-name DETAIL"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "core-js": "^3.6.5",
+    "dsbridge": "^3.1.4",
+    "qrious": "^4.0.2",
+    "vue": "^2.6.11",
+    "vue-router": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "postcss-px2rem": "^0.3.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "currency": "MMK",
+  "currencyUnit": "ks",
+  "device": {
+    "devicePlatform": "UNKNOWN",
+    "deviceType": "NORMAL",
+    "mobile": false,
+    "normal": true,
+    "tablet": false
+  },
+  "lang": "zh",
+  "paymentId": "zz_b",
+  "sign": "UkBN+vRoH0qvWyhGjlXjAois/Xkllkvx/FaafzgRs5Gs4csfyqoiYnKBrv/ICoz9H6yxIQUkzbPDFECAMt9slBN5ljokZqQB1n9klRStWHqGZaQjzBydPy4VjSARPzIbe011YT+LTvT6ATBfe2iRV8GWpElfpdUGrMoc47yM+nRw6QMrtcCQOnQqtADI8uKCjRJZktX6I85Mutp/xu7uzFeLOOH5oQhgZQSFDi3tZQBWNKsBJODJUz+VaZdbSdhK6mv+3N8D224wsY3AafuxRk6yD21GDU/fsqRcFp73xexBhzo/a5FbmG5lRfqivjxYqzzKjldE/tXRORCY4oDvgw==",
+  "transferInfo": {
+    "amount": 10016,
+    "bankCard": "09754490165",
+    "bankName": "kbz pay",
+    "bankType": "kbzp",
+    "baseAmount": 10000.00,
+    "cardNumberType": "phone",
+    "cardholder": "kpay(kyaw lin)",
+    "iconUrl": "https://img.yym203.com/link/tt/bank_icon/kbz_pay.png",
+    "subbranchName": "kbz pay",
+    "ttlSeconds": 1793
+  }
+}
