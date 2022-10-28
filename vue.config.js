@@ -16,8 +16,8 @@ module.exports = {
     proxy: {
       "/a/": {
         /* 测试环境kfc */
-        // target: "http://m01.mdybet77.com/",
-        target: "http://m.9188.com/",
+        target: "http://m.kfc.com/",
+        // target: "http://m.9188.com/",
       }
     },
     port: 8080,
