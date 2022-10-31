@@ -6,7 +6,10 @@
         <input class="confirm-input-model" v-model="parentData.content" maxlength="50" :placeholder="parentData.placeholder || $i18n('confirm.txt3', '输入付款人姓名')" type="text" />
       </div>
       <div class="confirm-tip">{{ $i18n("confirm.txt2", "请正确填入付款银行卡开户名，填错将会影响充值到账") }}</div>
-      <div class="confirm-btn" @click="confirm">{{ $i18n("confirm.txt5", "确定") }}</div>
+      <div class="confirm-btns flex">
+        <div class="confirm-btn cancel-btn">{{ $i18n("confirm.txt6", "取消") }}</div>
+        <div class="confirm-btn" @click="confirm">{{ $i18n("confirm.txt5", "确定") }}</div>
+      </div>
     </div>
   </transition>
 </template>
@@ -58,7 +61,7 @@ export default {
   width: 100%;
   border-radius: 20px 20px 0 0;
   overflow: hidden;
-  background: $skin-bg5;
+  background: $skin-white;
   //   height: 208px;
   padding-bottom: 15px;
   padding-bottom: calc(15px + env(safe-area-inset-bottom));
@@ -76,7 +79,7 @@ export default {
   }
   .confirm-input {
     height: 49px;
-    background-color: $skin-bg2;
+    background: $skin-bg4;
     margin: 0 20px;
     border-radius: 10px;
     display: flex;
@@ -87,7 +90,7 @@ export default {
       outline: none;
       border: 0;
       font-size: 14px;
-      color: $skin-font1;
+      color: $skin-color333;
       line-height: 30px;
       display: block;
       width: 100%;
@@ -101,16 +104,22 @@ export default {
     color: $skin-color3;
     padding: 5px 20px 0;
   }
+  .confirm-btns {
+
+  }
   .confirm-btn {
-    width: 335px;
+    width: 162px;
     height: 41px;
     line-height: 41px;
     background-color: $skin-color1;
     border-radius: 41px;
-    color: $skin-font1;
     font-size: 17px;
     text-align: center;
+    color: $skin-color333;
     margin: 10px auto 0;
+    &.cancel-btn {
+      background: $skin-bg4;
+    }
   }
 }
 .confirm-enter-active {

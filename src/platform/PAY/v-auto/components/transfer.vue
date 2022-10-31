@@ -1,7 +1,7 @@
 <template>
   <div id="v-detail" class="view-bg-gray">
     <cancel-order @cancelHandel="cancelHandel" :config="config" :status="status"></cancel-order>
-    <!-- <top-tips
+    <top-tips
       :content="
         $i18n(
           '存款金额限制',
@@ -14,7 +14,7 @@
           '见下方注释'
         )
       "
-    /> -->
+    />
     <!--  转账信息  -->
     <div class="layout-wrap form-s1">
       <div class="panel-main box-shadow">
@@ -67,12 +67,13 @@
               </p>
             </div>
           </div>
+          <!-- <div class="min-amount-tip color-333" v-html="$i18n('存款金额必需', {minAmount: minAmount, moneyKey: $$tools.moneyKey})"></div> -->
         </template>
         <template v-else-if="step === 2">
           <h2 class="title-s1">{{ $i18n("存款金额") }}-{{ config.currency }}</h2>
           <div class="input-amount-warp">
-            <!-- <div class="amount-type">{{ minAmount }}~{{ maxAmount }}{{ $$tools.moneyKey }}</div> -->
-            <input type="number" class="input-amount f-din" v-model="amount" @input="limitMoney(50)" @blur="limitAmountHandel" :placeholder="$i18n('请输入金额')" />
+            <div class="amount-type">{{ minAmount }}~{{ maxAmount }}{{ $$tools.moneyKey }}</div>
+            <input type="number" class="input-amount f-din" @keyup="amount = amount.substring(0, maxAmount.toString().length)" v-model="amount" :maxlength="maxAmount.toString().length" @blur="limitAmountHandel" :placeholder="$i18n('请输入金额')" />
           </div>
           <h2 class="title-s1">{{ $i18n("存款编号") }}</h2>
           <div class="input-amount-warp">
@@ -176,12 +177,13 @@ export default {
         }
       }, this.$i18n('detail.index.txt_13', '提示'),
         '',
-        this.$i18n('detail.index.txt_7', '撤销订单'),
-        this.$i18n('detail.index.txt_14', '暂不撤销'));
+        // this.$i18n('detail.index.txt_7', '撤销订单'),
+        // this.$i18n('detail.index.txt_14', '暂不撤销')
+      );
     },
     cancelOrder () {
       let transferInfo = this.transferInfo;
-      this.$$ajax.post('/recharge/cancelRecharge', {
+      this.$$ajaxLoading.post('/recharge/cancelRecharge', {
         amount: transferInfo.amount,
         paymentAmount: transferInfo.baseAmount,
         paymentId: this.config.paymentId
@@ -216,7 +218,7 @@ export default {
         setTimeout(() => {
           this.isRequest = false
         })
-        this.$$ajax.post('/recharge/verifyOrder', data).then(res => {
+        this.$$ajaxLoading.post('/recharge/verifyOrder', data).then(res => {
           if (res.operateResult) {
             this.$router.replace('/')
           }
@@ -233,27 +235,20 @@ export default {
       this.$$tools.copyToClipboard(str);
     },
     limitAmountHandel () {
-      let amount = this.amount;
+      let maxAmount = this.maxAmount,
+        amount = this.amount;
 
-      // if (minAmount) {
-      //   if (amount < minAmount) {
-      //     amount = minAmount;
-      //   }
-      // }
+      if (amount <= 1) {
+          amount = 1;
+        }
 
-      // if (maxAmount) {
-      //   if (amount > maxAmount) {
-      //     amount = maxAmount;
-      //   }
-      // }
+      if (maxAmount) {
+        if (amount > maxAmount) {
+          amount = maxAmount;
+        }
+      }
 
-      this.amount = parseInt(amount);
-    },
-    limitMoney () {
-      let v = this.amount
-      v = (v + '').replace(/\D|\.\-/g, '').substring(0, 12)
-      this.amount = v
-      console.log(v)
+      this.amount = amount;
     },
     // 显示类型
     setShowTip () {
@@ -323,7 +318,7 @@ export default {
     }
   }
   .color-333 {
-    color: $skin-font1;
+    color: $skin-color333;
     font-size: 14px;
     font-family: Barlow;
   }
@@ -383,7 +378,7 @@ export default {
         background: $skin-color1;
         text-align: center;
         line-height: 14px;
-        color: $skin-font5;
+        color: $skin-font1;
         font-size: 12px;
         font-weight: bold;
       }
@@ -396,7 +391,7 @@ export default {
       justify-content: space-between;
       padding: 20px 0;
       height: 70px;
-      border-bottom: 1px solid $skin-font5;
+      border-bottom: 1px solid $skin-bg4;
       position: relative;
       &.form-item-mini {
         height: 44px;
@@ -425,6 +420,11 @@ export default {
 
   .fc-bcb {
     color: $skin-color4;
+  }
+
+  .min-amount-tip {
+    line-height: 44px;
+    font-size: 12px;
   }
 
   .tips-box {
@@ -456,8 +456,9 @@ export default {
         align-items: center;
         flex-flow: column nowrap;
         line-height: 1;
-        color: #fff;
+        color: $skin-color333;
         justify-content: center;
+        font-weight: bold;
         .set-order {
           font-size: 17px;
         }
@@ -516,14 +517,14 @@ export default {
     .dot {
       &::before,
       &::after {
-        background: $skin-bg5;
+        background: $skin-white;
       }
     }
   }
   .input-amount-warp {
     position: relative;
     height: 44px;
-    background: $skin-bg5;
+    background: $skin-bg4;
     overflow: hidden;
     border-radius: 7px;
     .amount-type {
@@ -546,7 +547,7 @@ export default {
       background: transparent;
       outline: none;
       border: none;
-      color: $skin-font1;
+      color: $skin-color333;
       line-height: 44px;
       &::placeholder {
         color: $skin-font4;

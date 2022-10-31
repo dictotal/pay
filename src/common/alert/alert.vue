@@ -239,9 +239,10 @@ $red: #f56c6c;
 }
 @media screen and (max-width: 760px) {
 	#v-alert {
-		background: $skin-bg5;
+		background: $skin-white;
 		.title {
-			color: $skin-font1;
+			color: $skin-color333;
+      font-weight: bold;
 		}
 	.content {
 		margin-top: 20px !important;
@@ -260,11 +261,14 @@ $red: #f56c6c;
 		}
 
 		.btn-cancel {
-			color: $skin-font6;
-			background: $skin-bg2;
+			color: $skin-color333;
+      font-weight: bold;
+			background: $skin-bg4;
 		}
 		.btn-ok {
 			margin-top: 10px;
+      color: $skin-color333;
+      font-weight: bold;
 			background: $skin-color1;
 		}
 	}

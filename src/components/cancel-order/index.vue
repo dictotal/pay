@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss">
 .cancel-top {
-  background-color: $skin-bg2;
+  background: $skin-white;
   height: 67px;
   justify-content: space-between;
   align-items: center;
@@ -70,7 +70,8 @@ export default {
       color: $skin-font4;
     }
     .cancel-left-value {
-      color: $skin-font1;
+      color: $skin-color333;
+      font-weight: bold;
       padding-left: 4px;
       max-width: 140px;
       overflow: hidden;
@@ -88,12 +89,13 @@ export default {
     font-size: 13px;
     height: 32px;
     border-radius: 4px;
-    border: 1px solid $skin-font4;
-    color: $skin-font2;
+    color: $skin-color333;
     line-height: 32px;
     padding: 0 2px;
     width: 100px;
     text-align: center;
+    font-weight: bold;
+    background: $skin-bg4;
   }
 }
 @media screen and (min-width: 780px) {
@@ -108,7 +110,7 @@ export default {
     }
     .cancel-top-btn {
       background: $skin-color1;
-      color: $skin-font1;
+      color: $skin-color333;
       border: 0;
       cursor: pointer;
     }

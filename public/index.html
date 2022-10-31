@@ -1,18 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=750,maximum-scale=1,maximum-scale=1.0,user-scalable=0">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=750,maximum-scale=1,maximum-scale=1.0,user-scalable=0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <script src="<%= BASE_URL %>js/jsencrypt.js" async></script>
     <script src="<%= BASE_URL %>js/rsaencrypt.js" async></script>
     <script src="<%= BASE_URL %>js/dsBridge.js" async></script>
-</head>
-<body>
-<noscript>
-    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-</noscript>
-<div id="app"></div>
-</body>
+  </head>
+  <style>
+    #loading {
+      background: rgba(17, 17, 17, 0.5);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+    #loading .loading-box {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 200px;
+      height: 180px;
+      transform: translate(-50%, -50%);
+      background: rgba(51, 51, 62, 0.7);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #loading-text {
+      font-size: 24px;
+      color: #fff;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .loading-src {
+      width: 60px;
+      height: 60px;
+      animation: rotateFn 1500ms linear infinite;
+      margin: 32px auto 0;
+      display: block;
+    }
+    @keyframes rotateFn {
+      from {
+        transform: rotateZ(0deg);
+      }
+      to {
+        transform: rotateZ(360deg);
+      }
+    }
+    #loadingError {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      line-height: 2;
+      color: #306BFF;
+      text-decoration: underline;
+      text-align: center;
+      padding: 0 50px;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+    .laoding-error-text {
+      word-break: break-all;
+    }
+  </style>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <div id="loading">
+      <div class="loading-box">
+        <img
+          class="loading-src"
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgxMDB2MTAwSDB6Ii8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTlFOUU5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTMwKSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iIzk4OTY5NyIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgzMCAxMDUuOTggNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjOUI5OTlBIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDYwIDc1Ljk4IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0EzQTFBMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA2NSA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNBQkE5QUEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDU4LjY2IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0IyQjJCMiIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgxNTAgNTQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjQkFCOEI5IiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDMkMwQzEiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE1MCA0NS45OCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNDQkNCQ0IiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCA0MS4zNCA2NSkiLz48cmVjdCB3aWR0aD0iNyIgaGVpZ2h0PSIyMCIgeD0iNDYuNSIgeT0iNDAiIGZpbGw9IiNEMkQyRDIiIHJ4PSI1IiByeT0iNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDM1IDY1KSIvPjxyZWN0IHdpZHRoPSI3IiBoZWlnaHQ9IjIwIiB4PSI0Ni41IiB5PSI0MCIgZmlsbD0iI0RBREFEQSIgcng9IjUiIHJ5PSI1IiB0cmFuc2Zvcm09InJvdGF0ZSgtNjAgMjQuMDIgNjUpIi8+PHJlY3Qgd2lkdGg9IjciIGhlaWdodD0iMjAiIHg9IjQ2LjUiIHk9IjQwIiBmaWxsPSIjRTJFMkUyIiByeD0iNSIgcnk9IjUiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAtNS45OCA2NSkiLz48L3N2Zz4="
+          alt=""
+        />
+        <div id="loading-text"></div>
+      </div>
+    </div>
+    <div id="loadingError" style="display: none;">
+      <div class="loading-error-text" onclick="reloadPage()"></div>
+    </div>
+    <script>
+      function loadTimeout() {
+        var loadingEl = document.querySelector("#loading")
+        console.log(loadingEl)
+        if (loadingEl) {
+          loadingEl.parentNode.removeChild(loadingEl)
+          document.querySelector("#loadingError").style.display = "flex"
+        }
+      }
+      function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
+        var r = window.location.search.substr(1).match(reg)
+        if (r != null) {
+          return unescape(r[2])
+        } else {
+          return null
+        }
+      }
+
+      function reloadPage() {
+        location.reload(true)
+      }
+      var lang = getUrlParam('lang') || localStorage.lang || 'en'
+      var lightLang = {
+        en: {
+          loading: 'Loading...',
+          loadingError: 'Your network is too slow, please click here to try again!'
+        },
+        my: {
+          loading: 'တင်နေသည်။...',
+          loadingError: 'သင့်ကွန်ရက်သည် နှေးကွေးလွန်းသည်၊ ထပ်စမ်းကြည့်ရန် ဤနေရာကို နှိပ်ပါ။'
+        },
+        th: {
+          loading: 'กำลังโหลด...',
+          loadingError: 'เครือข่ายของคุณช้าเกินไป โปรดคลิกที่นี่เพื่อลองอีกครั้ง!'
+        },
+        zh: {
+          loading: 'Loading...',
+          loadingError: 'Your network is too slow, please click here to try again!'
+        }
+      }
+      var langObj = lightLang[lang]
+      document.querySelector('#loading-text').innerText = langObj.loading
+      document.querySelector('.loading-error-text').innerText = langObj.loadingError
+      var timer = setTimeout(function () {
+        loadTimeout()
+      }, 10000)
+    </script>
+  </body>
 </html>

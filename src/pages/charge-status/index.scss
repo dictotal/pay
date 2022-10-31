@@ -10,9 +10,9 @@
   margin: 0 auto;
   width: calc(100% - calc(20px));
   border-radius: 10px;
-  background: $skin-bg2;
+  background: $skin-white;
   margin: 10px auto;
-  color: $skin-font1;
+  color: $skin-color333;
   padding: 1px 0;
 }
 .active-title {
@@ -44,7 +44,7 @@
     color: #FF5252;
   }
   &.success {
-    color: $skin-color1;
+    color: $skin-main2;
   }
 }
 .common-wrapper-item {
@@ -55,10 +55,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .common-item-label {
+    color: $skin-font7;
+  }
   .common-item-value {
     display: flex;
     align-content: center;
     align-items: center;
+    font-weight: bold;
   }
 }
 .common-copy-icon {
@@ -68,15 +72,16 @@
   margin-left: 5px;
 }
 .active-title {
-  background: #306bff;
+  background: #ebebeb;
   border-radius: 10px 10px 0 0;
 }
 .customer-area {
   width: 351px;
   height: 45px;
-  background: $skin-bg5;
-  color: $skin-font2;
+  background: $skin-white;
+  color: $skin-color333;
   border-radius: 10px;
+  font-weight: bold;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);

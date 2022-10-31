@@ -5,6 +5,8 @@ axios.defaults.timeout = 30 * 1000
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '//pay.mdybet77.com/a/' : '/a/'
 
+axios.defaults.baseURL = '/a/'
+
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
 
 let ajax = createFactory(axios, {})

@@ -85,7 +85,7 @@ export default {
         clearTimeout(this.timeOut)
       }
 			this.timeOut = setTimeout(() => {
-				this.$$ajax.post("/recharge/payStatus", { orderNo: this.orderNo }).then(resp => {
+				this.$$ajaxLoading.post("/recharge/payStatus", { orderNo: this.orderNo }).then(resp => {
 					this.qrCodeInfo.status = resp.orderStatus;
 				}).finally(() => {
 					this.iniLoop();
@@ -122,8 +122,9 @@ export default {
 				}
 			}, this.$i18n('detail.qrcode.txt_10', '提示'),
 				'',
-				this.$i18n('detail.qrcode.txt_7', '撤销订单'),
-				this.$i18n('detail.qrcode.txt_9', '暂不撤销'));
+				// this.$i18n('detail.qrcode.txt_7', '撤销订单'),
+        // this.$i18n('detail.qrcode.txt_9', '暂不撤销')
+      );
 		},
 		cancelOrder () {
 			let qrCodeInfo = this.qrCodeInfo;
@@ -207,7 +208,7 @@ export default {
     .v-count-down {
       .time {
         font-size: 16px;
-        background-color: $skin-bg5;
+        background-color: $skin-white;
         color: $skin-font1;
         box-shadow: none;
         border-radius: 3px;
@@ -265,7 +266,7 @@ export default {
   }
   .order-view {
     padding: 15px 17px 0;
-    background: $skin-bg5;
+    background: $skin-white;
     border-color: $skin-font5;
     .order-item {
       width: 100%;

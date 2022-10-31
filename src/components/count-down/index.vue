@@ -151,11 +151,11 @@ export default {
 	.time {
 		min-width: 28px;
 		@include h-lh(28px);
-		background: #fff;
 		box-shadow: 0 2px 2px rgba(0, 0, 0, 0.6);
 		border-radius: 4px;
 		text-align: center;
     color: $skin-bg1;
+    background: #fff;
     font-family: Barlow;
     font-size: 16px;
 	}
@@ -177,5 +177,16 @@ export default {
 			border-radius: 100%;
 		}
 	}
+}
+@media screen and (max-width: 760px) {
+    .v-count-down {
+      .time {
+        color: $skin-main1;
+        background: #2C2C38;
+      }
+      .dot::before, .dot::after {
+        background:#2C2C38;
+      }
+    }
 }
 </style>

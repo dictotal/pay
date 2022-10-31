@@ -129,7 +129,7 @@ export default {
     },
     getData () {
       return new Promise((resolve, reject) => {
-        this.$$ajax.post('/recharge/rechargeInitS').then(res => {
+        this.$$ajaxLoading.post('/recharge/rechargeInitS').then(res => {
           if (res.paymentList && res.paymentList.length > 0) {
             resolve(res)
           } else {
@@ -331,21 +331,26 @@ export default {
   .title-s1 {
     margin-top: 30px;
     margin-bottom: 20px;
-    color: $skin-font1;
+    color: $skin-color333;
     font-weight: 600;
     line-height: 20px;
     font-size: 14px;
   }
 
   .choose-list {
-    color: $skin-font1;
+    color: $skin-color333;
+    font-weight: bold;
   }
-
+  .choose-pay-mode.choose-active {
+    .choose-item-top {
+      border: 1px solid $skin-color1;
+    }
+  }
   .choose-item-top {
     display: flex;
     flex-flow: row nowrap;
     height: 44px;
-    background-color: $skin-font5;
+    background-color: $skin-bg4;
     margin: 10px 0;
     border-radius: 7px;
     padding: 0 15px;
@@ -378,8 +383,8 @@ export default {
       width: 140px;
       min-width: 140px;
       height: 60px;
-      background: $skin-bg1;
-      border: 1px solid $skin-bg1;
+      background: $skin-bg4;
+      border: 1px solid $skin-bg4;
       border-radius: 10px;
       vertical-align: middle;
       display: flex;
@@ -463,7 +468,7 @@ export default {
   .input-amount-warp {
     position: relative;
     height: 44px;
-    background: $skin-bg5;
+    background: $skin-bg4;
     overflow: hidden;
     border-radius: 7px;
 
@@ -487,7 +492,6 @@ export default {
       background: transparent;
       outline: none;
       border: none;
-      color: $skin-font1;
       line-height: 44px;
 
       &::placeholder {
@@ -512,15 +516,16 @@ export default {
       border-radius: 10px;
       padding: 0 15px;
       margin: 0 10px 10px 0;
-      background: $skin-bg5;
-      border: 1px solid $skin-bg5;
-      color: $skin-font6;
+      background: $skin-bg4;
+      border: 1px solid $skin-bg4;
+      color: $skin-color333;
+      font-weight: bold;
 
       &:hover,
       &.active {
         color: #ffffff;
         border: 1px solid $skin-color1;
-        background: url("./images/arrow.png") no-repeat left top;
+        background: no-repeat left top $skin-color1;
         background-size: 17px 18px;
       }
       &.no-bg {
@@ -599,7 +604,7 @@ export default {
 
     .panel-main {
       padding: 0 17px 20px;
-      background: $skin-bg2;
+      background: $skin-white;
       color: $skin-font1;
     }
 
