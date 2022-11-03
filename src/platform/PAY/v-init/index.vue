@@ -132,8 +132,8 @@ export default {
     messageHandle({data}) {
       switch (data.type) {
         case 'rechargeListPop':
-          this.promoId = data.promoId
-          this.amountRule = JSON.parse(data.amountRule)
+          this.promoId = data.promoId || ''
+          this.amountRule = (data.amountRule && JSON.parse(data.amountRule)) || []
           this.$forceUpdate()
           break;
         default:
