@@ -102,7 +102,8 @@ export default {
       errorSrc: 'https://img.yym203.com/link/tt/payment_icon/transfer01.png',
 		}
 	},
-	created () {
+  created () {
+    this.addMessageListener()
 		injectOnce();
 		this.init();
     this.$$tools.postMessage('removeFrameHeight', {})
@@ -139,6 +140,17 @@ export default {
 			})
 			this.$set(this.bankChooseList[0], 'selected', true)
 			this.getActPayment()
+    },
+    addMessageListener() {
+      window.addEventListener('message', (message) => {
+        const { type, data} = message.data
+        switch (type) {
+          case 'joinRechargeActivity':
+            console.log(type, data)
+            // this.reInitFastBtns(data)
+            break;
+        }
+      }, false)
     },
     getData () {
       return new Promise((resolve, reject) => {
