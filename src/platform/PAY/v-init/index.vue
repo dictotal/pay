@@ -9,12 +9,14 @@
             <div class="quick-amount-box">
               <div class="item btn btn-amount mb10 f-din" @click="amount = item" v-for="item in filterQuickAmountList" :key="item">
                 {{ item | money }}
+                <span class="act_gift">{{ item | promoRule(that) }}</span>
               </div>
               <template v-if="filterQuickAmountList.length % 3 !== 0">
                 <div class="item no-bg" v-for="(fast, i) in 3 - (filterQuickAmountList.length % 3)" :key="'d' + i"></div>
               </template>
             </div>
             <div class="input-amount-warp">
+              <span class="act_gift">{{ amount | promoRule(that) }}</span>
               <div class="amount-type">{{ limitInfo.minAmount }}~{{ limitInfo.maxAmount }}{{ $$tools.moneyKey }}</div>
               <input type="number" class="input-amount f-din" v-model="amount" @blur="limitAmountHandel" maxlength="10" :placeholder="$i18n('bank-my.index.txt_3', '请输入金额')" />
             </div>
@@ -100,14 +102,44 @@ export default {
 			actPayment: {},
       config: null,
       errorSrc: 'https://img.yym203.com/link/tt/payment_icon/transfer01.png',
+      promoId: '',
+      amountRule: [],
+      that: this
 		}
 	},
+  filters: {
+    promoRule(amount, that) {
+      if (!that.amountRule.length) return
+      let newAmount = ''
+      that.amountRule.forEach((item) => {
+        if (amount >= item.min && amount <= item.max) return newAmount = `${that.$i18n("bank-my.index.txt_9", "加送")} ${item.ratio * 100}%`
+        else if (amount >= item.min && item.max === 0) return newAmount = `${that.$i18n("bank-my.index.txt_9", "加送")} ${item.ratio * 100}%`
+        else if (amount <= item.max && item.min === 0) return newAmount = `${that.$i18n("bank-my.index.txt_9", "加送")} ${item.ratio * 100}%`
+      })
+      return newAmount
+    }
+  },
 	created () {
+		window.addEventListener("message", this.messageHandle, false);
 		injectOnce();
 		this.init();
     this.$$tools.postMessage('removeFrameHeight', {})
 	},
+	beforeDestroy () {
+		window.removeEventListener('message', this.messageHandle);
+	},
 	methods: {
+    messageHandle({data}) {
+      switch (data.type) {
+        case 'rechargeListPop':
+          this.promoId = data.promoId
+          this.amountRule = JSON.parse(data.amountRule)
+          this.$forceUpdate()
+          break;
+        default:
+          break;
+      }
+    },
     async init () {
       let cfg
       if (!window.config) {
@@ -229,6 +261,7 @@ export default {
 				queryMap.bandId = this.actBank.id
 				queryMap.payAccount = payerName
       }
+      queryMap.promoId = this.promoId || ''
       this.$$ajaxLoading.post('/recharge/pay', queryMap).then(res => {
         this.toDetail(res)
       }).catch(err => {
@@ -508,6 +541,15 @@ export default {
     background: $skin-bg4;
     overflow: hidden;
     border-radius: 7px;
+    .act_gift {
+      position: absolute;
+      color: $skin-color2;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: normal;
+      top: 0;
+      right: 0;
+    }
 
     .amount-type {
       position: absolute;
@@ -546,6 +588,7 @@ export default {
     margin-top: 10px;
 
     .item {
+      position: relative;
       display: flex;
       align-items: center;
       height: 44px;
@@ -557,6 +600,16 @@ export default {
       border: 1px solid $skin-bg4;
       color: $skin-color333;
       font-weight: bold;
+      .act_gift {
+        position: absolute;
+        color: $skin-color2;
+        font-weight: 600;
+        line-height: normal;
+        width: 100%;
+        text-align: right;
+        top: -10px;
+        left: 0;
+      }
 
       &:hover,
       &.active {
