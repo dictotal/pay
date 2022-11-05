@@ -147,6 +147,7 @@ export default {
       } else {
         cfg = JSON.parse(JSON.stringify(window.config))
       }
+      this.$$tools.postMessage('noRecharge', {}) // 未充值状态调用活动接口拉起弹框
       this.config = cfg
       this.$$tools.setMoneyKey(cfg.currencyUnit)
       this.moneyUnit = this.config.currencyUnit;
