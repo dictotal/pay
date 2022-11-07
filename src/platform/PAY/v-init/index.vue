@@ -113,7 +113,7 @@ export default {
       if (!that.amountRule.length) return
       let newAmount = ''
       that.amountRule.forEach((item) => {
-        if (amount >= (that.upperLimit / item.ratio)) return newAmount = `${that.$i18n("bank-my.index.txt_9", "加送")} ${that.upperLimit}`
+        if (amount > (that.upperLimit / item.ratio)) return newAmount = `${that.$i18n("bank-my.index.txt_9", "加送")} ${that.upperLimit}`
         else if (amount >= item.min && amount <= item.max) return newAmount = `${that.$i18n("bank-my.index.txt_9", "加送")} ${item.ratio * 100}%`
         else if (amount >= item.min && item.max === 0) return newAmount = `${that.$i18n("bank-my.index.txt_9", "加送")} ${item.ratio * 100}%`
         else if (amount <= item.max && item.min === 0) return newAmount = `${that.$i18n("bank-my.index.txt_9", "加送")} ${item.ratio * 100}%`
