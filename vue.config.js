@@ -7,7 +7,7 @@ const path = require("path")
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
-
+// sass
 const ARGV_LIST = process.argv
 
 let platform = ARGV_LIST.slice(-1) || "YYM"
