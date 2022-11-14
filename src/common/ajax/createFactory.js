@@ -22,7 +22,9 @@ export default function (ref, { isLoading }) {
       data.platform = data.platform || "TtBet"
       config.data = data
       config.data.currency = window.commonParams.currency
-      config.headers["X-Access-Token"] = window.commonParams.token
+      // config.headers["X-Access-Token"] = window.commonParams.token
+      config.headers["Authorization"] = window.commonParams.token
+
       if (isLoading) {
 				loadingUid = Mask.loading();
 			}
