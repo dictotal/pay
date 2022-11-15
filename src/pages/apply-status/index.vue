@@ -46,7 +46,8 @@ export default {
     const that = this
     return {
       statusText: {
-        withdraw$waiting: {
+        // 提款成功 提款失败 字段还未调试
+        audit$waiting: {
           title: that.$i18n("确认中"),
           icon: "/images/status-confirm.png",
           className: 'confirm',
@@ -92,6 +93,7 @@ export default {
       //   withdrawStatus: "withdraw$waiting",
       //   withdrawStatusName: "<font color='#FF7600'>已发起(汇款中)</font>"
       // }
+      console.log('----',config)
       this.orderInfo = config
     }
   }
