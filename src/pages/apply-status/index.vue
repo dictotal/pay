@@ -12,7 +12,7 @@
     <div class="common-wrapper">
       <div class="common-wrapper-item">
         <div class="common-item-label">{{ $i18n("提款金额") }}</div>
-        <div class="common-item-value">{{ $$tools.toMoney(orderInfo.orderAmount) }} {{ orderInfo._currency }}</div>
+        <div class="common-item-value">{{ $$tools.toMoney(orderInfo.orderAmount) }} {{ orderInfo.currency }}</div>
       </div>
       <div class="common-wrapper-item">
         <div class="common-item-label">{{ $i18n("提款账户") }}</div>

@@ -27,10 +27,10 @@ export default {
   },
   computed: {
     orderNo() {
-      return this.config.orderNo || this.config.qrCodeInfo.orderNo
+      return this.config.orderNo || this.config.onlineBank.orderNo
     },
     paymentAmount() {
-      return this.config.paymentAmount || this.config.qrCodeInfo.amount
+      return this.config.paymentAmount || this.config.onlineBank.amount
     }
   },
   data() {

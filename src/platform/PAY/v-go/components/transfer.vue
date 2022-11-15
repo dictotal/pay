@@ -218,7 +218,7 @@ export default {
   },
   computed: {
     transferInfo() {
-      return this.config.transferInfo;
+      return this.config.onlineBank;
     },
     isMobile() {
       return this.$$tools.isMobile();

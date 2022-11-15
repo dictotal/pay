@@ -41,12 +41,12 @@ export default function (ref, { isLoading }) {
   ref.interceptors.response.use(
     data => {
       rs = data.data
-      let status = rs.status
+      let status = rs.code
       if (isLoading) {
 				Mask.hidden(loadingUid);
 			}
-      if (status === "ok") {
-        return rs.content
+      if (status === 200) {
+        return rs.data
       } else {
         if (status === 'need_login') {
           $$tools.postMessage('login', {from: 'pay'})

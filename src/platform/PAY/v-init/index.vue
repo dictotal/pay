@@ -22,7 +22,7 @@
             </div>
           </div>
         </template>
-        <!-- 选择金额部分 -->
+        <!-- 选择金额部分 结束 -->
         <!-- 银行卡支付方式 -->
         <template v-if="showPayWay">
           <div class="init-common-pay">
@@ -30,30 +30,30 @@
               <template v-for="(item, index) in bankChooseList">
                 <div class="choose-pay-mode" @click="choosePayWay(index)" :key="index">
                   <div class="choose-item-top">
-                    <img class="choose-pay-icon" alt="pay-icon" :src="item.paymentIconUrl" @error="src = errorSrc" />
-                    <div class="choose-item-type">{{ item.keyName }}</div>
+                    <img class="choose-pay-icon" alt="pay-icon" :src="item.icon" @error="src = errorSrc" />
+                    <div class="choose-item-type">{{ item.paymentName }}</div>
                   </div>
                   <div class="choose-bank-list" ref="bankListRef">
-                    <template v-if="item.type === 'transpay'">
+                    <template v-if="item.paymentType === 'p_t_online$transfer'">
                       <div class="choose-bank-item w-row" v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)" :key="`${index}-${idx}`">
                         <div class="choose-child-left w-cell">
-                          <div class="choose-child-left w-cell">
-                            <div class="bank-name">{{ bank.bankName }}</div>
+                          <div class="choose-child-left w-cell " style="display:flex">
+                            <div class="bank-name">{{ bank.paymentKey }}</div>
                             <div class="ml10 bank-limit">{{ $i18n('限制') }} {{bank.minAmount | money}} ~ {{bank.maxAmount | money}}</div>
                           </div>
-                          <div class="choose-child-desc" v-if="bank.descr">{{ bank.descr }}</div>
+                          <div class="choose-child-desc" v-if="bank.describe">{{ bank.describe }}</div>
                         </div>
                         <img class="bank-child-arrow" width="34" height="34" src="/images/right-arrow.png" alt="">
                       </div>
                     </template>
-                    <template v-else-if="item.qrList">
+                    <template v-else-if="item.bankCardList">
                       <div class="choose-bank-item w-row" v-for="(bank, idx) of item.bankCardList" @click="chooseBankCard($event, index, idx)" :key="`${index}-${idx}`">
                         <div class="choose-child-left w-cell">
                           <div class="choose-child-top w-row w-middle">
-                            <div class="bank-name">{{ bank.keyName }}</div>
+                            <div class="bank-name">{{ bank.paymentKey }}</div>
                             <div class="ml10 bank-limit">{{ $i18n('限制') }} {{bank.minAmount | money}} ~ {{bank.maxAmount | money}}</div>
                           </div>
-                          <div class="choose-child-desc" v-if="bank.descr">{{ bank.descr}}</div>
+                          <div class="choose-child-desc" v-if="bank.describe">{{ bank.describe}}</div>
                         </div>
                         <img class="bank-child-arrow" width="34" height="34" src="/images/right-arrow.png" alt="">
                       </div>
@@ -152,11 +152,11 @@ export default {
       this.$$tools.setMoneyKey(cfg.currencyUnit)
       this.moneyUnit = this.config.currencyUnit;
 			cfg.paymentList.forEach((item, index) => {
-				if (item.qrList) {
+				if (item.bankCardList) {
 					this.$set(this.bankChooseList, index, {
             ...item,
             ...this.bankChooseList[index],
-						bankCardList: item.qrList,
+						bankCardList: item.bankCardList,
             type: item.paymentType,
 						activeIdx: 0
 					})
@@ -164,7 +164,7 @@ export default {
 					this.$set(this.bankChooseList, index, {
 						...item,
             ...this.bankChooseList[index],
-						bankCardList: item.bankCardList,
+						bankCardList: item.paymethodInfos,
 						type: item.paymentType,
 						activeIdx: 0
 					})
@@ -176,6 +176,7 @@ export default {
     getData () {
       return new Promise((resolve, reject) => {
         this.$$ajaxLoading.post('/recharge/rechargeInitS').then(res => {
+          console.log('dddd',res)
           if (res.paymentList && res.paymentList.length > 0) {
             resolve(res)
           } else {
@@ -245,7 +246,14 @@ export default {
 		},
 		// 发起支付
 		postPay (payerName) {
+      let actItem = {}
 			let actPayment = this.actPayment;
+      console.log(window.commonParams,this.bankChooseList, this.actPayment)
+      for(let item of actPayment.paymethodInfos){
+        if(item.selected == true){
+          actItem = item
+        }
+      }
 			let queryMap = {
 				paymentId: actPayment.paymentId,
 				paymentKey: actPayment.paymentKey,
@@ -253,7 +261,9 @@ export default {
 				rechargeFees: actPayment.rechargeFees,
         paymentAmount: this.amount,
         origin: window.commonParams.origin,
-        platform: window.commonParams.platform
+        platform: window.commonParams.platform,
+        paymentKey: actItem.paymentKey,
+        payAccount: 'test', // 只有tt才有 有bankCardList
 			}
       if (window.commonParams.promoType) {
         queryMap.promoType = window.commonParams.promoType
@@ -270,14 +280,15 @@ export default {
       })
 		},
     toDetail (data) {
+      console.log('---',data)
       let url = '/sports/auto'
-      localStorage[data.currency + data.paymentId] = JSON.stringify(data)
-      if (data.modelType === 'transfer' || data.modelType === 'online') {
+      localStorage[data.currency + data.onlineBank.paymentKey] = JSON.stringify(data)
+      if (data.modelType === 'p_t_online$transfer' || data.image.png === 'online') {
         url = '/sports/go'
       } else if (data.modelType === 'qrcode') {
         url = '/sports/go'
       }
-      this.$router.replace(`${url}?paymentId=${data.paymentId}&modelType=${data.modelType}`)
+      this.$router.replace(`${url}?paymentId=${data.onlineBank.paymentKey}&modelType=${data.modelType}`)
     },
 		// 选择付款方式
 		choosePayWay (index) {
@@ -290,7 +301,6 @@ export default {
 				}
 			})
       this.getActPayment(() => {
-        console.log(this.actPayment)
         let {minAmount, maxAmount, keyName, bankName} = this.actPayment
         let name = keyName || bankName
         if (!this.amount) {

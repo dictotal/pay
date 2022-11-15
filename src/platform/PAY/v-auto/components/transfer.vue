@@ -7,8 +7,8 @@
           '存款金额限制',
           {
             el: '<em>$$</em>',
-            maxAmount: $$tools.toMoney(transferInfo.maxAmount),
-            minAmount: $$tools.toMoney(transferInfo.minAmount),
+            maxAmount: $$tools.toMoney(onlineBank.maxAmount),
+            minAmount: $$tools.toMoney(onlineBank.minAmount),
             moneyUnit: moneyUnit
           },
           '见下方注释'
@@ -35,26 +35,26 @@
           <div class="bank-info form-item">
             <div class="w-row w-middle">
               <div class="img-wrap">
-                <img :src="transferInfo.iconUrl" alt="" />
+                <img :src="onlineBank.iconUrl" alt="" />
               </div>
               <div class="ml10 bank-padding">
                 <p class="fw-100 f14 color-898">{{ $i18n("detail.index.txt_1", "银行名称") }}</p>
-                <p class="b mt5 color-333">{{ transferInfo.bankName }}</p>
+                <p class="b mt5 color-333">{{ onlineBank.bankName }}</p>
               </div>
             </div>
           </div>
 
           <div class="form-item">
             <div>
-              <h5 class="label color-898" v-if="transferInfo.cardNumberType === 'bank'">
+              <h5 class="label color-898" v-if="onlineBank.cardNumberType === 'bank'">
                 {{ $i18n("detail.index.txt_2", "银行卡") }}
               </h5>
-              <h5 class="label color-898" v-else-if="transferInfo.cardNumberType === 'phone'">
+              <h5 class="label color-898" v-else-if="onlineBank.cardNumberType === 'phone'">
                 {{ $i18n("detail.index.txt__2", "手机号") }}
               </h5>
               <p class="b color-333">
-                {{ transferInfo.bankCard }}
-                <img class="copy-icon" src="../images/copy.png" alt="copy" @click="copy(transferInfo.bankCard)" />
+                {{ onlineBank.bankCard }}
+                <img class="copy-icon" src="../images/copy.png" alt="copy" @click="copy(onlineBank.bankCard)" />
               </p>
             </div>
           </div>
@@ -62,8 +62,8 @@
             <div>
               <h5 class="label color-898">{{ $i18n("detail.index.txt_4", "开户姓名") }}</h5>
               <p class="b color-333">
-                {{ transferInfo.cardholder }}
-                <img class="copy-icon" src="../images/copy.png" alt="copy" @click="copy(transferInfo.cardholder)" />
+                {{ onlineBank.cardholder }}
+                <img class="copy-icon" src="../images/copy.png" alt="copy" @click="copy(onlineBank.cardholder)" />
               </p>
             </div>
           </div>
@@ -157,7 +157,7 @@ export default {
   },
   methods: {
     init () {
-      this.countDownSecond = [this.transferInfo.ttlSeconds * 1000];
+      this.countDownSecond = [this.onlineBank.ttlSeconds * 1000];
     },
     endCount () {
       this.$$alert(this.$i18n('detail.index.txt_11', '倒计时结束，请重新提交充值申请！'))
@@ -165,8 +165,8 @@ export default {
     data () {
       $i18n('detail.index.txt_6', {
         el: '<em>$$</em>',
-        amount: $$tools.toMoney(transferInfo.amount),
-        baseAmount: $$tools.toMoney(transferInfo.baseAmount),
+        amount: $$tools.toMoney(onlineBank.amount),
+        baseAmount: $$tools.toMoney(onlineBank.baseAmount),
         moneyUnit: moneyUnit
       }, '见下方注释')
     },
@@ -182,10 +182,10 @@ export default {
       );
     },
     cancelOrder () {
-      let transferInfo = this.transferInfo;
+      let onlineBank = this.onlineBank;
       this.$$ajaxLoading.post('/recharge/cancelRecharge', {
-        amount: transferInfo.amount,
-        paymentAmount: transferInfo.baseAmount,
+        amount: onlineBank.amount,
+        paymentAmount: onlineBank.baseAmount,
         paymentId: this.config.paymentId
       }).then(() => {
         window.config = undefined
@@ -253,25 +253,25 @@ export default {
     // 显示类型
     setShowTip () {
       this.$refs.guildTip.show({
-        bankType: this.transferInfo.bankType
+        bankType: this.onlineBank.bankType
       })
     }
   },
   computed: {
-    transferInfo () {
-      return this.config.transferInfo;
+    onlineBank () {
+      return this.config.onlineBank;
     },
     isMobile () {
       return this.$$tools.isMobile();
     },
     maxAmount () {
-      return this.transferInfo.maxAmount
+      return this.onlineBank.maxAmount
     },
     minAmount () {
-      return this.transferInfo.minAmount
+      return this.onlineBank.minAmount
     },
     activePayConfig () {
-      return this.transferInfo && this.payConfig[this.transferInfo.bankType] ? this.payConfig[this.transferInfo.bankType] : {}
+      return this.onlineBank && this.payConfig[this.onlineBank.bankType] ? this.payConfig[this.onlineBank.bankType] : {}
     }
 	},
 	watch: {

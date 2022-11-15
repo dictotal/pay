@@ -49,11 +49,12 @@ export default {
       }
     },
 		init () {
+      // console.log('-------111',this.config)
 			this.moneyUnit = this.config.currencyUnit;
 			let { amount, orderNo } = this.qrCodeInfo;
 			this.orderNo = orderNo;
       this.orderAmount = amount;
-      this.createIframe(this.config.url)
+      this.createIframe(this.config.onlineBank.redirectTo)
 			this.listenMessage()
     },
     createIframe (url) {
@@ -173,7 +174,7 @@ export default {
 			return { image, message }
 		},
 		qrCodeInfo () {
-			return this.config.qrCodeInfo || {};
+			return this.config.onlineBank || {};
 		},
 		isMobile () {
 			return this.$$tools.isMobile();

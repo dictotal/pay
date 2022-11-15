@@ -12,10 +12,11 @@ export default {
 	methods: {
 		init () {
 			this.$$ajaxLoading.post('/recharge/rechargeInitS').then(res => {
+        console.log('res0,',res)
 				if (res.paymentList && res.paymentList.length > 0) {
 					window.config = res
 					this.$router.replace('/sports/init')
-				} else if (res.transferInfo && res.transferInfo.status === 'pay$confirm') {
+				} else if (res.onlineBank && res.onlineBank.status === 'pay$confirm') {
 					this.$router.replace(`/charge/status/${res.orderNo}`)
 					return
 				} else {
@@ -27,12 +28,12 @@ export default {
 		},
 		toDetail (data) {
 			let url = '/sports/auto'
-			if (data.modelType === 'transfer' || data.modelType === 'online') {
+			if (data.modelType === 'p_t_online$transfer' || data.modelType === 'online') {
 				url = '/sports/go'
 			} else if (data.modelType === 'qrcode') {
 				url = '/sports/go'
 			}
-			this.$router.push(`${url}?paymentId=${data.paymentId}&modelType=${data.modelType}`)
+			this.$router.push(`${url}?paymentId=${data.onlineBank.paymentKey}&modelType=${data.modelType}`)
 		},
 	},
 	created () {

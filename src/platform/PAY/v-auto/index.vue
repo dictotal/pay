@@ -26,7 +26,8 @@ export default {
   },
   async created() {
     let storeData = await this.getOrderData()
-    storeData.qrCodeInfo = storeData.transferInfo
+    console.log('ddd',storeData)
+    storeData.qrCodeInfo = storeData.onlineBank
     storeData.qrCodeInfo.amount = null
     storeData.paymentAmount = null
     this.config = storeData

@@ -18,9 +18,10 @@ export default {
   },
   async created() {
     let storeData = await this.getOrderData()
-    if (this.$route.query.modelType === "transfer") {
+    console.log('----',storeData)
+    if (this.$route.query.modelType !== "p_t_online$transfer") {
       this.viewName = "transfer"
-      storeData.qrCodeInfo = storeData.transferInfo
+      storeData.qrCodeInfo = storeData.onlineBank
     } else {
       this.viewName = "onlineBank"
     }

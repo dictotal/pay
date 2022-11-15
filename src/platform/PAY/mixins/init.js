@@ -9,7 +9,7 @@ export default {
           if (res.paymentList && res.paymentList.length > 0) {
             window.config = res
             this.$router.replace('/sports/init')
-          } else if (res.transferInfo && res.transferInfo.status === 'pay$confirm') {
+          } else if (res.onlineBank && res.onlineBank.status === 'pay$confirm') {
             this.$router.replace(`/charge/status/${res.orderNo}`)
             return
           } else {
