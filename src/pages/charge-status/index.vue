@@ -84,7 +84,7 @@ export default {
       let config = await this.$$ajaxLoading.post('recharge/rechargeRecordInfo', {
         rechargeNo: this.$route.params.id
       })
-      config.rechargeStatus = 'pay$confirm'
+      // config.rechargeStatus = 'pay$confirm'
       this.orderInfo = config
     },
     // 复制文本
