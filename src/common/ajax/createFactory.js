@@ -19,7 +19,7 @@ export default function (ref, { isLoading }) {
       data.timeZone = defaultData.timeZone
       data.isWap = defaultData.isWap
       data.online = true
-      data.platform = data.platform || "TtBet"
+      data.platform = data.platform || window.commonParams.platform
       config.data = data
       config.data.currency = window.commonParams.currency
       config.headers["X-Access-Token"] = window.commonParams.token
