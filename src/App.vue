@@ -14,6 +14,8 @@ export default {
   },
   created () {
     injectLanguage(language)
+    console.log(window.commonParams)
+    if (['Ttag'].includes(window.commonParams.platform)) document.body.className = 'pvp'
   }
 }
 </script>
@@ -21,6 +23,7 @@ export default {
 @import "scss/base";
 @import "scss/common";
 @import "scss/mobile";
+@import "scss/font/wdfont";
 #app {
   height: 100%;
 }

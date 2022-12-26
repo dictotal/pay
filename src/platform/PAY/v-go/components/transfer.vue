@@ -93,7 +93,7 @@
         </div>
       </div> -->
       <div class="pay-btns mt30">
-        <div class="btn btn-confirm" @click="confirmHandel">{{ $i18n("detail.index.txt_20", "我已付款") }}</div>
+        <div class="common-btn btn-confirm" @click="confirmHandel">{{ $i18n("detail.index.txt_20", "我已付款") }}</div>
       </div>
       <div class="panel-notice">
         <h5 class="title-notice">
@@ -343,7 +343,7 @@ export default {
       background: $skin-color1;
       border: 1px solid $skin-color1;
       font-size: 17px;
-      color: $skin-color333;
+      width: 345px;
     }
   }
 

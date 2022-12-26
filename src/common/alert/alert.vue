@@ -13,8 +13,8 @@
 			</div>
 
 			<div class="wrap-btns">
-				<div class="btn btn-cancel" @click="handel(false)">{{ cancelTxt }}</div>
-				<div class="btn btn-ok" @click="handel(true)">{{ okTxt }}</div>
+				<div class="btn btn-cancel second-btn" @click="handel(false)">{{ cancelTxt }}</div>
+				<div class="btn btn-ok fill-btn" @click="handel(true)">{{ okTxt }}</div>
 			</div>
 		</div>
 	</transition>
@@ -155,17 +155,12 @@ $red: #f56c6c;
 		margin-top: 40px;
 		align-items: stretch;
 		justify-content: space-between;
-		.btn-ok {
-			color: $skin-font1;
-		}
 	}
 	.btn {
 		@include h-lh(40px);
 		width: 110px;
 		padding: 0;
 		font-size: 14px;
-		color: #ffffff;
-		background: #898c98;
 		border-radius: 5px;
 	}
 	&.alert {
@@ -175,10 +170,6 @@ $red: #f56c6c;
 		.btn-cancel {
 			display: none;
 		}
-	}
-
-	.btn-ok {
-		background: linear-gradient(90deg, #4664c4, #2a3e83);
 	}
 
 	.wrap-ipt {
@@ -257,19 +248,14 @@ $red: #f56c6c;
 			height: 40px;
 			display: block;
 			border-radius: 10px;
-			border: none;
 		}
 
 		.btn-cancel {
-			color: $skin-color333;
       font-weight: bold;
-			background: $skin-bg4;
 		}
 		.btn-ok {
 			margin-top: 10px;
-      color: $skin-color333;
       font-weight: bold;
-			background: $skin-color1;
 		}
 	}
 }

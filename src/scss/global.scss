@@ -43,6 +43,7 @@ $pc-font4: #aaa;
 $pc-font5: #f5f5f5;
 $pc-font6: #fff;
 
+$skin-pvp-main1: #926cfe;
 $skin-main1: #edcc7b;
 $skin-main2: #09C45C;
 $skin-main3: #306BFF;
@@ -56,4 +57,32 @@ $skin-main4: #306BFF;
 @mixin h-lh($h,$ph:0px){
   height: $h;
   line-height: $h - $ph;
+}
+
+@mixin common-btn($w:335px, $h:44px, $r:10px, $bg:#EDCC7B, $c:#333, $f:16px) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  width: $w;
+  height: $h;
+  background: $bg;
+  border-radius: $r;
+  color: $c;
+  font-size: $f;
+  font-weight: bold;
+}
+
+@mixin common-btn-pvp($w:335px, $h:44px, $r:10px, $bg:linear-gradient(97deg, #7753F7 0%, #E4985A 52%, #FDB6B4 100%), $c: $skin-font1, $f:16px) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  width: $w;
+  height: $h;
+  background: $bg!important;
+  border-radius: $r;
+  color: $c;
+  font-size: $f;
+  font-weight: bold;
 }

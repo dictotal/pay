@@ -16,7 +16,7 @@ module.exports = {
     proxy: {
       "/a/": {
         /* 测试环境kfc */
-        target: "http://m.kfc.com/",
+        target: "http://m.sass1.com/",
         // target: "http://m.9188.com/",
       }
     },

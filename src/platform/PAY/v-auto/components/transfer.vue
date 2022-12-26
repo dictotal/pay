@@ -18,14 +18,15 @@
     <!--  转账信息  -->
     <div class="layout-wrap form-s1">
       <div class="panel-main box-shadow">
-        <div class="order-step">
+        <div class="order-step main-color">
           <div class="order-step-content flex justify">
             <div class="order-step-item">
-              <img class="step-icon" src="@/platform/PAY/v-init/images/selected.png" alt="" />
+              <!-- <img class="step-icon" src="@/platform/PAY/v-init/images/selected.png" alt="" /> -->
+              <span class="wdfont  wd-yuanxingxuanzhongfill"></span>
               <div class="step-text">{{ $i18n("创建订单", "你好") }}</div>
             </div>
             <div class="order-step-item" :class="{ gray: step === 1 }">
-              <div class="step-icon">2</div>
+              <div class="step-icon main-bg">2</div>
               <div class="step-text">{{ $i18n("录入订单") }}</div>
             </div>
           </div>
@@ -90,7 +91,7 @@
       <!-- 订单信息 -->
       <template v-if="step === 1">
         <div class="pay-btns mt30 auto-btns">
-          <div class="btn btn-confirm" @click="confirmHandel">
+          <div class="btn-confirm common-btn" @click="confirmHandel">
             <div class="set-order">{{ $i18n("录入订单") }}</div>
             <div class="set-order-desc">{{ $i18n("汇款成功后再录入") }}</div>
           </div>
@@ -98,7 +99,7 @@
       </template>
       <template v-else>
         <div class="pay-btns mt30 auto-btns">
-          <div class="btn btn-confirm" @click="submitOrder">
+          <div class="common-btn btn-confirm" @click="submitOrder">
             <div class="set-order">{{ $i18n("提交订单") }}</div>
           </div>
         </div>
@@ -349,7 +350,7 @@ export default {
       transform: translateX(-50%);
       width: 130px;
       top: 6.5px;
-      border-bottom: 1px dashed $skin-color1;
+      border-bottom: 1px dashed;
     }
   }
   .order-step-content {
@@ -364,7 +365,6 @@ export default {
       justify-content: space-between;
       align-items: center;
       margin: 0 auto;
-      color: $skin-color1;
       &.gray {
         .step-icon {
           background: #d4d5db;
@@ -375,7 +375,6 @@ export default {
         width: 14px;
         height: 14px;
         border-radius: 50%;
-        background: $skin-color1;
         text-align: center;
         line-height: 14px;
         color: $skin-font1;
@@ -456,7 +455,6 @@ export default {
         align-items: center;
         flex-flow: column nowrap;
         line-height: 1;
-        color: $skin-color333;
         justify-content: center;
         font-weight: bold;
         .set-order {
@@ -483,9 +481,7 @@ export default {
       background: transparent;
     }
     .btn-confirm {
-      background: $skin-color1;
       border: 1px solid $skin-color1;
-      color: $skin-font5;
     }
   }
 

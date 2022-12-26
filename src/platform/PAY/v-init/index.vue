@@ -7,12 +7,14 @@
           <h2 class="title-s1">{{ $i18n("bank-my.index.txt_8", "充值方式") }}</h2>
           <div class="choose-list">
             <template v-for="(item, index) in bankChooseList">
-              <div class="choose-pay-mode" @click="choosePayWay(index)" :class="{ 'choose-active': index === activeIndex }" :key="index">
+              <div class="choose-pay-mode" @click="choosePayWay(index)" :class="{ 'choose-active main-color': index === activeIndex }" :key="index">
                 <div class="choose-item-top">
                   <img class="choose-pay-icon" alt="pay-icon" :src="item.paymentIconUrl" @error="src = errorSrc" />
                   <div class="choose-item-type">{{ item.keyName }}</div>
-                  <img class="choose-icon" v-if="item.selected" src="./images/selected.png" alt="choose" />
-                  <img class="choose-icon" v-else src="./images/un-select.png" alt="choose" />
+                  <!-- <img class="choose-icon" v-if="item.selected" src="./images/selected.png" alt="choose" />
+                  <img class="choose-icon" v-else src="./images/un-select.png" alt="choose" /> -->
+                  <span  v-if="item.selected" class="wdfont main-color wd-yuanxingxuanzhongfill"></span>
+                  <span  v-else class="wdfont wd-yuanxingweixuanzhong main-color"></span>
                 </div>
                 <div class="choose-bank-list" ref="bankListRef" v-show="item.selected">
                   <template v-if="item.type === 'transpay'">
@@ -37,7 +39,7 @@
         <template v-if="actPayment.paymentId !== 'zz_c'">
           <h2 class="title-s1">{{ $i18n("bank-my.index.txt_2", "存款金额") }}-{{ config.currency }}</h2>
           <div class="quick-amount-box">
-            <div class="item btn btn-amount mb10 f-din" @click="amount = item" v-for="item in filterQuickAmountList" :key="item">
+            <div class="item btn btn-amount mb10 f-din" :class="{'fill-btn': item === amount}" @click="amount = item" v-for="item in filterQuickAmountList" :key="item">
               {{ item | money }}
             </div>
             <template v-if="filterQuickAmountList.length % 3 !== 0">
@@ -52,7 +54,7 @@
         <!-- 选择金额部分 -->
       </div>
       <div class="mt30 pb30 w-row w-center">
-        <div class="btn btn-submit" :class="{ disable: !amountIsRight }" @click="submitHandel">
+        <div class="btn btn-submit common-btn" :class="{ disable: !amountIsRight }" @click="submitHandel">
           {{ $i18n("bank-my.index.txt_4", "下一步") }}
         </div>
       </div>
@@ -343,7 +345,7 @@ export default {
   }
   .choose-pay-mode.choose-active {
     .choose-item-top {
-      border: 1px solid $skin-color1;
+      border: 1px solid;
     }
   }
   .choose-item-top {
@@ -355,6 +357,9 @@ export default {
     border-radius: 7px;
     padding: 0 15px;
     align-items: center;
+    .wdfont {
+      font-weight: normal;
+    }
   }
 
   .choose-pay-icon {
@@ -371,6 +376,7 @@ export default {
   .choose-item-type {
     min-width: 0;
     flex: 1;
+    color: $skin-color333;
   }
 
   .choose-bank-list {
@@ -384,7 +390,6 @@ export default {
       min-width: 140px;
       height: 60px;
       background: $skin-bg4;
-      border: 1px solid $skin-bg4;
       border-radius: 10px;
       vertical-align: middle;
       display: flex;
@@ -395,7 +400,7 @@ export default {
       float: left;
 
       &.active {
-        border: 1px solid $skin-color1;
+        border: 1px solid;
       }
     }
 
@@ -404,6 +409,7 @@ export default {
       display: inline-block;
       max-width: 80px;
       margin-left: 5px;
+      color: $skin-color333;
     }
 
     .bank-icon {
@@ -517,7 +523,6 @@ export default {
       padding: 0 15px;
       margin: 0 10px 10px 0;
       background: $skin-bg4;
-      border: 1px solid $skin-bg4;
       color: $skin-color333;
       font-weight: bold;
 
@@ -550,10 +555,8 @@ export default {
     justify-content: center;
     width: 320px;
     height: 50px;
-    color: #ffffff;
     font-size: 18px;
     border-radius: 10px;
-    background: $skin-color1;
     border: 0;
     &:hover {
       opacity: 0.9;

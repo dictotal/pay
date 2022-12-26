@@ -356,5 +356,56 @@ div {
     box-sizing: border-box;
 }
 
+.main-color {
+  color: $skin-main1;
+  border-color: $skin-main1
+}
+.main-bg {
+  background-color: $skin-main1
+}
+
+.common-btn {
+  @include common-btn();
+}
+.second-btn {
+  @include common-btn(335px, 44px, 10px, $skin-bg4, $skin-color333);
+  margin: 0 auto;
+  border: none;
+}
+.fill-btn {
+  @include common-btn-pvp(335px, 44px, 10px, $skin-main1, $skin-color333);
+  margin: 0 auto;
+}
 
 
+.pvp {
+  .main-color {
+    color: $skin-pvp-main1;
+    border-color: $skin-pvp-main1
+  }
+  .main-bg {
+    background-color: $skin-pvp-main1
+  }
+
+  .common-btn {
+    @include common-btn-pvp();
+  }
+  .second-btn {
+    @include common-btn-pvp(335px, 44px, 10px, transparent, $skin-pvp-main1);
+    margin: 0 auto;
+    border: 1px solid $skin-pvp-main1;
+  }
+  .fill-btn {
+    @include common-btn-pvp(335px, 44px, 10px, $skin-pvp-main1, $skin-pvp-main1);
+    margin: 0 auto;
+    color: $skin-font1!important;
+  }
+
+  .link-color {
+    color: $skin-pvp-main1;
+    text-decoration: underline;
+  }
+  .common-link-btn {
+    @include common-btn-pvp(335px, 44px, 10px, #09C45C, $skin-font1, 14px);
+  }
+}
